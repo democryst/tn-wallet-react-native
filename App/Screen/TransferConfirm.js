@@ -108,6 +108,6 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   text_info:{
-    fontSize: 23
+    fontSize: 24
   }
 });
