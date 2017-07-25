@@ -3,9 +3,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import  HomeScreen  from './App/Screen/home' ;
+import EnterTransferIdScreen from './App/Screen/EnterTransferIdScreen' ;
 
 const SimpleApp = StackNavigator({
-  Home: { screen: HomeScreen },
+    EnterTransferIdScreen: { screen: EnterTransferIdScreen } ,
+    Home: { screen: HomeScreen },
 });
 
 const AppNavigation = () => (
