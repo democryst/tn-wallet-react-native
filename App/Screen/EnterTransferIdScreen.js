@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
        
   },
   textReceiverId:{
-    fontSize: 50,
+   
      justifyContent: 'flex-start',
     
   }

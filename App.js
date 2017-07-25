@@ -1,13 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { StackNavigator } from 'react-navigation';
+
+import  HomeScreen  from './App/Screen/home' ;
+
+const SimpleApp = StackNavigator({
+  Home: { screen: HomeScreen },
+});
+
+const AppNavigation = () => (
+  <SimpleApp  />
+);
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text> Hello worlds!!!</Text>
-
-      </View>
+      <AppNavigation/>
     );
   }
 }
