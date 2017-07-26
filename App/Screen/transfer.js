@@ -1,37 +1,67 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions} from 'react-native';
+var {height, width} = Dimensions.get('window');
 
-export default class Transfer extends React.Component {
+export default class Result extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: "25/7/17",
+      senderName: "TN Group",
+      senderID: "1212312121",
+      receiverName: "ธนาคารออมสิน",
+      receiverID: "0000000000",
+      amount: "0.00",
+      fee: "0.00",
+      remaining: "0.00"
+    }
+  }
+
+
   render() {
     return (
       <View style={styles.container}>
-
-        <View style={{ flex: 3}}>
-          <View style={[styles.box, {paddingTop: 10}]}>
-            <View style={styles.boxtext}><Text style={styles.text}>Receiver's Name</Text></View>
-            <TextInput style={styles.textinput} value='Phansawuth Jenthaworn'/>
+        <View  style={styles.top_container}>
+          <View style={styles.row_container}>
+            <Text style={styles.text_bold}> Date</Text>
+            <Text style={styles.text_info}> {this.state.date}</Text>
           </View>
-          <View style={styles.box}>
-            <View style={styles.boxtext}><Text style={styles.text}>Receiver's ID</Text></View>
-            <TextInput style={styles.textinput2} value='7582983660'/>
+          <View style={styles.row_container}>
+            <Text style={styles.text_bold}> Sender Name</Text>
+            <Text style={styles.text_info}> {this.state.senderName}</Text>
           </View>
-
-          <View style={styles.box}>
-            <View style={styles.boxtext}><Text style={styles.text}>Amount</Text></View>
-            <TextInput style={styles.textinput1} value='5,000'/>
+          <View style={styles.row_container}>
+            <Text style={styles.text_bold}> Sender ID</Text>
+            <Text style={styles.text_info}> {this.state.senderID}</Text>
           </View>
-
+          <View style={styles.row_container}>
+            <Text style={styles.text_bold}> Receiver Name</Text>
+            <Text style={styles.text_info}> {this.state.receiverName}</Text>
+          </View>
+          <View style={styles.row_container}>
+            <Text style={styles.text_bold}> Receiver ID</Text>
+            <Text> {this.state.receiverID}</Text>
+          </View>
+          <View style={styles.row_container}>
+            <Text style={styles.text_bold}> Amount</Text>
+            <Text style={styles.text_info}> {this.state.amount}</Text>
+          </View>
+          <View style={styles.row_container}>
+            <Text style={styles.text_bold}> Fee</Text>
+            <Text style={styles.text_info}> {this.state.fee}</Text>
+          </View>
+          <View style={styles.row_container}>
+            <Text style={styles.text_bold}> Remaining</Text>
+            <Text style={styles.text_info}> {this.state.remaining}</Text>
+          </View>
         </View>
-
-        <View style={{ flex: 2, flexDirection: 'row', alignItems: 'flex-end' }}>
-          <View style={{ flex: 1 }}>
-            <TouchableOpacity style={styles.button}>
-              <Text style={{ height: 50, fontSize: 30 ,fontWeight: 'bold'}}>Next ></Text>
-            </TouchableOpacity>
-          </View>
+        
+        <View style={styles.bottom_container}>
+          <TouchableOpacity style={styles.button}>
+              <Text style={styles.text}>Confirm</Text>
+          </TouchableOpacity>
+          
         </View>
-
-
 
       </View>
     );
@@ -41,65 +71,45 @@ export default class Transfer extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
+    marginTop: 10,
+    backgroundColor: '#fff',
+  },
+  row_container: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    padding: 10,
+  },
+  top_container: {
+    flex: 3,
+    backgroundColor: '#fff',
     justifyContent: 'center',
-    flexDirection: 'column',
-  
+  },
+  bottom_container: {
+    // flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    // justifyContent: 'center',
+    justifyContent: "flex-end",
   },
   button: {
-    margin: 10,
-    backgroundColor: '#f88fb0',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-      
-  },
-  box:{ flex: 1 ,
-    justifyContent: 'center',
-    alignItems:'flex-start',
-   
-    width: 250,
-  },
-  textinput:{
-    paddingLeft:20, 
-    width: 250,
-    fontSize: 20 ,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    fontWeight: 'bold'
-    
+    // backgroundColor: '#f88fb0',
+    backgroundColor: '#f06da1',
+    // backgroundColor: '#e64f93',
+    // flexDirection: "column",
+    padding: 25,
+    width: width,
   },
   text:{
-    fontSize: 20,
-    fontWeight: 'bold'
-    
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 25
   },
-  boxtext:{
-     backgroundColor: 'white',
-     width:250,
-     borderRadius: 50
+  text_bold:{
+    fontWeight: "bold",
+    fontSize: 24
   },
-    textinput1:{
-    paddingLeft:20, 
-    width: 250,
-    fontSize: 50 ,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    fontWeight: 'bold'
-    
-  },
-  textinput2:{
-    paddingLeft:20, 
-    width: 250,
-    fontSize: 30 ,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    fontWeight: 'bold'
-    
-  },
-
+  text_info:{
+    fontSize: 20
+  }
 });
+
