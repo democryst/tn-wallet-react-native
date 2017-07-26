@@ -15,7 +15,7 @@ import {AppRegistry, StyleSheet, Text, TextInput, View ,Button,TouchableOpacity}
           />
         </View >
         <View style={styles.bottom_container}>
-         <TouchableOpacity  onPress={() => navigate('Home', { user: 'Lucy' })}>
+         <TouchableOpacity  onPress={() => navigate('TransferCheckReceiver', { user: 'Lucy' })}>
           <View style={styles.button}>
             <Text style={styles.buttonText}>Enter</Text>
           </View>
