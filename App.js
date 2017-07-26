@@ -4,10 +4,18 @@ import { StackNavigator } from 'react-navigation';
 
 import  HomeScreen  from './App/Screen/home' ;
 import EnterTransferIdScreen from './App/Screen/EnterTransferIdScreen' ;
+import TransferCheckReceiver from './App/Screen/TransferCheckReceiver' ;
+import TransferConfirm from './App/Screen/TransferConfirm' ;
+import TransferResult from './App/Screen/TransferResult' ;
+
 
 const SimpleApp = StackNavigator({
-    EnterTransferIdScreen: { screen: EnterTransferIdScreen } ,
     Home: { screen: HomeScreen },
+    EnterTransferIdScreen: { screen: EnterTransferIdScreen } ,
+    TransferCheckReceiver: { screen: TransferCheckReceiver } ,
+    TransferConfirm: { screen: TransferConfirm } ,
+    TransferResult: { screen: TransferResult } ,
+
 });
 
 const AppNavigation = () => (
