@@ -5,7 +5,10 @@ var DismissKeyboard = require('dismissKeyboard');
 
 
 export default class TransferCheckReceiver extends React.Component {
-
+  static navigationOptions = {
+      title: 'Transfer',
+      
+  };
 
 
   constructor(props) {
