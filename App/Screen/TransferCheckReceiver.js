@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Dimensions } from 'react-native';
+var { height, width } = Dimensions.get('window');
 
 
 export default class TransferCheckReceiver extends React.Component {
