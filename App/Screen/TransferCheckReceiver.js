@@ -32,7 +32,7 @@ export default class TransferCheckReceiver extends React.Component {
 
           <View style={styles.box}>
             <View style={styles.boxtext}><Text style={styles.text_bold}> Amount</Text></View>
-            <TextInput style={styles.textinput1} keyboardType='numeric' value={this.state.amount} onChangeText={(amount)=>this.setState({amount})}/>
+            <View style={{borderWidth: 1, borderColor: 'gray'}}><TextInput style={styles.textinput1} keyboardType='numeric' value={this.state.amount} onChangeText={(amount)=>this.setState({amount})}/></View>
           </View>
 
         </View>
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   text_bold:{
     fontWeight: "bold",
