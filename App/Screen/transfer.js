@@ -2,6 +2,16 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 export default class Transfer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      receiverName: "ธนาคารออมสิน",
+      receiverID: "0000000000",
+      amount: "0.00",
+    }
+  }
+
+
   render() {
     return (
       <View style={styles.container}>
@@ -9,16 +19,16 @@ export default class Transfer extends React.Component {
         <View style={{ flex: 3}}>
           <View style={[styles.box, {paddingTop: 10}]}>
             <View style={styles.boxtext}><Text style={styles.text}>Receiver's Name</Text></View>
-            <TextInput style={styles.textinput} value='Phansawuth Jenthaworn'/>
+            <Text style={styles.textinput}>{this.state.receiverName}</Text>
           </View>
           <View style={styles.box}>
             <View style={styles.boxtext}><Text style={styles.text}>Receiver's ID</Text></View>
-            <TextInput style={styles.textinput2} value='7582983660'/>
+            <Text style={styles.textinput}>{this.state.receiverID}</Text>
           </View>
 
           <View style={styles.box}>
             <View style={styles.boxtext}><Text style={styles.text}>Amount</Text></View>
-            <TextInput style={styles.textinput1} value='5,000'/>
+            <TextInput style={styles.textinput1} placeholder={this.state.amount} onchange={this.setState()}/>
           </View>
 
         </View>
