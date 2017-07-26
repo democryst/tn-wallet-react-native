@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native';
 
 
 export default class Transfer extends React.Component {
@@ -32,14 +32,14 @@ export default class Transfer extends React.Component {
 
           <View style={styles.box}>
             <View style={styles.boxtext}><Text style={styles.text}>Amount</Text></View>
-            <TextInput style={styles.textinput1} keyboardType={'numeric'} placeholder={this.state.amount} onchangeText={(amount)=>this.setState({amount})} onSubmit={Keyboard.dismiss}/>
+            <TextInput style={styles.textinput1} keyboardType='numeric' value={this.state.amount} onChangeText={(amount)=>this.setState({amount})}/>
           </View>
 
         </View>
 
         <View style={{ flex: 2, flexDirection:'column', alignItems: 'flex-end' }}>
           <View style={{ flex: 1 }}>
-            <TouchableOpacity onPress={()=>{})} style={styles.button}>
+            <TouchableOpacity onPress={()=>{}} style={styles.button}>
               <Text>Next</Text>
             </TouchableOpacity>
           </View>

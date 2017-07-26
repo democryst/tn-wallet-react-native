@@ -4,4 +4,6 @@ yarn.lock
 .babelrc
 .flowconfig
 .watchmanconfig
-.expo/
+.expo/packager-info.json
+.expo/settings.json
+jsconfig.json
