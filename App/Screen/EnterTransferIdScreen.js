@@ -8,16 +8,17 @@ import {AppRegistry, StyleSheet, Text, TextInput, View ,Button,TouchableOpacity}
     return (
       <View style={styles.container}>
         <View style={styles.top_container} >
-          <Text style={styles.textReceiverId}>RecieverID</Text>
+          <Text style={styles.text_bold}>RecieverID</Text>
             <TextInput
-              style={styles.textInput}
+              keyboardType='numeric'
+              style={styles.text}
               placeholder="Input RecieverID"
           />
         </View >
         <View style={styles.bottom_container}>
-         <TouchableOpacity  onPress={() => navigate('Home', { user: 'Lucy' })}>
+         <TouchableOpacity  onPress={() => navigate('TransferCheckReceiver')}>
           <View style={styles.button}>
-            <Text style={styles.buttonText}>Enter</Text>
+            <Text style={styles.text}>Enter</Text>
           </View>
         </TouchableOpacity>
     
