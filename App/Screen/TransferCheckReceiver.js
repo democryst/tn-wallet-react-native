@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Dimensions } from 'react-native';
 var { height, width } = Dimensions.get('window');
 
-export default class Transfer extends React.Component {
+export default class TransferCheckReceiver extends React.Component {
 
 
 
@@ -36,13 +36,24 @@ export default class Transfer extends React.Component {
 
         </View>
 
+<<<<<<< HEAD
         
         
+=======
+        <View style={{ flex: 2, flexDirection:'column', alignItems: 'flex-end' }}>
+          <View style={{ flex: 1 }}>
+            <TouchableOpacity onPress={()=>{}} style={styles.button}>
+              <Text>Next</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+>>>>>>> d7d3013face4b9c7812d2ae521f5169827caa0ed
         <View style={styles.bottom_container}>
           <TouchableOpacity style={styles.button}>
               <Text style={styles.text}>Next ></Text>
           </TouchableOpacity>
-          
+
         </View>
 
       </View>
@@ -83,8 +94,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+<<<<<<< HEAD
   textinput1:{
     paddingLeft:20, 
+=======
+    textinput1:{
+    paddingLeft:20,
+>>>>>>> d7d3013face4b9c7812d2ae521f5169827caa0ed
     width: 250,
     fontSize: 50 ,
     alignItems: 'center',
@@ -100,4 +116,3 @@ const styles = StyleSheet.create({
     fontSize: 20
   }
 });
-
