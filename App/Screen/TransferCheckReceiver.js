@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native';
-
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Dimensions } from 'react-native';
+var { height, width } = Dimensions.get('window');
 
 export default class Transfer extends React.Component {
 
@@ -9,14 +9,9 @@ export default class Transfer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: "25/7/17",
-      senderName: "TN Group",
-      senderID: "1212312121",
       receiverName: "ธนาคารออมสิน",
       receiverID: "0000000000",
       amount: "0.00",
-      fee: "0.00",
-      remaining: "0.00"
     }
   }
 
@@ -25,33 +20,27 @@ export default class Transfer extends React.Component {
     return (
       <View style={styles.container}>
         <View  style={styles.top_container}>
-          <View style={styles.row_container}>
-            <Text style={styles.text_bold}> Date</Text>
-            <Text style={styles.text_info}> {this.state.date}</Text>
+          <View style={styles.box}>
+            <View style={styles.boxtext}><Text style={styles.text_bold}> Receiver Name</Text></View>
+            <Text style={styles.text_info}> {this.state.receiverName}</Text>
           </View>
-          <View style={styles.row_container}>
-            <Text style={styles.text_bold}> Sender Name</Text>
-            <Text style={styles.text_info}> {this.state.senderName}</Text>
+          <View style={styles.box}>
+            <View style={styles.boxtext}><Text style={styles.text_bold}> ReceiverID</Text></View>
+            <Text style={styles.text_info}> {this.state.receiverID}</Text>
           </View>
 
           <View style={styles.box}>
-            <View style={styles.boxtext}><Text style={styles.text}>Amount</Text></View>
+            <View style={styles.boxtext}><Text style={styles.text_bold}> Amount</Text></View>
             <TextInput style={styles.textinput1} keyboardType='numeric' value={this.state.amount} onChangeText={(amount)=>this.setState({amount})}/>
           </View>
 
         </View>
 
-        <View style={{ flex: 2, flexDirection:'column', alignItems: 'flex-end' }}>
-          <View style={{ flex: 1 }}>
-            <TouchableOpacity onPress={()=>{}} style={styles.button}>
-              <Text>Next</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+        
         
         <View style={styles.bottom_container}>
           <TouchableOpacity style={styles.button}>
-              <Text style={styles.text}>Confirm</Text>
+              <Text style={styles.text}>Next ></Text>
           </TouchableOpacity>
           
         </View>
@@ -67,15 +56,15 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: '#fff',
   },
-  row_container: {
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    padding: 10,
+  box: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-start'
   },
   top_container: {
     flex: 3,
     backgroundColor: '#fff',
-    justifyContent: 'center',
+    // justifyContent: 'center',
   },
   bottom_container: {
     // flex: 1,
@@ -88,11 +77,13 @@ const styles = StyleSheet.create({
     // backgroundColor: '#f88fb0',
     backgroundColor: '#f06da1',
     // backgroundColor: '#e64f93',
-    // flexDirection: "column",
+    flexDirection: "column",
     padding: 25,
     width: width,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-    textinput1:{
+  textinput1:{
     paddingLeft:20, 
     width: 250,
     fontSize: 50 ,
