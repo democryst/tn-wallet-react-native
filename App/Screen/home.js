@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
   button_box:{
     flex:1,
     paddingTop: 30,
-    borderRadius: 50,
   },
   button: {
     // backgroundColor: '#f88fb0',
