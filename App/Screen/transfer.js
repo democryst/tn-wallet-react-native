@@ -18,14 +18,14 @@ export default class Transfer extends React.Component {
 
           <View style={styles.box}>
             <View style={styles.boxtext}><Text style={styles.text}>Amount</Text></View>
-            <TextInput style={styles.textinput1} value='5,000'/>
+            <TextInput style={styles.textinput1} value='5,000' onChange={(amount)=>this.setState({amount})}/>
           </View>
 
         </View>
 
-        <View style={{ flex: 2, flexDirection: 'row', alignItems: 'flex-end' }}>
+        <View style={{ flex: 2, flexDirection: 'c', alignItems: 'flex-end' }}>
           <View style={{ flex: 1 }}>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} >
               <Text style={{ height: 50, fontSize: 30 ,fontWeight: 'bold'}}>Next ></Text>
             </TouchableOpacity>
           </View>
