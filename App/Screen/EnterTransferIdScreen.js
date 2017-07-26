@@ -1,23 +1,28 @@
 import React, { Component }from 'react';
-import {AppRegistry, StyleSheet, Text, TextInput, View ,Button,TouchableOpacity} from 'react-native';
-
+import {AppRegistry, StyleSheet, Text, TextInput, View ,Button,TouchableOpacity,Dimensions} from 'react-native';
+var { height, width } = Dimensions.get('window');
 
  export default class EnterTransferScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Transfer',
+    
+  };
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <View style={styles.top_container} >
-          <Text style={styles.textReceiverId}>RecieverID</Text>
+          <Text style={styles.text_bold}>RecieverID</Text>
             <TextInput
-              style={styles.textInput}
+              keyboardType='numeric'
+              style={styles.text}
               placeholder="Input RecieverID"
           />
         </View >
         <View style={styles.bottom_container}>
-         <TouchableOpacity  onPress={() => navigate('Home', { user: 'Lucy' })}>
+         <TouchableOpacity  onPress={() => navigate('TransferCheckReceiver', { user: 'Lucy' })}>
           <View style={styles.button}>
-            <Text style={styles.buttonText}>Enter</Text>
+            <Text style={styles.text}>Enter</Text>
           </View>
         </TouchableOpacity>
     
@@ -31,7 +36,6 @@ import {AppRegistry, StyleSheet, Text, TextInput, View ,Button,TouchableOpacity}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 10,
     backgroundColor: '#fff',
   },
   row_container: {
@@ -41,6 +45,7 @@ const styles = StyleSheet.create({
   },
   top_container: {
     flex: 3,
+    margin: 15,
     backgroundColor: '#fff',
     justifyContent: 'center',
   },
@@ -48,7 +53,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
+
   },
   button: {
     // backgroundColor: '#f88fb0',
@@ -57,6 +63,7 @@ const styles = StyleSheet.create({
     // flexDirection: "column",
     // justifyContent: "flex-end",
     padding: 20,
+    width: width,
 
   },
   text:{

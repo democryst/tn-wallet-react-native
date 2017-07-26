@@ -1,10 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Dimensions, TouchableWithoutFeedback } from 'react-native';
 var { height, width } = Dimensions.get('window');
+var DismissKeyboard = require('dismissKeyboard');
 
 
 export default class TransferCheckReceiver extends React.Component {
-
+  static navigationOptions = {
+      title: 'Transfer',
+      
+  };
 
 
   constructor(props) {
@@ -18,34 +22,36 @@ export default class TransferCheckReceiver extends React.Component {
 
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <View  style={styles.top_container}>
-          <View style={styles.box}>
-            <View style={styles.boxtext}><Text style={styles.text_bold}> Receiver Name</Text></View>
-            <Text style={styles.text_info}> {this.state.receiverName}</Text>
+        <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
+          <View style={{flex: 1}}>
+            <View style={styles.top_container}>
+              <View style={styles.box}>
+                <View style={styles.boxtext}><Text style={styles.text_bold}> Receiver Name</Text></View>
+                <Text style={styles.text_info}> {this.state.receiverName}</Text>
+              </View>
+              <View style={styles.box}>
+                <View style={styles.boxtext}><Text style={styles.text_bold}> ReceiverID</Text></View>
+                <Text style={styles.text_info}> {this.state.receiverID}</Text>
+              </View>
+
+              <View style={styles.box}>
+                <View style={styles.boxtext}><Text style={styles.text_bold}> Amount</Text></View>
+                <TextInput style={styles.textinput1} keyboardType='numeric' value={this.state.amount} onChangeText={(amount) => this.setState({ amount })} />
+              </View>
+
+            </View>
+
+            <View style={styles.bottom_container}>
+              <TouchableOpacity style={styles.button} onPress={() => navigate('TransferConfirm', { user: 'Lucy' })}>
+                <Text style={styles.text}>Next ></Text>
+              </TouchableOpacity>
+
+            </View>
           </View>
-          <View style={styles.box}>
-            <View style={styles.boxtext}><Text style={styles.text_bold}> ReceiverID</Text></View>
-            <Text style={styles.text_info}> {this.state.receiverID}</Text>
-          </View>
-
-          <View style={styles.box}>
-            <View style={styles.boxtext}><Text style={styles.text_bold}> Amount</Text></View>
-            <View style={{borderWidth: 1, borderColor: 'gray'}}><TextInput style={styles.textinput1} keyboardType='numeric' value={this.state.amount} onChangeText={(amount)=>this.setState({amount})}/></View>
-          </View>
-
-        </View>
-
-
-
-        <View style={styles.bottom_container}>
-          <TouchableOpacity style={styles.button}>
-              <Text style={styles.text}>Next ></Text>
-          </TouchableOpacity>
-
-        </View>
-
+        </TouchableWithoutFeedback>
       </View>
     );
   }
@@ -84,20 +90,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  textinput1:{
-    paddingLeft:20,
+  textinput1: {
+    paddingLeft: 20,
     width: 250,
-    fontSize: 50 ,
+    fontSize: 50,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
     fontWeight: 'bold',
   },
-  text_bold:{
+  text_bold: {
     fontWeight: "bold",
     fontSize: 24
   },
-  text_info:{
+  text_info: {
     fontSize: 20
   }
 });

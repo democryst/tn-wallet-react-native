@@ -3,6 +3,10 @@ import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-nati
 var { height, width } = Dimensions.get('window');
 
 export default class TransferConfirm extends React.Component {
+  static navigationOptions = {
+    title: 'Transfer',
+    
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -20,6 +24,7 @@ export default class TransferConfirm extends React.Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <View style={styles.top_container}>
@@ -136,7 +141,7 @@ export default class TransferConfirm extends React.Component {
         </View>
 
         <View style={styles.bottom_container}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={() => navigate('TransferResult', { user: 'Lucy' })}>
             <Text style={styles.text}>Confirm</Text>
           </TouchableOpacity>
 

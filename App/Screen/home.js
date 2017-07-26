@@ -7,7 +7,7 @@ var { height, width } = Dimensions.get('window');
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Welcome',
+    title: 'Home',
     headerLeft: null,
   };
   render() {
@@ -25,7 +25,7 @@ export default class HomeScreen extends React.Component {
         />
       </View>
       <View style ={styles.container_userdetail}>
-          <Text>Tanakorn  Suanprang</Text>
+          <Text style={{size}}>Tanakorn  Suanprang</Text>
           <Text>4700.00  $</Text>
       </View>
 
