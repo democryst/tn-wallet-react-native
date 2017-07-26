@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Dimensions
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 
+
 export default class TransferCheckReceiver extends React.Component {
 
 
@@ -39,8 +40,6 @@ export default class TransferCheckReceiver extends React.Component {
               </View>
 
             </View>
-
-
 
             <View style={styles.bottom_container}>
               <TouchableOpacity style={styles.button} onPress={() => navigate('TransferConfirm', { user: 'Lucy' })}>
