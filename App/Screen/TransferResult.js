@@ -3,6 +3,10 @@ import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-nati
 var { height, width } = Dimensions.get('window');
 
 export default class TransferResult extends React.Component {
+    static navigationOptions = {
+    title: 'Transfer',
+   
+    };
     constructor(props) {
         super(props);
         this.state = {

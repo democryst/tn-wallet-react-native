@@ -5,7 +5,7 @@ import { StackNavigator } from 'react-navigation';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    title: 'Welcome',
+    title: 'Home',
     headerLeft: null,
   };
   render() {
