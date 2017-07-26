@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   text_bold: {
     fontWeight: "bold",

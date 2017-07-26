@@ -15,16 +15,16 @@ export default class HomeScreen extends React.Component {
     };
 
     return(
-    <View>
+    <View style={{flex: 1}}>
       <View style ={styles.container_userbar}>
-        <View style ={styles.container_userdetail}>
+        <View>
           <Image source={pic}
             style={styles.container_image_profile}
           />
-
         </View>
-        <View >
+        <View style ={styles.container_userdetail}>
             <Text>Tanakorn  Suanprang</Text>
+            <Text>4700.00  $</Text>
         </View>
 
 
@@ -51,25 +51,27 @@ const styles = StyleSheet.create({
       width: 100,
       height: 100,
       borderRadius: 30,
-
+      margin: 40,
   },
   container_userdetail:{
     flex: 1,
         flexDirection: 'row',
+    marginTop:40 ,
   },
   container_userbar:{
-    flex: 1,
-        flexDirection: 'row',
-    margin: 30,
+    flex: 3,
+    flexDirection: 'row',
+    backgroundColor: 'blue',
   },
   container_button:{
-    flex: 1,
+    flex: 5,
     flexDirection: 'column',
     padding: 60,
+    backgroundColor: 'red',
   },
   button_box:{
     flex:1,
-    paddingTop: 100,
+    paddingTop: 30,
   },
   button: {
     // backgroundColor: '#f88fb0',
