@@ -25,7 +25,7 @@ export default class HomeScreen extends React.Component {
         />
       </View>
       <View style ={styles.container_userdetail}>
-          <Text style={{size}}>Tanakorn  Suanprang</Text>
+          <Text>Tanakorn  Suanprang</Text>
           <Text>4700.00  $</Text>
       </View>
 
