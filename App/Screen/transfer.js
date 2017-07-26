@@ -1,7 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Keyboard } from 'react-native';
+
 
 export default class Transfer extends React.Component {
+
+
+
   constructor(props) {
     super(props);
     this.state = {
@@ -28,15 +32,15 @@ export default class Transfer extends React.Component {
 
           <View style={styles.box}>
             <View style={styles.boxtext}><Text style={styles.text}>Amount</Text></View>
-            <TextInput style={styles.textinput1} placeholder={this.state.amount} onchange={this.setState(amount)}/>
+            <TextInput style={styles.textinput1} keyboardType={'numeric'} placeholder={this.state.amount} onchangeText={(amount)=>this.setState({amount})} onSubmit={Keyboard.dismiss}/>
           </View>
 
         </View>
 
-        <View style={{ flex: 2, alignItems: 'flex-end' }}>
+        <View style={{ flex: 2, flexDirection:'column', alignItems: 'flex-end' }}>
           <View style={{ flex: 1 }}>
-            <TouchableOpacity style={styles.button}>
-              <Text style={{ height: 50, fontSize: 30 ,fontWeight: 'bold'}}>Next ></Text>
+            <TouchableOpacity onPress={()=>{})} style={styles.button}>
+              <Text>Next</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -57,14 +61,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   
   },
-  // button: {
-  //   margin: 10,
-  //   backgroundColor: '#f88fb0',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   flexDirection: 'column',
+  button: {
+    margin: 10,
+    backgroundColor: '#f88fb0',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
       
-  // },
+  },
   box:{ flex: 1 ,
     justifyContent: 'center',
     alignItems:'flex-start',
@@ -99,7 +103,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'column',
     fontWeight: 'bold'
-    
   },
   textinput2:{
     paddingLeft:20, 

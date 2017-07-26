@@ -4,8 +4,9 @@ import { StackNavigator } from 'react-navigation';
 
 import  HomeScreen  from './App/Screen/home' ;
 import EnterTransferIdScreen from './App/Screen/EnterTransferIdScreen' ;
-
+import TransferScreen from './App/Screen/transfer' ;
 const SimpleApp = StackNavigator({
+    TransferScreen: {screen: TransferScreen},
     EnterTransferIdScreen: { screen: EnterTransferIdScreen } ,
     Home: { screen: HomeScreen },
 });
