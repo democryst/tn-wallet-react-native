@@ -25,8 +25,8 @@ export default class HomeScreen extends React.Component {
         />
       </View>
       <View style ={styles.container_userdetail}>
-          <Text style={{size}}>Tanakorn  Suanprang</Text>
-          <Text>4700.00  $</Text>
+          <Text style ={styles.font_username}>Tanakorn  Suanprang</Text>
+          <Text style ={styles.font_money}>4700.00  $</Text>
       </View>
 
 
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
   button_box:{
     flex:1,
     paddingTop: 30,
+    borderRadius: 50,
   },
   button: {
     // backgroundColor: '#f88fb0',
@@ -94,6 +95,14 @@ const styles = StyleSheet.create({
     padding: 20,
 
   },
+  font_username:{
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  font_money:{
+    fontSize: 60,
+    fontWeight: 'bold',
+  }
 
 
 

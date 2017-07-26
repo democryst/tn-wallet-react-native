@@ -5,7 +5,7 @@ var { height, width } = Dimensions.get('window');
  export default class EnterTransferScreen extends React.Component {
   static navigationOptions = {
     title: 'Transfer',
-    
+
   };
   render() {
     const { navigate } = this.props.navigation;
@@ -25,10 +25,10 @@ var { height, width } = Dimensions.get('window');
             <Text style={styles.text}>Enter</Text>
           </View>
         </TouchableOpacity>
-    
+
         </View>
       </View>
-        
+
     );
   }
 }
@@ -79,4 +79,3 @@ const styles = StyleSheet.create({
     fontSize: 24
   }
 });
-
