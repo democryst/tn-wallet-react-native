@@ -28,12 +28,12 @@ export default class Transfer extends React.Component {
 
           <View style={styles.box}>
             <View style={styles.boxtext}><Text style={styles.text}>Amount</Text></View>
-            <TextInput style={styles.textinput1} placeholder={this.state.amount} onchange={this.setState()}/>
+            <TextInput style={styles.textinput1} placeholder={this.state.amount} onchange={this.setState(amount)}/>
           </View>
 
         </View>
 
-        <View style={{ flex: 2, flexDirection: 'row', alignItems: 'flex-end' }}>
+        <View style={{ flex: 2, alignItems: 'flex-end' }}>
           <View style={{ flex: 1 }}>
             <TouchableOpacity style={styles.button}>
               <Text style={{ height: 50, fontSize: 30 ,fontWeight: 'bold'}}>Next ></Text>
@@ -57,14 +57,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   
   },
-  button: {
-    margin: 10,
-    backgroundColor: '#f88fb0',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
+  // button: {
+  //   margin: 10,
+  //   backgroundColor: '#f88fb0',
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   flexDirection: 'column',
       
-  },
+  // },
   box:{ flex: 1 ,
     justifyContent: 'center',
     alignItems:'flex-start',

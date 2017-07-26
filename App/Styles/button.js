@@ -19,14 +19,19 @@ class Button extends Component {
 
 const styles = StyleSheet.create({
   button:{
+    // margin: 10,
+    // height: 50,
+    // width: 100,
+    // borderWidth: 1,
+    // borderRadius: 10,
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // backgroundColor: 'lightgray'
     margin: 10,
-    height: 50,
-    width: 100,
-    borderWidth: 1,
-    borderRadius: 10,
+    backgroundColor: '#f88fb0',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'lightgray'
+    flexDirection: 'column',
   }
 });
 
