@@ -25,8 +25,9 @@ export default class HomeScreen extends React.Component {
         />
       </View>
       <View style ={styles.container_userdetail}>
-          <Text style ={styles.font_username}>Tanakorn  Suanprang</Text>
-          <Text style ={styles.font_money}>4700.00  $</Text>
+          <Text style ={styles.font_standard}>Tanakorn  Suanprang</Text>
+          <Text style ={styles.font_money}>4,700.00</Text>
+          <Text style ={styles.font_standard}>BATH</Text>
       </View>
 
 
@@ -95,13 +96,14 @@ const styles = StyleSheet.create({
     padding: 20,
 
   },
-  font_username:{
-    fontSize: 20,
-    fontWeight: 'bold',
+  font_standard:{
+    fontSize: 15,
+
   },
   font_money:{
-    fontSize: 60,
+    fontSize: 30,
     fontWeight: 'bold',
+    paddingTop: 10,
   }
 
 
