@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native';
 
 
-export default class Transfer extends React.Component {
+export default class TransferCheckReceiver extends React.Component {
 
 
 
@@ -48,12 +48,12 @@ export default class Transfer extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-        
+
         <View style={styles.bottom_container}>
           <TouchableOpacity style={styles.button}>
               <Text style={styles.text}>Confirm</Text>
           </TouchableOpacity>
-          
+
         </View>
 
       </View>
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     width: width,
   },
     textinput1:{
-    paddingLeft:20, 
+    paddingLeft:20,
     width: 250,
     fontSize: 50 ,
     alignItems: 'center',
@@ -109,4 +109,3 @@ const styles = StyleSheet.create({
     fontSize: 20
   }
 });
-

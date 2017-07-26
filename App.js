@@ -4,15 +4,17 @@ import { StackNavigator } from 'react-navigation';
 
 import  HomeScreen  from './App/Screen/home' ;
 import EnterTransferIdScreen from './App/Screen/EnterTransferIdScreen' ;
-import TransferScreen from './App/Screen/transfer' ;
+import TransferCheckReceiver from './App/Screen/TransferCheckReceiver' ;
+import TransferConfirm from './App/Screen/TransferConfirm' ;
+import TransferResult from './App/Screen/TransferResult' ;
+
+
 const SimpleApp = StackNavigator({
-<<<<<<< HEAD
-=======
-    TransferScreen: {screen: TransferScreen},
-    EnterTransferIdScreen: { screen: EnterTransferIdScreen } ,
->>>>>>> 8294a9439470a0fb3fc5ef4f6f2a3a50c2f65094
     Home: { screen: HomeScreen },
     EnterTransferIdScreen: { screen: EnterTransferIdScreen } ,
+    TransferCheckReceiver: { screen: TransferCheckReceiver } ,
+    TransferConfirm: { screen: TransferConfirm } ,
+    TransferResult: { screen: TransferResult } ,
 
 });
 
@@ -36,4 +38,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-

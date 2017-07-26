@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
 var { height, width } = Dimensions.get('window');
 
-export default class Result extends React.Component {
+export default class TransferConfirm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -191,4 +191,3 @@ const styles = StyleSheet.create({
     fontSize: 19
   }
 });
-
