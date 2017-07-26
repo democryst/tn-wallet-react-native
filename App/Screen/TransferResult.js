@@ -7,6 +7,7 @@ export default class Result extends React.Component {
     super(props);
     this.state = {
       date: "25/7/17",
+      transferID: "1234567890",
       senderName: "Thanaporn",
       senderSurname: "Suwathanawongchai",
       senderID: "6302335476",
@@ -19,6 +20,7 @@ export default class Result extends React.Component {
     }
   }
 
+
   render() {
     return (
       <View style={styles.container}>
@@ -29,6 +31,15 @@ export default class Result extends React.Component {
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
               <Text style={styles.text_info}> {this.state.date}</Text>
+            </View>
+          </View>
+
+          <View style={{ flexDirection: 'row' }}>
+            <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
+              <Text style={styles.text_bold}> Transaction ID</Text>
+            </View>
+            <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
+              <Text style={styles.text_info}> {this.state.transferID}</Text>
             </View>
           </View>
 
@@ -137,7 +148,7 @@ export default class Result extends React.Component {
 
         <View style={styles.bottom_container}>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Confirm</Text>
+            <Text style={styles.text}>Done</Text>
           </TouchableOpacity>
 
         </View>

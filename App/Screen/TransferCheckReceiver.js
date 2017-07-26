@@ -9,9 +9,14 @@ export default class Transfer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      date: "25/7/17",
+      senderName: "TN Group",
+      senderID: "1212312121",
       receiverName: "ธนาคารออมสิน",
       receiverID: "0000000000",
       amount: "0.00",
+      fee: "0.00",
+      remaining: "0.00"
     }
   }
 
@@ -19,15 +24,14 @@ export default class Transfer extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-
-        <View style={{ flex: 3}}>
-          <View style={[styles.box, {paddingTop: 10}]}>
-            <View style={styles.boxtext}><Text style={styles.text}>Receiver's Name</Text></View>
-            <Text style={styles.textinput}>{this.state.receiverName}</Text>
+        <View  style={styles.top_container}>
+          <View style={styles.row_container}>
+            <Text style={styles.text_bold}> Date</Text>
+            <Text style={styles.text_info}> {this.state.date}</Text>
           </View>
-          <View style={styles.box}>
-            <View style={styles.boxtext}><Text style={styles.text}>Receiver's ID</Text></View>
-            <Text style={styles.textinput}>{this.state.receiverID}</Text>
+          <View style={styles.row_container}>
+            <Text style={styles.text_bold}> Sender Name</Text>
+            <Text style={styles.text_info}> {this.state.senderName}</Text>
           </View>
 
           <View style={styles.box}>
@@ -44,8 +48,13 @@ export default class Transfer extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-
-
+        
+        <View style={styles.bottom_container}>
+          <TouchableOpacity style={styles.button}>
+              <Text style={styles.text}>Confirm</Text>
+          </TouchableOpacity>
+          
+        </View>
 
       </View>
     );
@@ -55,45 +64,33 @@ export default class Transfer extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
+    marginTop: 10,
+    backgroundColor: '#fff',
+  },
+  row_container: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    padding: 10,
+  },
+  top_container: {
+    flex: 3,
+    backgroundColor: '#fff',
     justifyContent: 'center',
-    flexDirection: 'column',
-  
+  },
+  bottom_container: {
+    // flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    // justifyContent: 'center',
+    justifyContent: "flex-end",
   },
   button: {
-    margin: 10,
-    backgroundColor: '#f88fb0',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-      
-  },
-  box:{ flex: 1 ,
-    justifyContent: 'center',
-    alignItems:'flex-start',
-   
-    width: 250,
-  },
-  textinput:{
-    paddingLeft:20, 
-    width: 250,
-    fontSize: 20 ,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    fontWeight: 'bold'
-    
-  },
-  text:{
-    fontSize: 20,
-    fontWeight: 'bold'
-    
-  },
-  boxtext:{
-     backgroundColor: 'white',
-     width:250,
-     borderRadius: 50
+    // backgroundColor: '#f88fb0',
+    backgroundColor: '#f06da1',
+    // backgroundColor: '#e64f93',
+    // flexDirection: "column",
+    padding: 25,
+    width: width,
   },
     textinput1:{
     paddingLeft:20, 
@@ -104,15 +101,12 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     fontWeight: 'bold'
   },
-  textinput2:{
-    paddingLeft:20, 
-    width: 250,
-    fontSize: 30 ,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    fontWeight: 'bold'
-    
+  text_bold:{
+    fontWeight: "bold",
+    fontSize: 24
   },
-
+  text_info:{
+    fontSize: 20
+  }
 });
+
