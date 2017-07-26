@@ -6,8 +6,9 @@ import  HomeScreen  from './App/Screen/home' ;
 import EnterTransferIdScreen from './App/Screen/EnterTransferIdScreen' ;
 
 const SimpleApp = StackNavigator({
-    EnterTransferIdScreen: { screen: EnterTransferIdScreen } ,
     Home: { screen: HomeScreen },
+    EnterTransferIdScreen: { screen: EnterTransferIdScreen } ,
+
 });
 
 const AppNavigation = () => (
