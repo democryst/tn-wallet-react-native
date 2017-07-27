@@ -3,7 +3,10 @@ import { StyleSheet, Text, View, Button, TouchableOpacity, Image, Dimensions } f
 import { StackNavigator } from 'react-navigation';
 
 var { height, width } = Dimensions.get('window');
-
+var userData = fetch('http://188.166.214.163/accounts/1234567890')
+  .then(function(response) {
+    return response.json()
+  })
 
 
 export default class HomeScreen extends React.Component {
@@ -16,7 +19,7 @@ export default class HomeScreen extends React.Component {
     let pic = {
       uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
     };
-
+    console.log("============================================================================================");
     return(
     <Image source={require('../Resource/img/pink_background.png')} style={styles.container}>
     <View style ={styles.container_userbar}>
@@ -26,7 +29,7 @@ export default class HomeScreen extends React.Component {
         />
       </View>
       <View style ={styles.container_userdetail}>
-          <Text style ={styles.font_standard}>Tanakorn  Suanprang</Text>
+          <Text style ={styles.font_standard}>{userData.balance}</Text>
           <Text style ={styles.font_money}>4,700.00</Text>
           <Text style ={styles.font_standard}>BATH</Text>
       </View>
@@ -42,7 +45,7 @@ export default class HomeScreen extends React.Component {
     />
     <View style ={styles.container_button}>
       <View style ={styles.button_box}>
-        <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen') , {userId=7582983660}} style={styles.button}>
+        <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen' , {userId:7582983660})} style={styles.button}>
           <Text> Transfer </Text>
         </TouchableOpacity>
       </View>
