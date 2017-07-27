@@ -6,8 +6,8 @@ var DismissKeyboard = require('dismissKeyboard');
 
 export default class TransferCheckReceiver extends React.Component {
   static navigationOptions = {
-      title: 'Transfer',
-      
+    title: 'Transfer',
+
   };
 
 
@@ -26,7 +26,7 @@ export default class TransferCheckReceiver extends React.Component {
     return (
       <View style={styles.container}>
         <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
-          <View style={{flex: 1}}>
+          <View style={{ flex: 1 }}>
             <View style={styles.top_container}>
               <View style={styles.box}>
                 <View ><Text style={styles.text_bold}> Receiver Name</Text></View>
@@ -38,15 +38,29 @@ export default class TransferCheckReceiver extends React.Component {
               </View>
 
               <View style={styles.box}>
-                <View style={{flexDirection: 'column', justifyContent: 'flex-end'}}><Text style={styles.text_bold}> Amount</Text></View>
-                <View style={{flexDirection: 'column', justifyContent: 'flex-end'}}><TextInput style={styles.textinput1} keyboardType='numeric' value={this.state.amount} onChangeText={(amount) => this.setState({ amount })} /></View>
+                <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}><Text style={styles.text_bold}> Amount</Text></View>
+                <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}><TextInput style={styles.textinput1} keyboardType='numeric' value={this.state.amount} onChangeText={(amount) => this.setState({ amount })} /></View>
               </View>
               <View style={styles.box}></View>
 
             </View>
 
             <View style={styles.bottom_container}>
-              <TouchableOpacity style={styles.button} onPress={() => navigate('TransferConfirm', { user: 'Lucy' })}>
+              <TouchableOpacity style={styles.button} onPress={() => navigate('TransferConfirm', {
+                data: {
+                  sender_accinfo: {
+                    senderName: "Thanaporn",
+                    senderSurname: "Suwathanawongchai",
+                    senderID: "6302335476"
+                  },
+                  receiver_accinfo: {
+                    receiverName: "Phansawuth",
+                    receiverSurname: "Jenthaworn",
+                    receiverID: "7582983660"
+                  },
+                  transferamount: { this.state.amount }
+                }
+              })}>
                 <Text style={styles.text}>Next ></Text>
               </TouchableOpacity>
 
