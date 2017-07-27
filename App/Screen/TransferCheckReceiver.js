@@ -39,7 +39,8 @@ export default class TransferCheckReceiver extends React.Component {
 
 
   render() {
-
+    const { navigate } = this.props.navigation;
+    const { params } = this.props.navigation.state;
 
     return (
       <View style={styles.container}>
