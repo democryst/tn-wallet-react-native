@@ -21,7 +21,6 @@ export default class HomeScreen extends React.Component {
   };
 
   render() {
-    makeRequest() ;
     const { navigate } = this.props.navigation;
     let pic = {
       uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
