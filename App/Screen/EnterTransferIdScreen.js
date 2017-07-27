@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {TextInputMask} from 'react-native-masked-text';
 import { AppRegistry, StyleSheet, Text, TextInput, View, Button, TouchableOpacity, Dimensions, TouchableWithoutFeedback } from 'react-native';
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
