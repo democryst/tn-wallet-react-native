@@ -36,8 +36,8 @@ export default class HomeScreen extends React.Component {
       </View>
       <View style ={styles.container_userdetail}>
           <Text style ={styles.font_standard}>{`${this.state.name} ${this.state.surname}`}</Text>
-          <Text style ={styles.font_money}>{`${balance}  THB`}</Text>
-          {/* <Text style ={styles.font_standard}>THB</Text> */}
+          <Text style ={styles.font_money}>{balance}</Text>
+          <Text style ={styles.font_standard}>THB</Text>
       </View>
 
 
@@ -51,7 +51,7 @@ export default class HomeScreen extends React.Component {
     />
     <View style ={styles.container_button}>
       <View style ={styles.button_box}>
-        <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen' , {userId:7582983660})} style={styles.button}>
+        <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen' , {userId:this.state.account_id})} style={styles.button}>
           <Text> Transfer </Text>
         </TouchableOpacity>
       </View>
