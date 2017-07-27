@@ -2,33 +2,46 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Dimensions, TouchableWithoutFeedback } from 'react-native';
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
+import api from '../../API/RequestAPI.js';
 
-var receiveruserData = fetch('http://188.166.214.163/accounts/1234567890')
-  .then(function(response) {
-    return response.json()
-  })
 
 
 export default class TransferCheckReceiver extends React.Component {
+
+
+  constructor(props){
+    super(props);
+    const { navigate } = this.props.navigation;
+    const { params } = this.props.navigation.state;
+    this.state = {
+      amount: 0.00,
+      sender: {},
+      receiver: {},
+
+    };
+
+    api.getData(params.data.userId).then((data)=>{
+      this.setState(sender);
+    });
+
+    api.getData(params.data.receiverId).then((data)=>{
+      this.setState(receiver);
+    });
+
+
+  }
+
   static navigationOptions = {
     title: 'Transfer',
 
   };
 
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      receiverName: "ธนาคารออมสิน",
-      receiverID: "0000000000",
-      amount: "0.00",
-    }
-  }
-
 
   render() {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
+
     return (
       <View style={styles.container}>
         <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
@@ -36,17 +49,17 @@ export default class TransferCheckReceiver extends React.Component {
             <View style={styles.top_container}>
               <View style={styles.box}>
                 <View ><Text style={styles.text_bold}> Receiver Name</Text></View>
-                <Text style={styles.text_info}> {receiveruserData.name +" "+receiveruserData.surname}</Text>
+                <Text style={styles.text_info}> {`${this.state.name} ${this.state.surname}`}</Text>
               </View>
               <View style={styles.box}>
                 <View ><Text style={styles.text_bold}> ReceiverID</Text></View>
-                <Text style={styles.text_info}> {params.data.receiverID}</Text>
+                <Text style={styles.text_info}> {`${params.data.receiverId}`}</Text>
               </View>
 
               <View style={styles.box}>
                 <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}><Text style={styles.text_bold}> Amount</Text></View>
-                <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}><TextInput style={styles.textinput1} keyboardType='numeric' 
-                placeholder={this.state.amount} onChangeText={(amount) => this.setState({ amount })} /></View>
+                <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}><TextInput style={styles.textinput1} keyboardType='numeric'
+                placeholder={'0.00'} onChangeText={(amount) => this.setState({ amount })} /></View>
               </View>
               <View style={styles.box}></View>
 
@@ -55,17 +68,19 @@ export default class TransferCheckReceiver extends React.Component {
             <View style={styles.bottom_container}>
               <TouchableOpacity style={styles.button} onPress={() => navigate('TransferConfirm', {
                 data: {
-                  sender_accinfo: {
-                    senderName: "Thanaporn",
-                    senderSurname: "Suwathanawongchai",
-                    senderID: "6302335476"
+                  senderAccountInfo: {
+                    senderName: this.state.sender.name,
+                    senderSurname: this.state.sender.surname,
+                    senderID: this.state.sender.account_id,
+                    senderBalance: this.state.sender.balance
                   },
-                  receiver_accinfo: {
-                    receiverName: "Phansawuth",
-                    receiverSurname: "Jenthaworn",
-                    receiverID: "7582983660"
+                  receiverAccountInfo: {
+                    receiverName: this.state.receiver.name,
+                    receiverSurname: this.state.receiver.surname,
+                    receiverID: this.state.receiver.account_id,
+                    receiverBalance: this.state.receiver.balance
                   },
-                  transferamount:  this.state.amount 
+                  transferamount:  this.state.amount
                 }
               })}>
                 <Text style={styles.text}>Next ></Text>

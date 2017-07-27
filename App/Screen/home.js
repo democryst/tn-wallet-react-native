@@ -1,52 +1,34 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import api from '../../API/RequestAPI.js';
 
 var { height, width } = Dimensions.get('window');
 
-var testTranferRequest = function(){
-    fetch('http://188.166.214.163/transfer/', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        type: 'transfer',
-        scrc_acc_id: '1234567890',
-        des_acc_initial_id: '9876543210',
-        des_acc_initial_balance: 2000,
-        amount: 300,
-        src_remain_balance: 1700,
-        des_remain_balance: 5000,
-      })
+var makeRequest = function(){
+
+    fetch('http://188.166.214.163/accounts/1234567890', {
+        method: 'post',
     })
+    .then((responseData) => { // responseData = undefined
+        console.log(responseData.json());
+        return responseData;
+    })
+  .catch(function(err) {
+      console.log(err);
+  })
 }
 
-
-
 export default class HomeScreen extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {};
-
-    api.getData(1234567890).then((data)=>{
-      this.setState(data[0]);
-    });
-
-  }
   static navigationOptions = {
     title: 'Home',
     headerLeft: null,
   };
-
   render() {
+    makeRequest() ;
     const { navigate } = this.props.navigation;
     let pic = {
-      uri: 'http://simpleicon.com/wp-content/uploads/account.png'
+      uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
     };
-    var balance = parseFloat(this.state.balance).toFixed(2);
     return(
     <Image source={require('../Resource/img/pink_background.png')} style={styles.container}>
     <View style ={styles.container_userbar}>
@@ -56,8 +38,8 @@ export default class HomeScreen extends React.Component {
         />
       </View>
       <View style ={styles.container_userdetail}>
-          <Text style ={styles.font_standard}>{`${this.state.name} ${this.state.surname}`}</Text>
-          <Text style ={styles.font_money}>{balance}</Text>
+          <Text style ={styles.font_standard}>xxxxxxxx</Text>
+          <Text style ={styles.font_money}>4,700.00</Text>
           <Text style ={styles.font_standard}>THB</Text>
       </View>
 
@@ -72,7 +54,7 @@ export default class HomeScreen extends React.Component {
     />
     <View style ={styles.container_button}>
       <View style ={styles.button_box}>
-        <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen' , {userId:this.state.account_id})} style={styles.button}>
+        <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen' , {userId:7582983660})}  style={styles.button}>
           <Text> Transfer </Text>
         </TouchableOpacity>
       </View>
