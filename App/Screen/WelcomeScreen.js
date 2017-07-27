@@ -3,11 +3,20 @@ import { StyleSheet, Text, View, Button, TouchableOpacity, Image, Dimensions } f
 import { StackNavigator } from 'react-navigation';
 
 var { height, width } = Dimensions.get('window');
-var userData = fetch('http://188.166.214.163/accounts/1234567890')
-  .then(function(response) {
-    return response.json()
-  })
 
+var makeRequest = function(){
+
+    fetch('http://188.166.214.163/accounts/1234567890', {
+        method: 'get',
+    })
+    .then((responseData) => { // responseData = undefined
+        console.log(responseData.json());
+        return responseData.;
+    })
+  .catch(function(err) {
+      console.log(err);
+  })
+}
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -15,11 +24,11 @@ export default class HomeScreen extends React.Component {
     headerLeft: null,
   };
   render() {
+    makeRequest() ;
     const { navigate } = this.props.navigation;
     let pic = {
       uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
     };
-    console.log("============================================================================================");
     return(
     <Image source={require('../Resource/img/pink_background.png')} style={styles.container}>
     <View style ={styles.container_userbar}>
@@ -29,9 +38,9 @@ export default class HomeScreen extends React.Component {
         />
       </View>
       <View style ={styles.container_userdetail}>
-          <Text style ={styles.font_standard}>{userData.balance}</Text>
+          <Text style ={styles.font_standard}>xxxxxxxx</Text>
           <Text style ={styles.font_money}>4,700.00</Text>
-          <Text style ={styles.font_standard}>BATH</Text>
+          <Text style ={styles.font_standard}>THB</Text>
       </View>
 
 
@@ -45,11 +54,7 @@ export default class HomeScreen extends React.Component {
     />
     <View style ={styles.container_button}>
       <View style ={styles.button_box}>
-<<<<<<< HEAD:App/Screen/home.js
-        <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen' , {userId:7582983660})} style={styles.button}>
-=======
-        <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen' , {userId: 7582983660})}  style={styles.button}>
->>>>>>> 5c19d7146ff3ebe1aa28da8daa255601b923bc88:App/Screen/WelcomeScreen.js
+        <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen' , {userId:7582983660})}  style={styles.button}>
           <Text> Transfer </Text>
         </TouchableOpacity>
       </View>
