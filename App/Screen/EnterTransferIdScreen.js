@@ -1,44 +1,50 @@
-import React, { Component }from 'react';
-import {AppRegistry, StyleSheet, Text, TextInput, View ,Button,TouchableOpacity,Dimensions} from 'react-native';
+import React, { Component } from 'react';
+import { AppRegistry, StyleSheet, Text, TextInput, View, Button, TouchableOpacity, Dimensions, TouchableWithoutFeedback } from 'react-native';
 var { height, width } = Dimensions.get('window');
+var DismissKeyboard = require('dismissKeyboard');
 
- export default class EnterTransferScreen extends React.Component {
+export default class EnterTransferScreen extends React.Component {
   static navigationOptions = {
     title: 'Transfer',
-   
+
   };
   constructor(props) {
     super(props);
-    this.state = {receiverId: null};
+    this.state = { receiverId: null };
 
-   
-    
+
+
   }
   render() {
     const { navigate } = this.props.navigation;
-   const { params } = this.props.navigation.state;
+    const { params } = this.props.navigation.state;
     return (
-      <View style={styles.container}>
-        <View style={styles.top_container} >
-          <Text style={styles.text_bold}>Receiver Number</Text>
+      <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
+        <View style={styles.container}>
+
+          <View style={styles.top_container} >
+            <Text style={styles.text_bold}>Receiver Number</Text>
+
             <TextInput
               keyboardType='numeric'
               style={styles.text}
               placeholder='Input Receiver Number'
-              onChangeText={(receiverId) => this.setState({receiverId})}
-              
-          />
-        </View >
-        <View style={styles.bottom_container}>
-         <TouchableOpacity  onPress={() => navigate('TransferCheckReceiver', { userId: params.userId,receiverId: this.state.receiverId })}>
-          <View style={styles.button}>
-            <Text style={styles.text}>Enter</Text>
+              onChangeText={(receiverId) => this.setState({ receiverId })}
+
+            />
+          </View >
+          <View style={styles.bottom_container}>
+            <TouchableOpacity onPress={() => navigate('TransferCheckReceiver', {data:{ userId: params.userId, receiverId: this.state.receiverId} })}>
+              <View style={styles.button}>
+                <Text style={styles.text}>Enter</Text>
+              </View>
+            </TouchableOpacity>
+
           </View>
-        </TouchableOpacity>
-    
+
         </View>
-      </View>
-        
+      </TouchableWithoutFeedback>
+
     );
   }
 }
@@ -76,16 +82,16 @@ const styles = StyleSheet.create({
     width: width,
 
   },
-  text:{
+  text: {
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 20
   },
-  text_bold:{
+  text_bold: {
     fontWeight: "bold",
     fontSize: 20
   },
-  text_info:{
+  text_info: {
     fontSize: 24
   }
 });
