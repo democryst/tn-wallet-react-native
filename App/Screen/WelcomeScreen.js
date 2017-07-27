@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+
 var { height, width } = Dimensions.get('window');
 
 
@@ -41,7 +42,7 @@ export default class HomeScreen extends React.Component {
     />
     <View style ={styles.container_button}>
       <View style ={styles.button_box}>
-        <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen')} style={styles.button}>
+        <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen' , {userId: 7582983660})}  style={styles.button}>
           <Text> Transfer </Text>
         </TouchableOpacity>
       </View>
