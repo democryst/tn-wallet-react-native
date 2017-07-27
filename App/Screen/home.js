@@ -7,11 +7,11 @@ var { height, width } = Dimensions.get('window');
 var makeRequest = function(){
 
     fetch('http://188.166.214.163/accounts/1234567890', {
-        method: 'get',
+        method: 'post',
     })
     .then((responseData) => { // responseData = undefined
         console.log(responseData.json());
-        return responseData.;
+        return responseData;
     })
   .catch(function(err) {
       console.log(err);
