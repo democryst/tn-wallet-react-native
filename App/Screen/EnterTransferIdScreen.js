@@ -5,30 +5,34 @@ var { height, width } = Dimensions.get('window');
  export default class EnterTransferScreen extends React.Component {
   static navigationOptions = {
     title: 'Transfer',
-
+   
   };
+
   render() {
     const { navigate } = this.props.navigation;
+   const { params } = this.props.navigation.state;
     return (
       <View style={styles.container}>
         <View style={styles.top_container} >
-          <Text style={styles.text_bold}>RecieverID</Text>
+          <Text style={styles.text_bold}>Receiver Number</Text>
             <TextInput
               keyboardType='numeric'
               style={styles.text}
-              placeholder="Input RecieverID"
+              placeholder='Input Receiver Number'
+              onChangeText={(receiverId) => this.setState({receiverId})}
+              
           />
         </View >
         <View style={styles.bottom_container}>
-         <TouchableOpacity  onPress={() => navigate('TransferCheckReceiver', { user: 'Lucy' })}>
+         <TouchableOpacity  onPress={() => navigate('TransferCheckReceiver', { userId: params.userId,receiverId: this.state.receiverId })}>
           <View style={styles.button}>
             <Text style={styles.text}>Enter</Text>
           </View>
         </TouchableOpacity>
-
+    
         </View>
       </View>
-
+        
     );
   }
 }
@@ -79,3 +83,4 @@ const styles = StyleSheet.create({
     fontSize: 24
   }
 });
+

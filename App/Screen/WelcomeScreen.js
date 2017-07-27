@@ -45,7 +45,11 @@ export default class HomeScreen extends React.Component {
     />
     <View style ={styles.container_button}>
       <View style ={styles.button_box}>
-        <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen' , {userId: 7582983660})} style={styles.button}>
+<<<<<<< HEAD:App/Screen/home.js
+        <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen' , {userId:7582983660})} style={styles.button}>
+=======
+        <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen' , {userId: 7582983660})}  style={styles.button}>
+>>>>>>> 5c19d7146ff3ebe1aa28da8daa255601b923bc88:App/Screen/WelcomeScreen.js
           <Text> Transfer </Text>
         </TouchableOpacity>
       </View>
