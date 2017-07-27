@@ -24,13 +24,14 @@ export default class EnterTransferScreen extends React.Component {
         <View style={styles.container}>
 
           <View style={styles.top_container} >
-            <Text style={styles.text_bold}>{params.userId}</Text>
+            <Text style={styles.text_bold}>Receiver Account Number</Text>
             <TextInputMask
             type={'credit-card'}
               maxLength={10}
             
               style={styles.textInput}
               placeholder='XXX-X-XXXXXX'
+              
               onChangeText={(receiverId) => this.setState({ receiverId })}
             />
           </View >
