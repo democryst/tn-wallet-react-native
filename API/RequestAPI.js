@@ -6,11 +6,12 @@ exports.getData = function () {
     .then((resp) => resp.json());
 }
 
-exports.postTransaction = function (sourceID, sourceInitialBalance, destinationID, 
-  destinationInitialBalance, amount) {
-  let sourceRemain = src_initial_balance - amount;
-  let destinationRemain = des_initial_balance + amount;
-  fetch('https://mywebsite.com/endpoint/', {
+exports.postTransaction = function (sourceID, sourceInitialBalance, destinationID, destinationInitialBalance, amount) {
+  let sourceRemain = sourceInitialBalance - amount;
+  let destinationRemain = destinationInitialBalance + amount;
+  console.log(sourceRemain);
+  console.log(destinationRemain);
+  fetch('http://188.166.214.163/transactions/', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -27,4 +28,11 @@ exports.postTransaction = function (sourceID, sourceInitialBalance, destinationI
       des_remain_balance: destinationRemain,
     })
   })
+  .then(function(response){ 
+ return response.json();   
+})
+.then(function(data){ 
+console.log(data)
+});
+  
 }

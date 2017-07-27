@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
 var { height, width } = Dimensions.get('window');
+import api from '../../API/RequestAPI.js';
 
 export default class TransferConfirm extends React.Component {
   static navigationOptions = {
@@ -17,10 +18,17 @@ export default class TransferConfirm extends React.Component {
       receiverName: "Phansawuth",
       receiverSurname: "Jenthaworn",
       receiverID: "7582983660",
-      amount: "500.00",
+      amount: 500,
       fee: "0.00",
-      remaining: "4,200.00"
+      remaining: "4,200.00",
+      sB: 1000,
+      dB: 500,
     }
+  }
+
+  postTransaction(){
+    api.postTransaction(this.state.senderID, this.state.sB, this.state.receiverID, this.state.dB, this.state.amount);
+    // console.log("kuy");
   }
 
   render() {
@@ -142,7 +150,7 @@ export default class TransferConfirm extends React.Component {
         </View>
 
         <View style={styles.bottom_container}>
-          <TouchableOpacity style={styles.button} onPress={() => navigate('TransferResult', { user: 'Lucy' })}>
+          <TouchableOpacity style={styles.button} onPress={ () =>{this.postTransaction(), navigate('TransferResult', { user: 'Lucy' })} }>
             <Text style={styles.text}>Confirm</Text>
           </TouchableOpacity>
 
