@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {TextInputMask} from 'react-native-masked-text';
 import { AppRegistry, StyleSheet, Text, TextInput, View, Button, TouchableOpacity, Dimensions, TouchableWithoutFeedback } from 'react-native';
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
@@ -23,18 +24,18 @@ export default class EnterTransferScreen extends React.Component {
         <View style={styles.container}>
 
           <View style={styles.top_container} >
-            <Text style={styles.text_bold}>Receiver Number</Text>
-
-            <TextInput
-              keyboardType='numeric'
-              style={styles.text}
-              placeholder='Input Receiver Number'
+            <Text style={styles.text_bold}>{params.userId}</Text>
+            <TextInputMask
+            type={'credit-card'}
+              maxLength={10}
+            
+              style={styles.textInput}
+              placeholder='XXX-X-XXXXXX'
               onChangeText={(receiverId) => this.setState({ receiverId })}
-
             />
           </View >
           <View style={styles.bottom_container}>
-            <TouchableOpacity onPress={() => navigate('TransferCheckReceiver', {data:{ userId: params.userId, receiverId: this.state.receiverId} })}>
+            <TouchableOpacity onPress={() => navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } })}>
               <View style={styles.button}>
                 <Text style={styles.text}>Enter</Text>
               </View>
@@ -85,14 +86,22 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 20
+    fontSize: 25
   },
   text_bold: {
     fontWeight: "bold",
-    fontSize: 20
+    fontSize: 25
   },
   text_info: {
     fontSize: 24
+  },
+  textInput: {
+    borderWidth: 1,
+    height: 50,
+    padding: 10,
+    fontSize: 25,
+
+
   }
 });
 
