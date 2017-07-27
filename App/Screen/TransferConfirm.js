@@ -47,7 +47,7 @@ export default class TransferConfirm extends React.Component {
 
           <View style={{ flexDirection: 'row' }}>
             <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-              <Text style={styles.text_bold}> Sender Name</Text>
+              <Text style={styles.text_bold}>From</Text>
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
               <View>
@@ -59,7 +59,7 @@ export default class TransferConfirm extends React.Component {
 
           <View style={{ flexDirection: 'row' }}>
             <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-              <Text style={styles.text_bold}> Sender ID</Text>
+              {/* <Text style={styles.text_bold}> Sender ID</Text> */}
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
               <Text style={styles.text_info}> {this.state.senderID}</Text>
@@ -76,7 +76,7 @@ export default class TransferConfirm extends React.Component {
 
           <View style={{ flexDirection: 'row' }}>
             <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-              <Text style={styles.text_bold}> Receiver Name</Text>
+              <Text style={styles.text_bold}>To</Text>
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
               <View>
@@ -88,7 +88,7 @@ export default class TransferConfirm extends React.Component {
 
           <View style={{ flexDirection: 'row' }}>
             <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-              <Text style={styles.text_bold}> Receiver ID</Text>
+              {/* <Text style={styles.text_bold}> Receiver ID</Text> */}
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
               <Text style={styles.text_info}> {this.state.receiverID}</Text>
