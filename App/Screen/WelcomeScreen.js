@@ -38,8 +38,8 @@ export default class HomeScreen extends React.Component {
       <View style ={styles.container_userdetail}>
 
           <Text style ={styles.font_standard}>{`${this.state.name} ${this.state.surname}`}</Text>
-          <Text style ={styles.font_money}>{balance}</Text>
-          <Text style ={styles.font_standard}>THB</Text>
+          <Text style ={styles.font_money}>{`${balance}  THB`}</Text>
+          {/* <Text style ={styles.font_standard}>THB</Text> */}
       </View>
 
 
