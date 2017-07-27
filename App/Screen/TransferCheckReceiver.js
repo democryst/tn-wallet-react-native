@@ -29,18 +29,19 @@ export default class TransferCheckReceiver extends React.Component {
           <View style={{flex: 1}}>
             <View style={styles.top_container}>
               <View style={styles.box}>
-                <View style={styles.boxtext}><Text style={styles.text_bold}> Receiver Name</Text></View>
+                <View ><Text style={styles.text_bold}> Receiver Name</Text></View>
                 <Text style={styles.text_info}> {this.state.receiverName}</Text>
               </View>
               <View style={styles.box}>
-                <View style={styles.boxtext}><Text style={styles.text_bold}> ReceiverID</Text></View>
+                <View ><Text style={styles.text_bold}> ReceiverID</Text></View>
                 <Text style={styles.text_info}> {this.state.receiverID}</Text>
               </View>
 
               <View style={styles.box}>
-                <View style={styles.boxtext}><Text style={styles.text_bold}> Amount</Text></View>
-                <TextInput style={styles.textinput1} keyboardType='numeric' value={this.state.amount} onChangeText={(amount) => this.setState({ amount })} />
+                <View style={{flexDirection: 'column', justifyContent: 'flex-end'}}><Text style={styles.text_bold}> Amount</Text></View>
+                <View style={{flexDirection: 'column', justifyContent: 'flex-end'}}><TextInput style={styles.textinput1} keyboardType='numeric' value={this.state.amount} onChangeText={(amount) => this.setState({ amount })} /></View>
               </View>
+              <View style={styles.box}></View>
 
             </View>
 
@@ -60,7 +61,6 @@ export default class TransferCheckReceiver extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 10,
     backgroundColor: '#fff',
   },
   box: {
@@ -91,7 +91,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   textinput1: {
-    paddingLeft: 20,
+    // paddingLeft: 20,
+    paddingRight: 20,
     width: 250,
     fontSize: 50,
     alignItems: 'center',
