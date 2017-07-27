@@ -166,7 +166,7 @@ export default class TransferResult extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 10,
+        // marginTop: 10,
         backgroundColor: '#fff',
     },
     row_container: {
