@@ -58,7 +58,7 @@ export default class TransferCheckReceiver extends React.Component {
                     receiverSurname: "Jenthaworn",
                     receiverID: "7582983660"
                   },
-                  transferamount: { this.state.amount }
+                  transferamount:  this.state.amount 
                 }
               })}>
                 <Text style={styles.text}>Next ></Text>
