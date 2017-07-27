@@ -7,7 +7,13 @@ var { height, width } = Dimensions.get('window');
     title: 'Transfer',
    
   };
+  constructor(props) {
+    super(props);
+    this.state = {receiverId: null};
 
+   
+    
+  }
   render() {
     const { navigate } = this.props.navigation;
    const { params } = this.props.navigation.state;
