@@ -23,6 +23,7 @@ export default class TransferCheckReceiver extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    const { params } = this.props.navigation.state;
     return (
       <View style={styles.container}>
         <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
@@ -39,7 +40,8 @@ export default class TransferCheckReceiver extends React.Component {
 
               <View style={styles.box}>
                 <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}><Text style={styles.text_bold}> Amount</Text></View>
-                <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}><TextInput style={styles.textinput1} keyboardType='numeric' value={this.state.amount} onChangeText={(amount) => this.setState({ amount })} /></View>
+                <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}><TextInput style={styles.textinput1} keyboardType='numeric' 
+                placeholder={this.state.amount} onChangeText={(amount) => this.setState({ amount })} /></View>
               </View>
               <View style={styles.box}></View>
 
