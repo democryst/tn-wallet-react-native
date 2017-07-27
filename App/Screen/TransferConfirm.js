@@ -2,11 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
 var { height, width } = Dimensions.get('window');
 import api from '../../API/RequestAPI.js';
+import RestClient from 'react-native-rest-client';
 
 export default class TransferConfirm extends React.Component {
   static navigationOptions = {
     title: 'Transfer',
-    
+
   };
   constructor(props) {
     super(props);
@@ -26,14 +27,31 @@ export default class TransferConfirm extends React.Component {
     }
   }
 
-  postTransaction(){
-    api.postTransaction(this.state.senderID, this.state.sB, this.state.receiverID, this.state.dB, this.state.amount);
+  postTransaction() {
+    const { navigate } = this.props.navigation;
+    const { params } = this.props.navigation.state;
+    api.postTransaction(this.state.senderID, this.state.sB, this.state.receiverID, this.state.dB, params.data.transferAmount);
     // console.log("kuy");
   }
 
   render() {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
+    var balance = params.data.senderAccountInfo.senderBalance - params.data.transferAmount;
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+      dd = '0' + dd
+    }
+
+    if (mm < 10) {
+      mm = '0' + mm
+    }
+
+    today = dd + '/' + mm + '/' + yyyy;
     return (
       <View style={styles.container}>
         <View style={styles.top_container}>
@@ -42,7 +60,7 @@ export default class TransferConfirm extends React.Component {
               <Text style={styles.text_bold}> Date</Text>
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-              <Text style={styles.text_info}> {this.state.date}</Text>
+              <Text style={styles.text_info}> {today}</Text>
             </View>
           </View>
 
@@ -60,8 +78,8 @@ export default class TransferConfirm extends React.Component {
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
               <View>
-                <Text style={[styles.text_info, { textAlign: "right" }]}> {this.state.senderName}</Text>
-                <Text style={[styles.text_info, { textAlign: "right" }]}> {this.state.senderSurname}</Text>
+                <Text style={[styles.text_info, { textAlign: "right" }]}> {params.data.senderAccountInfo.senderName}</Text>
+                <Text style={[styles.text_info, { textAlign: "right" }]}> {params.data.senderAccountInfo.senderSurname}</Text>
               </View>
             </View>
           </View>
@@ -71,7 +89,7 @@ export default class TransferConfirm extends React.Component {
               {/* <Text style={styles.text_bold}> Sender ID</Text> */}
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-              <Text style={styles.text_info}> {this.state.senderID}</Text>
+              <Text style={styles.text_info}> {params.data.senderAccountInfo.senderID}</Text>
             </View>
           </View>
 
@@ -89,8 +107,8 @@ export default class TransferConfirm extends React.Component {
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
               <View>
-                <Text style={[styles.text_info, { textAlign: "right" }]}> {params.data.receiver_accinfo.receiverName}</Text>
-                <Text style={[styles.text_info, { textAlign: "right" }]}> {this.state.receiverSurname}</Text>
+                <Text style={[styles.text_info, { textAlign: "right" }]}> {params.data.receiverAccountInfo.receiverName}</Text>
+                <Text style={[styles.text_info, { textAlign: "right" }]}> {params.data.receiverAccountInfo.receiverSurname}</Text>
               </View>
             </View>
           </View>
@@ -100,7 +118,7 @@ export default class TransferConfirm extends React.Component {
               {/* <Text style={styles.text_bold}> Receiver ID</Text> */}
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-              <Text style={styles.text_info}> {this.state.receiverID}</Text>
+              <Text style={styles.text_info}> {params.data.receiverAccountInfo.receiverID}</Text>
             </View>
           </View>
 
@@ -117,7 +135,7 @@ export default class TransferConfirm extends React.Component {
               <Text style={styles.text_bold}> Amount</Text>
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-              <Text style={styles.text_info}> {this.state.amount}</Text>
+              <Text style={styles.text_info}> {params.data.transferAmount}</Text>
             </View>
           </View>
 
@@ -143,14 +161,14 @@ export default class TransferConfirm extends React.Component {
               <Text style={styles.text_bold}> Remaining</Text>
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-              <Text style={styles.text_info}> {this.state.remaining}</Text>
+              <Text style={styles.text_info}> {balance}</Text>
             </View>
           </View>
 
         </View>
 
         <View style={styles.bottom_container}>
-          <TouchableOpacity style={styles.button} onPress={ () =>{this.postTransaction(), navigate('TransferResult', { user: 'Lucy' })} }>
+          <TouchableOpacity style={styles.button} onPress={() => { this.postTransaction(), navigate('TransferResult', { user: 'Lucy' }) }}>
             <Text style={styles.text}>Confirm</Text>
           </TouchableOpacity>
 
