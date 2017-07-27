@@ -1,17 +1,8 @@
 let rootURL = 'http://www.omdbapi.com/';
+let URL = 'http://188.166.214.163/accounts/1234567890';
 
-exports.search = function(q){
-  let url = `${rootURL}?s=${q}`;
-  console.log(url);
-  return fetch(url)
-    .then((resp)=>resp.json())
-    .then((json)=>{
-      return json.Search;
-    });
-}
-
-exports.view = function(id){
-  let url = `${rootURL}?i=${id}&plot=short&r=json`;
-  return fetch(url)
+exports.getData = function(){
+  return fetch(URL)
     .then((resp)=>resp.json());
 }
+

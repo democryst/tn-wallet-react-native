@@ -1,25 +1,31 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import api from '../../API/RequestAPI.js';
 
 var { height, width } = Dimensions.get('window');
-var userData = fetch('http://188.166.214.163/accounts/1234567890')
-  .then(function(response) {
-    return response.json()
-  })
-
 
 export default class HomeScreen extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {};
+
+    api.getData().then((data)=>{
+      this.setState(data[0]);
+    });
+
+  }
   static navigationOptions = {
     title: 'Home',
     headerLeft: null,
   };
+
   render() {
     const { navigate } = this.props.navigation;
     let pic = {
       uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
     };
-    console.log("============================================================================================");
+    var balance = parseFloat(this.state.balance).toFixed(2);
     return(
     <Image source={require('../Resource/img/pink_background.png')} style={styles.container}>
     <View style ={styles.container_userbar}>
@@ -29,9 +35,9 @@ export default class HomeScreen extends React.Component {
         />
       </View>
       <View style ={styles.container_userdetail}>
-          <Text style ={styles.font_standard}>{userData.balance}</Text>
-          <Text style ={styles.font_money}>4,700.00</Text>
-          <Text style ={styles.font_standard}>BATH</Text>
+          <Text style ={styles.font_standard}>{`${this.state.name} ${this.state.surname}`}</Text>
+          <Text style ={styles.font_money}>{balance}</Text>
+          <Text style ={styles.font_standard}>THB</Text>
       </View>
 
 
