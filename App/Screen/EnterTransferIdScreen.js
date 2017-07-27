@@ -25,10 +25,9 @@ export default class EnterTransferScreen extends React.Component {
 
           <View style={styles.top_container} >
             <Text style={styles.text_bold}>Receiver Account Number</Text>
-            <TextInputMask
-            type={'credit-card'}
+            <TextInput
               maxLength={10}
-            
+           
               style={styles.textInput}
               placeholder='XXX-X-XXXXXX'
               
