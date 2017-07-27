@@ -14,7 +14,7 @@ var { height, width } = Dimensions.get('window');
     return (
       <View style={styles.container}>
         <View style={styles.top_container} >
-          <Text style={styles.text_bold}>{params.userId}}</Text>
+          <Text style={styles.text_bold}>{params.userId}</Text>
             <TextInput
               keyboardType='numeric'
               style={styles.text}
