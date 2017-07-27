@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-import  HomeScreen  from './App/Screen/home' ;
+import WelcomeScreen  from './App/Screen/WelcomeScreen' ;
 import EnterTransferIdScreen from './App/Screen/EnterTransferIdScreen' ;
 import TransferCheckReceiver from './App/Screen/TransferCheckReceiver' ;
 import TransferConfirm from './App/Screen/TransferConfirm' ;
@@ -10,7 +10,7 @@ import TransferResult from './App/Screen/TransferResult' ;
 
 
 const SimpleApp = StackNavigator({
-    Home: { screen: HomeScreen },
+    Home: { screen: WelcomeScreen },
     EnterTransferIdScreen: { screen: EnterTransferIdScreen } ,
     TransferCheckReceiver: { screen: TransferCheckReceiver } ,
     TransferConfirm: { screen: TransferConfirm } ,
