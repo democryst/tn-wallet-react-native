@@ -25,8 +25,6 @@ export default class HomeScreen extends React.Component {
     let pic = {
       uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
     };
-
-    
     return(
     <Image source={require('../Resource/img/pink_background.png')} style={styles.container}>
     <View style ={styles.container_userbar}>
