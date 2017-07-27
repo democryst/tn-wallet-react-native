@@ -3,6 +3,11 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Dimensions
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 
+var receiveruserData = fetch('http://188.166.214.163/accounts/1234567890')
+  .then(function(response) {
+    return response.json()
+  })
+
 
 export default class TransferCheckReceiver extends React.Component {
   static navigationOptions = {
@@ -23,6 +28,7 @@ export default class TransferCheckReceiver extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    const { params } = this.props.navigation.state;
     return (
       <View style={styles.container}>
         <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
@@ -30,16 +36,17 @@ export default class TransferCheckReceiver extends React.Component {
             <View style={styles.top_container}>
               <View style={styles.box}>
                 <View ><Text style={styles.text_bold}> Receiver Name</Text></View>
-                <Text style={styles.text_info}> {this.state.receiverName}</Text>
+                <Text style={styles.text_info}> {receiveruserData.name +" "+receiveruserData.surname}</Text>
               </View>
               <View style={styles.box}>
                 <View ><Text style={styles.text_bold}> ReceiverID</Text></View>
-                <Text style={styles.text_info}> {this.state.receiverID}</Text>
+                <Text style={styles.text_info}> {params.data.receiverID}</Text>
               </View>
 
               <View style={styles.box}>
                 <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}><Text style={styles.text_bold}> Amount</Text></View>
-                <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}><TextInput style={styles.textinput1} keyboardType='numeric' value={this.state.amount} onChangeText={(amount) => this.setState({ amount })} /></View>
+                <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}><TextInput style={styles.textinput1} keyboardType='numeric' 
+                placeholder={this.state.amount} onChangeText={(amount) => this.setState({ amount })} /></View>
               </View>
               <View style={styles.box}></View>
 
