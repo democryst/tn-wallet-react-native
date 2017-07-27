@@ -25,6 +25,7 @@ export default class TransferConfirm extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    const { params } = this.props.navigation.state;
     return (
       <View style={styles.container}>
         <View style={styles.top_container}>
@@ -80,7 +81,7 @@ export default class TransferConfirm extends React.Component {
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
               <View>
-                <Text style={[styles.text_info, { textAlign: "right" }]}> {this.state.receiverName}</Text>
+                <Text style={[styles.text_info, { textAlign: "right" }]}> {params.data.receiver_accinfo.receiverName}</Text>
                 <Text style={[styles.text_info, { textAlign: "right" }]}> {this.state.receiverSurname}</Text>
               </View>
             </View>

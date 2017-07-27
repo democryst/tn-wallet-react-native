@@ -1,28 +1,25 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import api from '../../API/RequestAPI.js';
 
 var { height, width } = Dimensions.get('window');
 
-var makeRequest = function(){
-
-    fetch('http://188.166.214.163/accounts/1234567890', {
-        method: 'get',
-    })
-    .then((responseData) => { // responseData = undefined
-        console.log(responseData.json());
-        return responseData.;
-    })
-  .catch(function(err) {
-      console.log(err);
-  })
-}
-
 export default class HomeScreen extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {};
+
+    api.getData().then((data)=>{
+      this.setState(data[0]);
+    });
+
+  }
   static navigationOptions = {
     title: 'Home',
     headerLeft: null,
   };
+
   render() {
     makeRequest() ;
     const { navigate } = this.props.navigation;
@@ -38,8 +35,9 @@ export default class HomeScreen extends React.Component {
         />
       </View>
       <View style ={styles.container_userdetail}>
-          <Text style ={styles.font_standard}>xxxxxxxx</Text>
-          <Text style ={styles.font_money}>4,700.00</Text>
+
+          <Text style ={styles.font_standard}>{`${this.state.name} ${this.state.surname}`}</Text>
+          <Text style ={styles.font_money}>{balance}</Text>
           <Text style ={styles.font_standard}>THB</Text>
       </View>
 
