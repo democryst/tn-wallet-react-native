@@ -5,8 +5,6 @@ import api from '../../API/RequestAPI.js';
 
 var { height, width } = Dimensions.get('window');
 
-<<<<<<< HEAD
-=======
 // var testTranferRequest = function(){
 //     fetch('http://188.166.214.163/transfer/', {
 //       method: 'POST',
@@ -27,7 +25,6 @@ var { height, width } = Dimensions.get('window');
 // }
 
 
->>>>>>> 5e8f2bf9205f690e02dd06688ea9187a57ebda29
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
@@ -37,8 +34,6 @@ export default class HomeScreen extends React.Component {
     api.getData(1234567890).then((data) => {
       this.setState(data[0]);
     });
-
-
 
   }
   static navigationOptions = {
@@ -82,37 +77,6 @@ export default class HomeScreen extends React.Component {
             margin: 15
           }}
         />
-<<<<<<< HEAD
-      </View>
-      <View style ={styles.container_userdetail}>
-          <Text style ={styles.font_standard}>{`${this.state.name} ${this.state.surname}`}</Text>
-          <Text style ={styles.font_money}>{balance}</Text>
-          <Text style ={styles.font_standard}>THB</Text>
-      </View>
-
-
-    </View>
-    <View
-      style={{
-        borderBottomColor: 'black',
-        borderBottomWidth: 3,
-        margin: 15
-      }}
-    />
-    <View style ={styles.container_button}>
-      <View style ={styles.button_box}>
-        <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen' , {userId:this.state.account_id})} style={styles.button}>
-          <Text> Transfer </Text>
-        </TouchableOpacity>
-      </View>
-      <View style ={styles.button_box}>
-        <TouchableOpacity onPress={() =>xxxx()} style={styles.button}>
-          <Text> Top Up </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-    </Image>
-=======
         <View style={styles.container_button}>
           <View style={styles.button_box}>
             <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen', { userId: this.state.account_id })} style={styles.button}>
@@ -126,7 +90,6 @@ export default class HomeScreen extends React.Component {
           </View>
         </View>
       </Image>
->>>>>>> 5e8f2bf9205f690e02dd06688ea9187a57ebda29
     )
   }
 }
