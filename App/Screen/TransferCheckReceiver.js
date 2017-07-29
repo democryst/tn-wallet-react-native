@@ -13,20 +13,23 @@ export default class TransferCheckReceiver extends React.Component {
     super(props);
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
-    this.state = {
-      amount: 0.00,
-      sender: {},
-      receiver: {},
 
-    };
-
-    api.getData(params.data.userId).then((data)=>{
+    var xx = api.getData(params.data.userId).then((data)=>{
       this.setState(sender);
     });
 
-    api.getData(params.data.receiverId).then((data)=>{
+    var yy = api.getData(params.data.receiverId).then((data)=>{
       this.setState(receiver);
     });
+
+    this.state = {
+      amount: 0.00,
+      sender: xx,
+      receiver: yy,
+
+    };
+
+
 
 
   }
@@ -49,7 +52,7 @@ export default class TransferCheckReceiver extends React.Component {
             <View style={styles.top_container}>
               <View style={styles.box}>
                 <View ><Text style={styles.text_bold}> Receiver Name</Text></View>
-                <Text style={styles.text_info}> {`${this.state.name} ${this.state.surname}`}</Text>
+                <Text style={styles.text_info}> {`${this.state.sender.name} ${this.state.surname}`}</Text>
               </View>
               <View style={styles.box}>
                 <View ><Text style={styles.text_bold}> ReceiverID</Text></View>

@@ -5,26 +5,6 @@ import api from '../../API/RequestAPI.js';
 
 var { height, width } = Dimensions.get('window');
 
-var testTranferRequest = function(){
-    fetch('http://188.166.214.163/transfer/', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        type: 'transfer',
-        scrc_acc_id: '1234567890',
-        des_acc_initial_id: '9876543210',
-        des_acc_initial_balance: 2000,
-        amount: 300,
-        src_remain_balance: 1700,
-        des_remain_balance: 5000,
-      })
-    })
-}
-
-
 
 export default class HomeScreen extends React.Component {
   constructor(props){
@@ -34,6 +14,8 @@ export default class HomeScreen extends React.Component {
     api.getData(1234567890).then((data)=>{
       this.setState(data[0]);
     });
+
+
 
   }
   static navigationOptions = {
@@ -77,7 +59,7 @@ export default class HomeScreen extends React.Component {
         </TouchableOpacity>
       </View>
       <View style ={styles.button_box}>
-        <TouchableOpacity onPress={() => alert("Not ready yet")} style={styles.button}>
+        <TouchableOpacity onPress={() =>xxxx()} style={styles.button}>
           <Text> Top Up </Text>
         </TouchableOpacity>
       </View>
