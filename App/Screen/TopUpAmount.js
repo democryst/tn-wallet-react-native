@@ -28,9 +28,9 @@ export default class TopUpAmount extends React.Component {
 
                     <View style={styles.top_container} >
                         <Text style={styles.text_bold}>Top Up Amount:</Text>
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                             <Text style={styles.input}>
-                               {this.state.amount} THB
+                               {this.state.amount} <Text style={{fontSize: 20}}>THB</Text>
                             </Text>
                         </View>
                     </View >
@@ -43,10 +43,11 @@ export default class TopUpAmount extends React.Component {
                     />
                     <View style={styles.top_container} >
                         <Text style={styles.text_bold}>Current Balance:</Text>
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                             <Text style={styles.input}>
-                                 {this.state.currentbalance} THB
+                                 {this.state.currentbalance} <Text style={{fontSize: 20}}>THB</Text>
                             </Text>
+                            
                         </View>
                     </View >
                     <View style={styles.bottom_container}>
@@ -123,8 +124,10 @@ const styles = StyleSheet.create({
         height: 100,
         padding: 10,
         fontSize: 40,
-        borderWidth:1,
-        borderRadius:30
+        // borderWidth: 1,
+        // borderRadius: 30,
+        width: width*0.7,
+        margin: 40
 
     },
 });
