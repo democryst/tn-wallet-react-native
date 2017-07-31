@@ -88,7 +88,7 @@ export default class HomeScreen extends React.Component {
             <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen', { userId: this.state.account_id })} style={styles.button}>
               <View style={{ flexDirection: 'row', marginLeft: -38 }}>
                 <View>
-                  <Image source={require('../Resource/img/transfer2_c.png')} style={[styles.icon, { marginTop: responsiveHeight(1.5), resizeMode: 'contain' }]} />
+                  <Image source={require('../Resource/img/transfer2.png')} style={[styles.icon, { marginTop: responsiveHeight(1.5), resizeMode: 'contain' }]} />
                 </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(2.5), marginLeft: 20 }}>
                   <RkText style={{ fontSize: responsiveFontSize(3) }} > Transfer </RkText>
@@ -100,7 +100,7 @@ export default class HomeScreen extends React.Component {
             <TouchableOpacity onPress={() => alert("Not ready yet")} style={styles.button}>
               <View style={{ flexDirection: 'row', marginLeft: -38 }}>
                 <View>
-                  <Image source={require('../Resource/img/topup2_c.png')} style={[styles.icon, { marginTop: responsiveHeight(1.5) }]} />
+                  <Image source={require('../Resource/img/topup2.png')} style={[styles.icon, { marginTop: responsiveHeight(1.5) }]} />
                 </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(2.5), marginLeft: 20 }}>
                   <RkText style={{ fontSize: responsiveFontSize(3) }}> Top Up </RkText>
