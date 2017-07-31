@@ -9,23 +9,23 @@ import api from '../../API/RequestAPI.js';
 export default class TransferCheckReceiver extends React.Component {
 
 
-  constructor(props){
+  constructor(props) {
     super(props);
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
     this.state = {
       amount: 0.00,
-      sender: {},
-      receiver: {},
+      sender: "",
+      receiver: "",
 
     };
 
-    api.getData(params.data.userId).then((data)=>{
-      this.setState(sender);
+    api.getData(params.data.userId).then((data) => {
+      this.setState({ sender: data[0] });
     });
 
-    api.getData(params.data.receiverId).then((data)=>{
-      this.setState(receiver);
+    api.getData(params.data.receiverId).then((data) => {
+      this.setState({ receiver: data[0] });
     });
 
 
@@ -39,8 +39,8 @@ export default class TransferCheckReceiver extends React.Component {
 
 
   render() {
-
-
+    const { navigate } = this.props.navigation;
+    const { params } = this.props.navigation.state;
     return (
       <View style={styles.container}>
         <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
@@ -48,7 +48,7 @@ export default class TransferCheckReceiver extends React.Component {
             <View style={styles.top_container}>
               <View style={styles.box}>
                 <View ><Text style={styles.text_bold}> Receiver Name</Text></View>
-                <Text style={styles.text_info}> {`${this.state.name} ${this.state.surname}`}</Text>
+                <Text style={styles.text_info}> {`${this.state.receiver.name} ${this.state.receiver.surname}`}</Text>
               </View>
               <View style={styles.box}>
                 <View ><Text style={styles.text_bold}> ReceiverID</Text></View>
@@ -58,7 +58,7 @@ export default class TransferCheckReceiver extends React.Component {
               <View style={styles.box}>
                 <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}><Text style={styles.text_bold}> Amount</Text></View>
                 <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}><TextInput style={styles.textinput1} keyboardType='numeric'
-                placeholder={'0.00'} onChangeText={(amount) => this.setState({ amount })} /></View>
+                  placeholder={'0.00'} onChangeText={(amount) => this.setState({ amount })} /></View>
               </View>
               <View style={styles.box}></View>
 
@@ -79,7 +79,7 @@ export default class TransferCheckReceiver extends React.Component {
                     receiverID: this.state.receiver.account_id,
                     receiverBalance: this.state.receiver.balance
                   },
-                  transferamount:  this.state.amount
+                  transferAmount: this.state.amount
                 }
               })}>
                 <Text style={styles.text}>Next ></Text>

@@ -26,7 +26,7 @@ export default class EnterTransferScreen extends React.Component {
             <Text style={styles.text_bold}>Receiver Account Number</Text>
             <TextInput
               maxLength={10}
-           
+           keyboardType='numeric'
               style={styles.textInput}
               placeholder='XXX-X-XXXXXX'
               
