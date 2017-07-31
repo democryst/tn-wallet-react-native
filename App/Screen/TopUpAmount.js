@@ -54,11 +54,7 @@ export default class TopUpAmount extends React.Component {
                         <Text style={styles.text_bold}>Top Up Amount:</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                             <Text style={styles.input}>
-<<<<<<< HEAD
-                               {params.data.amount} THB
-=======
-                               {this.state.amount} <Text style={{fontSize: 20}}>THB</Text>
->>>>>>> c55b52888e154d5199a56ce9fd97a7619403a0d5
+                               {params.data.amount} <Text style={{fontSize: 20}}>THB</Text>
                             </Text>
                         </View>
                     </View >
@@ -73,11 +69,7 @@ export default class TopUpAmount extends React.Component {
                         <Text style={styles.text_bold}>Current Balance:</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                             <Text style={styles.input}>
-<<<<<<< HEAD
-                                 {params.data.currentbalance} THB
-=======
-                                 {this.state.currentbalance} <Text style={{fontSize: 20}}>THB</Text>
->>>>>>> c55b52888e154d5199a56ce9fd97a7619403a0d5
+                                 {params.data.currentbalance} <Text style={{fontSize: 20}}>THB</Text>
                             </Text>
                             
                         </View>
