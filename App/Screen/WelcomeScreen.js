@@ -1,9 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import { RkButton, RkTheme, RkText } from 'react-native-ui-kitten';
 import api from '../../API/RequestAPI.js';
 
 var { height, width } = Dimensions.get('window');
+var numeral = require('numeral');
 
 // var testTranferRequest = function(){
 //     fetch('http://188.166.214.163/transfer/', {
@@ -24,7 +26,21 @@ var { height, width } = Dimensions.get('window');
 //     })
 // }
 
+let accent = '#ed1c4d';
 
+RkTheme.setType('RkButton', 'accent', {
+  backgroundColor: accent,
+  color: 'white'
+});
+
+// RkTheme.setType('RkText', 'basic', {
+//   fontSize: 50,
+//   color: 'midnightblue'
+// });
+
+RkTheme.setType('RkText', 'primaryBackground', {
+  backgroundColor: theme => theme.colors.primary
+});
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
@@ -46,37 +62,44 @@ export default class HomeScreen extends React.Component {
     let pic = {
       uri: 'http://simpleicon.com/wp-content/uploads/account.png'
     };
-    var balance = parseFloat(this.state.balance).toFixed(2);
+    var balance = numeral(this.state.balance).format('0,0');
+    var balanceStang = numeral(this.state.balance).format('.00');
     return (
       <Image source={require('../Resource/img/pink_background.png')} style={styles.container}>
         <View style={styles.container_userbar}>
-          <View>
+          <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
             <Image source={pic}
               style={styles.container_image_profile}
             />
           </View>
           <View style={styles.container_userdetail}>
-
-            <Text style={styles.font_standard}>{`${this.state.name} ${this.state.surname}`}</Text>
-            <View style={{ flexDirection: 'row' }}>
+            <RkText rkType='xlarge'>{`${this.state.name}  ${this.state.surname}`}</RkText>
+            <View style={{ flexDirection: 'row', marginTop: 8 }}>
               <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}>
-                <Text style={styles.font_money}>{balance}</Text>
-              </View>
-              <View style={{ flexDirection: 'column', justifyContent: 'flex-end' , marginBottom: 3}}>
-                <Text style={styles.font_standard}>THB</Text>
+                <View style={{ flexDirection: 'row' }}>
+                  <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}>
+                    <RkText style={{ fontSize: 40 }}>{`${balance}`}</RkText>
+                  </View>
+                  <View style={{ flexDirection: 'column', justifyContent: 'flex-end', marginBottom: 5 }}>
+                    <RkText rkType='large'>{`${balanceStang}  `}</RkText>
+                  </View>
+                  <View style={{ flexDirection: 'column', justifyContent: 'flex-end', marginBottom: 5 }}>
+                    <RkText rkType='xlarge'>THB</RkText>
+                  </View>
+                </View>
               </View>
             </View>
           </View>
-
 
         </View>
         <View
           style={{
             borderBottomColor: 'black',
-            borderBottomWidth: 3,
-            margin: 15
+            borderBottomWidth: 1,
+            margin: 10
           }}
         />
+
         <View style={styles.container_button}>
           <View style={styles.button_box}>
             <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen', { userId: this.state.account_id })} style={styles.button}>
@@ -87,6 +110,10 @@ export default class HomeScreen extends React.Component {
             <TouchableOpacity onPress={() => alert("Not ready yet")} style={styles.button}>
               <Text> Top Up </Text>
             </TouchableOpacity>
+            {/* <RkText rkType='primaryBackground'>KUY </RkText>
+            <RkButton rkType='accent'>
+              Click me.
+            </RkButton> */}
           </View>
         </View>
       </Image>
@@ -105,15 +132,16 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 50,
     margin: 40,
+    borderWidth: 1
   },
   container_userdetail: {
     flex: 1,
     flexDirection: 'column',
-    marginTop: 40,
+    justifyContent: 'center',
     backgroundColor: 'transparent'
   },
   container_userbar: {
-    flex: 3,
+    flex: 2,
     flexDirection: 'row',
   },
   container_button: {
