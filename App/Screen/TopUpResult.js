@@ -120,8 +120,6 @@ const styles = StyleSheet.create({
         height: 100,
         padding: 10,
         fontSize: 40,
-     
-
     },
 });
 
