@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import { RkButton, RkTextInput, RkTheme, RkText, RkAvoidKeyboard, RkCard } from 'react-native-ui-kitten';
 import { AppRegistry, StyleSheet, Text, TextInput, View, Button, TouchableOpacity, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import { TextInputMask } from 'react-native-masked-text';
+import api from '../../API/RequestAPI.js';
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 
 export default class EnterTransferScreen extends React.Component {
+  static textInputId = "";
   static navigationOptions = {
     title: 'Transfer',
 
@@ -11,11 +15,41 @@ export default class EnterTransferScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = { receiverId: null };
+    this.onChangePage = this.onChangePage.bind(this);
+    this.onChangeText = this.onChangeText.bind(this);
+
+  }
+  onChangeText(text) {
+    textInputId = text.replace(new RegExp("-", 'g'), "");
+    // this.setState({ receiverId: textInputId });
+    this.state.receiverId = textInputId;
+  }
+  onChangePage() {
+
+    const { navigate } = this.props.navigation;
+    const { params } = this.props.navigation.state;
+    api.getData(this.state.receiverId).then((data) => {
+      if (textInputId) {
+        if (data[0] === undefined) {
+          alert("Account Invalid");
+        }
+        else {
+          navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } });
+
+        }
+      } else {
+        alert("Please fill account nummber");
+      }
+
+    });
 
 
 
   }
+
   render() {
+
+
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
     return (
@@ -23,18 +57,29 @@ export default class EnterTransferScreen extends React.Component {
         <View style={styles.container}>
 
           <View style={styles.top_container} >
-            <Text style={styles.text_bold}>Receiver Account Number</Text>
-            <TextInput
+            <RkText rkType='xlarge' >Receiver Account Number</RkText>
+
+            <TextInputMask style={styles.textInput}
+              text=""
+              onChangeText={this.onChangeText.bind(this)}
+              keyboardType='numeric'
+              type={'custom'}
+              options={{
+                mask: '999-9-999999'
+              }} />
+
+            {/* <TextInput
               maxLength={10}
            keyboardType='numeric'
               style={styles.textInput}
               placeholder='XXX-X-XXXXXX'
               
               onChangeText={(receiverId) => this.setState({ receiverId })}
-            />
+            />   */}
           </View >
           <View style={styles.bottom_container}>
-            <TouchableOpacity onPress={() => navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } })}>
+            {/* <TouchableOpacity onPress={() => navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } })}> */}
+            <TouchableOpacity onPress={() => this.onChangePage()}>
               <View style={styles.button}>
                 <Text style={styles.text}>Enter</Text>
               </View>
@@ -95,6 +140,8 @@ const styles = StyleSheet.create({
     fontSize: 24
   },
   textInput: {
+    borderColor: 'gray',
+    borderRadius: 10,
     borderWidth: 1,
     height: 50,
     padding: 10,
@@ -102,5 +149,11 @@ const styles = StyleSheet.create({
 
 
   }
+
+});
+RkTheme.setType('RkText', 'xlarge', {
+  fontWeight: "bold",
+
+
 });
 

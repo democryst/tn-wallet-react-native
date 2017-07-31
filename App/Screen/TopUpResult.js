@@ -3,9 +3,9 @@ import { AppRegistry, StyleSheet, Text, TextInput, View, Button, TouchableOpacit
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 
-export default class TopUpSuccess extends React.Component {
+export default class TopUpResult extends React.Component {
     static navigationOptions = {
-        title: 'Top Up Success',
+        title: 'Top Up Result',
 
     };
     constructor(props) {
@@ -21,15 +21,16 @@ export default class TopUpSuccess extends React.Component {
     render() {
         const { navigate } = this.props.navigation;
          const { params } = this.props.navigation.state;
+         
         return (
             <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
                 <View style={styles.container}>
 
                     <View style={styles.top_container} >
-                        <Text style={styles.text_bold}>Top Up Amount</Text>
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                        <Text style={styles.text_bold}>Top Up Amount :</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                             <Text style={styles.input}>
-                               {params.data.amount + params.data.currentbalance} THB
+                               {params.data.amount + params.data.currentbalance} <Text style={{fontSize: 20}}>THB</Text>
                             </Text>
                         </View>
                     </View >
@@ -41,17 +42,17 @@ export default class TopUpSuccess extends React.Component {
                         }}
                     />
                     <View style={styles.top_container} >
-                        <Text style={styles.text_bold}>Status</Text>
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                            <Text style={styles.input}>
+                        <Text style={styles.text_bold}>Status :</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                            <Text style={{fontSize:50, color:'green',margin:40,fontWeight: "bold",}}>
                                  Success
                                  </Text>
                         </View>
                     </View >
                     <View style={styles.bottom_container}>
-                         <TouchableOpacity onPress={() => navigate('TransferCheckReceiver', { data: { amount:this.state.amount } })}> 
+                         <TouchableOpacity onPress={() => navigate('home', { data: { amount:this.state.amount } })}> 
                             <View style={styles.button}>
-                                <Text style={styles.text}>Confirm</Text>
+                                <Text style={styles.text}>Done</Text>
                             </View>
                     </TouchableOpacity>
 
@@ -119,8 +120,9 @@ const styles = StyleSheet.create({
         height: 100,
         padding: 10,
         fontSize: 40,
-     
-
+        color:"gray",
+        borderWidth:1,
+        borderRadius: 30,
     },
 });
 
