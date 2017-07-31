@@ -10,11 +10,15 @@ export default class TopUpAmount extends React.Component {
     };
     constructor(props) {
         super(props);
-        this.state = { receiverId: null };
+        this.state = { 
+            receiverId: null,
+            currentbalance: 4100.00 ,
+            amount: 500.00  };
 
 
 
     }
+    
     render() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
@@ -23,10 +27,10 @@ export default class TopUpAmount extends React.Component {
                 <View style={styles.container}>
 
                     <View style={styles.top_container} >
-                        <Text style={styles.text_bold}>Top Up Amount</Text>
+                        <Text style={styles.text_bold}>Top Up Amount:</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
                             <Text style={styles.input}>
-                               {this.state.amount}
+                               {this.state.amount} THB
                             </Text>
                         </View>
                     </View >
@@ -38,13 +42,15 @@ export default class TopUpAmount extends React.Component {
                         }}
                     />
                     <View style={styles.top_container} >
-                        <Text style={styles.text_bold}>Current Balance</Text>
+                        <Text style={styles.text_bold}>Current Balance:</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                            <Text style={styles.input}> {this.state.currentbalance}</Text>
+                            <Text style={styles.input}>
+                                 {this.state.currentbalance} THB
+                            </Text>
                         </View>
                     </View >
                     <View style={styles.bottom_container}>
-                        <TouchableOpacity onPress={() => navigate('TopUpSuccess', { data: { amount: this.state.amount} })}>
+                        <TouchableOpacity onPress={() => navigate('TopUpSuccess', { data: { amount: this.state.amount, currentbalance: this.state.currentbalance} })}>
                             <View style={styles.button}>
                                 <Text style={styles.text}>Confirm</Text>
                             </View>
@@ -117,7 +123,8 @@ const styles = StyleSheet.create({
         height: 100,
         padding: 10,
         fontSize: 40,
-        borderWidth:1
+        borderWidth:1,
+        borderRadius:30
 
     },
 });

@@ -10,11 +10,14 @@ export default class TopUpSuccess extends React.Component {
     };
     constructor(props) {
         super(props);
-        this.state = { receiverId: null };
+        this.state = { 
+    
+             receiverId: null };
 
 
 
     }
+    
     render() {
         const { navigate } = this.props.navigation;
          const { params } = this.props.navigation.state;
@@ -26,7 +29,7 @@ export default class TopUpSuccess extends React.Component {
                         <Text style={styles.text_bold}>Top Up Amount</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
                             <Text style={styles.input}>
-                                2500.00
+                               {params.data.amount + params.data.currentbalance} THB
                             </Text>
                         </View>
                     </View >
@@ -46,7 +49,7 @@ export default class TopUpSuccess extends React.Component {
                         </View>
                     </View >
                     <View style={styles.bottom_container}>
-                         <TouchableOpacity onPress={() => navigate('TransferCheckReceiver', { data: { amount:this.state.amount } })}> }
+                         <TouchableOpacity onPress={() => navigate('TransferCheckReceiver', { data: { amount:this.state.amount } })}> 
                             <View style={styles.button}>
                                 <Text style={styles.text}>Confirm</Text>
                             </View>
