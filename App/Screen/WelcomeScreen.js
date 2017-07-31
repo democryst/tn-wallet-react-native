@@ -7,25 +7,6 @@ import api from '../../API/RequestAPI.js';
 var { height, width } = Dimensions.get('window');
 var numeral = require('numeral');
 
-// var testTranferRequest = function(){
-//     fetch('http://188.166.214.163/transfer/', {
-//       method: 'POST',
-//       headers: {
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({
-//         type: 'transfer',
-//         scrc_acc_id: '1234567890',
-//         des_acc_initial_id: '9876543210',
-//         des_acc_initial_balance: 2000,
-//         amount: 300,
-//         src_remain_balance: 1700,
-//         des_remain_balance: 5000,
-//       })
-//     })
-// }
-
 let accent = '#ed1c4d';
 
 RkTheme.setType('RkButton', 'accent', {
@@ -68,9 +49,7 @@ export default class HomeScreen extends React.Component {
       <Image source={require('../Resource/img/pink_background.png')} style={styles.container}>
         <View style={styles.container_userbar}>
           <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
-            <Image source={pic}
-              style={styles.container_image_profile}
-            />
+            <Image source={pic} style={styles.container_image_profile} />
           </View>
           <View style={styles.container_userdetail}>
             <RkText rkType='xlarge'>{`${this.state.name}  ${this.state.surname}`}</RkText>
@@ -94,26 +73,37 @@ export default class HomeScreen extends React.Component {
         </View>
         <View
           style={{
-            borderBottomColor: 'black',
+            borderBottomColor: 'gray',
             borderBottomWidth: 1,
-            margin: 10
+            marginLeft: 8,
+            marginRight: 8
           }}
         />
 
         <View style={styles.container_button}>
-          <View style={styles.button_box}>
+          <View style={[styles.menuContainer, { marginTop: 0 }]}>
             <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen', { userId: this.state.account_id })} style={styles.button}>
-              <Text> Transfer </Text>
+              <View style={{ flexDirection: 'row' , marginLeft: -38}}>
+                <View style={{marginTop: 10}}>
+                  <Image source={pic} style={styles.icon} />
+                </View>
+                <View style={{ justifyContent: 'center', marginTop: 10, paddingLeft: 30 }}>
+                  <RkText rkType='xxlarge'> Transfer </RkText>
+                </View>
+              </View>
             </TouchableOpacity>
           </View>
-          <View style={styles.button_box}>
+          <View style={[styles.menuContainer, { marginTop: 0 }]}>
             <TouchableOpacity onPress={() => alert("Not ready yet")} style={styles.button}>
-              <Text> Top Up </Text>
+              <View style={{ flexDirection: 'row' , marginLeft: -38}}>
+                <View style={{marginTop: 10}}>
+                  <Image source={pic} style={styles.icon} />
+                </View>
+                <View style={{ justifyContent: 'center', marginTop: 10, paddingLeft: 30 }}>
+                  <RkText rkType='xxlarge'> Top Up </RkText>
+                </View>
+              </View>
             </TouchableOpacity>
-            {/* <RkText rkType='primaryBackground'>KUY </RkText>
-            <RkButton rkType='accent'>
-              Click me.
-            </RkButton> */}
           </View>
         </View>
       </Image>
@@ -131,8 +121,24 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    margin: 40,
-    borderWidth: 1
+    margin: 35,
+    borderWidth: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+  },
+  icon: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    borderWidth: 3,
+    borderColor: 'lightgrey',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    
   },
   container_userdetail: {
     flex: 1,
@@ -141,26 +147,40 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   container_userbar: {
-    flex: 2,
+    flex: 1.5,
     flexDirection: 'row',
   },
   container_button: {
     flex: 5,
-    flexDirection: 'column',
-    padding: 40,
+    justifyContent: 'space-around',
+    // borderWidth: 1,
+    margin: 15,
+    marginRight: 0,
+    // flexDirection: 'column',
+    paddingBottom: 100
   },
-  button_box: {
-    flex: 1,
-    paddingTop: 30,
+  menuContainer: {
+    // flex: 1,
+    // marginTop: 30,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    // alignItems: 'center'
   },
   button: {
-    // backgroundColor: '#f88fb0',
-    backgroundColor: '#f06da1',
+    backgroundColor: '#f88fb0',
+    // backgroundColor: '#f06da1',
     // backgroundColor: '#e64f93',
     // flexDirection: "column",
     // justifyContent: "flex-end",
-    padding: 20,
-
+    // padding: 30,
+    height: 100,
+    width: width * 2 / 3,
+    // marginRight: -100
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    elevation: 1,
   },
   font_standard: {
     fontSize: 15,
