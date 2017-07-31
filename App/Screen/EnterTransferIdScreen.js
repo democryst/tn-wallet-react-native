@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { RkButton, RkTextInput, RkTheme, RkText, RkAvoidKeyboard, RkCard } from 'react-native-ui-kitten';
 import { AppRegistry, StyleSheet, Text, TextInput, View, Button, TouchableOpacity, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import { TextInputMask } from 'react-native-masked-text';
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 
 export default class EnterTransferScreen extends React.Component {
+  static a = null;
   static navigationOptions = {
     title: 'Transfer',
 
@@ -11,11 +14,27 @@ export default class EnterTransferScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = { receiverId: null };
-
+    this.onChangePage = this.onChangePage.bind(this);
 
 
   }
+  onChangeText(text) {
+    a = null;
+     a = text;
+
+  }
+  onChangePage(){
+       this.setState({receiverId: a });
+     const { navigate } = this.props.navigation;
+       const { params } = this.props.navigation.state;
+     
+    navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } });
+   
+
+  }
   render() {
+
+
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
     return (
@@ -23,18 +42,31 @@ export default class EnterTransferScreen extends React.Component {
         <View style={styles.container}>
 
           <View style={styles.top_container} >
-            <Text style={styles.text_bold}>Receiver Account Number</Text>
-            <TextInput
+            <RkText rkType='xlarge' >Receiver Account Number</RkText>
+
+
+            <TextInputMask style={styles.textInput}
+              onChangeText={this.onChangeText.bind(this)}
+              keyboardType='numeric'
+              ref={'myDateText'}
+              type={'custom'}
+
+              options={{
+                mask: '999-9-999999'
+              }} />
+
+            {/* <TextInput
               maxLength={10}
            keyboardType='numeric'
               style={styles.textInput}
               placeholder='XXX-X-XXXXXX'
               
               onChangeText={(receiverId) => this.setState({ receiverId })}
-            />
+            />   */}
           </View >
           <View style={styles.bottom_container}>
-            <TouchableOpacity onPress={() => navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } })}>
+            {/* <TouchableOpacity onPress={() => navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } })}> */}
+              <TouchableOpacity onPress={() =>this.onChangePage()}>
               <View style={styles.button}>
                 <Text style={styles.text}>Enter</Text>
               </View>
@@ -95,6 +127,8 @@ const styles = StyleSheet.create({
     fontSize: 24
   },
   textInput: {
+    borderColor: 'gray',
+    borderRadius: 10,
     borderWidth: 1,
     height: 50,
     padding: 10,
@@ -102,5 +136,11 @@ const styles = StyleSheet.create({
 
 
   }
+
+});
+RkTheme.setType('RkText', 'xlarge', {
+  fontWeight: "bold",
+
+
 });
 

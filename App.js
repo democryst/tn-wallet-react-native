@@ -14,9 +14,7 @@ import TopUpSelectAmountScreen from './App/Screen/TopUpSelectAmountScreen';
 
 const SimpleApp = StackNavigator({
 
-    TopUpSelectAmountScreen: { screen:TopUpSelectAmountScreen},
-   TopUpAmount: {screen: TopUpAmount },
-  TopUpResult: {screen: TopUpResult},
+  
 
 
   Home: { screen: WelcomeScreen },
@@ -24,9 +22,10 @@ const SimpleApp = StackNavigator({
   TransferCheckReceiver: { screen: TransferCheckReceiver },
   TransferConfirm: { screen: TransferConfirm },
   TransferResult: { screen: TransferResult },
+    TopUpSelectAmountScreen: { screen:TopUpSelectAmountScreen},
+   TopUpAmount: {screen: TopUpAmount },
+  TopUpResult: {screen: TopUpResult},
   
-
-
 });
 
 const AppNavigation = () => (
