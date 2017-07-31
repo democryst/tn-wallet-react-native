@@ -61,7 +61,10 @@ export default class TransferConfirm extends React.Component {
         if (this.state.topupallow) {
             const { navigate } = this.props.navigation;
             const { params } = this.props.navigation.state;
-            console.log("top up allow")
+            console.log("top up allow");
+            console.log("top up amount", this.state.amount );
+            console.log("top up currentbalance", this.state.currentbalance);
+            console.log("top up apidata", this.state.apidata);
             navigate('TopUpAmount', {
                 data: {
                     amount: this.state.amount,
