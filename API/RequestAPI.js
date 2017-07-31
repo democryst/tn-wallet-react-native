@@ -1,9 +1,14 @@
 // let rootURL = 'http://www.omdbapi.com/';
-let URL = 'http://188.166.214.163/accounts/';
+let URL = 'http://188.166.214.163/';
 
 
 exports.getData = function(userId){
-  return fetch(URL+userId)
+  return fetch(URL+'accounts/'+userId)
+    .then((resp)=>resp.json());
+}
+
+exports.getTransaction = function(transactionId){
+  return fetch(URL+'transactions/'+transactionId)
     .then((resp)=>resp.json());
 }
 
@@ -39,5 +44,5 @@ exports.postTransaction = function (sourceID, sourceInitialBalance, destinationI
             src_remain_balance: sourceRemain,
             des_remain_balance: destinationRemain
           })
-        }).then((resp)=>resp.json());
+        })
 }

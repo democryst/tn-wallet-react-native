@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
+import api from '../../API/RequestAPI.js';
 var { height, width } = Dimensions.get('window');
 
 export default class TransferResult extends React.Component {
@@ -9,26 +10,28 @@ export default class TransferResult extends React.Component {
     };
     constructor(props) {
       super(props);
+      this.state = {
+        transactionId: params.result.transaction_id 
+      };
       const { navigate } = this.props.navigation;
       const { params } = this.props.navigation.state;
 
-        console.log("pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp");
-        console.log(params.user);
-        this.state = {
-            date: "25/7/17",
-            transferID: "1234567890",
-            senderName: "Thanaporn",
-            senderSurname: "Suwathanawongchai",
-            senderID: "6302335476",
-            receiverName: "Phansawuth",
-            receiverSurname: "Jenthaworn",
-            receiverID: "7582983660",
-            amount: "500.00",
-            fee: "0.00",
-            remaining: "4,200.00"
-        }
+      //console.log("pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp");
+
+
+
     }
 
+    componentDidMount(){
+      const { navigate } = this.props.navigation;
+      const { params } = this.props.navigation.state;
+      console.log("componentDidMount");
+      console.log(params.result.transaction_id);
+      api.getTransaction(params.result.transaction_id).then((data) => {
+        this.setState({ transactionResult: data });
+        console.log("lllllllllllllllllllllllllllllllllllllllllllllllllllllll",data);
+      });
+    };
 
     render() {
         const { navigate } = this.props.navigation;
@@ -67,7 +70,7 @@ export default class TransferResult extends React.Component {
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
                             <View>
-                                <Text style={[styles.text_info, { textAlign: "right" }]}> {this.state.senderName}</Text>
+                                <Text style={[styles.text_info, { textAlign: "right" }]}> {this.state.transactionResult.id}</Text>
                                 <Text style={[styles.text_info, { textAlign: "right" }]}> {this.state.senderSurname}</Text>
                             </View>
                         </View>

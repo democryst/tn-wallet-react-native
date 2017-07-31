@@ -30,12 +30,23 @@ export default class TransferConfirm extends React.Component {
   postTransaction() {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
-    return api.postTransaction(params.data.senderAccountInfo.senderID,
+    api.postTransaction(params.data.senderAccountInfo.senderID,
       params.data.senderAccountInfo.senderBalance,
       params.data.receiverAccountInfo.receiverID,
       params.data.receiverAccountInfo.receiverBalance,
       params.data.transferAmount
-    );
+    )
+    .then( resp=> resp.json())
+    .then((resp)=>{
+      navigate('TransferResult' , { result: resp }) ;
+    })
+    .catch((res)=>{
+      console.log("temp resp");
+      console.log(res)
+    });
+
+
+    //return temp ;
   }
 
   render() {
@@ -172,7 +183,7 @@ export default class TransferConfirm extends React.Component {
         </View>
 
         <View style={styles.bottom_container}>
-          <TouchableOpacity style={styles.button} onPress={() => { this.postTransaction().then((data) => navigate('TransferResult' , { result: data }) )}}>
+          <TouchableOpacity style={styles.button} onPress={() => { this.postTransaction() }}>
             <Text style={styles.text}>Confirm</Text>
           </TouchableOpacity>
 
