@@ -6,7 +6,7 @@ import api from '../../API/RequestAPI.js';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 var { height, width } = Dimensions.get('window');
-// var numeral = require('numeral');
+var numeral = require('numeral');
 
 let accent = '#ed1c4d';
 
@@ -44,15 +44,13 @@ export default class HomeScreen extends React.Component {
     let pic = {
       uri: 'http://simpleicon.com/wp-content/uploads/account.png'
     };
-    // var balance = numeral(this.state.balance).format('0,0');
-    // var balanceStang = numeral(this.state.balance).format('.00');
-     var balance = 0;
-     var balanceStang = .00;
+    var balance = numeral(this.state.balance).format('0,0');
+    var balanceStang = numeral(this.state.balance).format('.00');
     return (
       <Image source={require('../Resource/img/pink_background.png')} style={styles.container}>
         <View style={styles.container_userbar}>
           <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
-            <Image source={pic} style={styles.container_image_profile} />
+            <Image source={require('../Resource/img/ploy.jpg')} style={styles.container_image_profile} />
           </View>
           <View style={styles.container_userdetail}>
             <RkText style={{ fontSize: responsiveFontSize(2)}}>{`${this.state.name}  ${this.state.surname}`}</RkText>
@@ -125,7 +123,8 @@ const styles = StyleSheet.create({
     height: responsiveHeight(14),
     borderRadius: 50*(responsiveHeight(14)/100),
     margin: 38,
-    borderWidth: 1,
+    borderWidth: 3,
+    borderColor: 'lightgrey',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
