@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image } from 'react-native';
 var { height, width } = Dimensions.get('window');
 import api from '../../API/RequestAPI.js';
 import RestClient from 'react-native-rest-client';
 
 export default class TransferConfirm extends React.Component {
     static navigationOptions = {
-        title: 'Transfer',
+        title: 'Top Up Amount',
 
     };
     constructor(props) {
@@ -22,10 +22,10 @@ export default class TransferConfirm extends React.Component {
                 third: 500,
                 fourth: 1000,
             },
-            TopUpNote: "Please select topup amount",
+            TopUpNote: "Please select top up amount",
             walletLimit: 5000,
             topupallow: false,
-            apidata : "",
+            apidata: "",
         }
         this.getAccount();
     }
@@ -34,7 +34,7 @@ export default class TransferConfirm extends React.Component {
         this.checkwallet(topupchoice);
     }
     checkwallet(amount) {
-        console.log("balance : " +this.state.currentbalance)
+        console.log("balance : " + this.state.currentbalance)
         if ((this.state.currentbalance + amount) > this.state.walletLimit) {
             this.setState({
                 TopUpNote: "Topup amount exceeding wallet limit",
@@ -43,7 +43,7 @@ export default class TransferConfirm extends React.Component {
         }
         else if ((this.state.currentbalance + amount) <= this.state.walletLimit) {
             this.setState({
-                TopUpNote: "Topup for " + amount,
+                TopUpNote: "Top up for " + amount + " THB",
                 topupallow: true
             })
         }
@@ -53,15 +53,18 @@ export default class TransferConfirm extends React.Component {
         const { params } = this.props.navigation.state;
         // api.getData(params.userId).then((data) => {
         api.getData(1234567890).then((data) => {
-            this.setState({ apidata: data[0] ,currentbalance: data[0].balance});
+            this.setState({ apidata: data[0], currentbalance: data[0].balance });
         });
-        console.log("balance : " +this.state.currentbalance)
+        console.log("balance : " + this.state.currentbalance)
     }
-    postTransaction() {
+    moveTopUpAmount() {
         if (this.state.topupallow) {
             const { navigate } = this.props.navigation;
             const { params } = this.props.navigation.state;
-            console.log("top up allow")
+            console.log("top up allow");
+            console.log("top up amount", this.state.amount);
+            console.log("top up currentbalance", this.state.currentbalance);
+            console.log("top up apidata", this.state.apidata);
             navigate('TopUpAmount', {
                 data: {
                     amount: this.state.amount,
@@ -95,82 +98,94 @@ export default class TransferConfirm extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={styles.top_container}>
-                    
 
-                    <View style={{ flexDirection: 'row' }}>
+
+                    <View style={styles.box_container}>
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
                             <View>
-                                <TouchableOpacity><Text style={[styles.text_info, { textAlign: "right" }]} onPress={
+                                <TouchableOpacity style={styles.row_container} onPress={
                                     () => { this.checkwalletlimit(this.state.topupselectchoice.first) }
-                                }> {this.state.topupselectchoice.first}</Text></TouchableOpacity>
+                                }>
+                                    <Image source={require('../Resource/img/right_button.png')}
+                                        style={styles.next_button}
+                                    />
+                                    <Text style={[styles.text_info, { textAlign: "right" }]} > {this.state.topupselectchoice.first}</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
                         </View>
                     </View>
 
-                    <View style={{ flexDirection: 'row' }}>
+                    <View style={styles.box_container}>
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
                             <View>
-                                <TouchableOpacity><Text style={[styles.text_info, { textAlign: "right" }]} onPress={
+                                <TouchableOpacity style={styles.row_container} onPress={
                                     () => { this.checkwalletlimit(this.state.topupselectchoice.second) }
-                                }> {this.state.topupselectchoice.second}</Text></TouchableOpacity>
+                                }>
+                                    <Image source={require('../Resource/img/right_button.png')}
+                                        style={styles.next_button}
+                                    />
+                                    <Text style={[styles.text_info, { textAlign: "right" }]} > {this.state.topupselectchoice.second}</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
                         </View>
                     </View>
 
-                    <View style={{ flexDirection: 'row' }}>
+                    <View style={styles.box_container}>
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
                             <View>
-                                <TouchableOpacity><Text style={[styles.text_info, { textAlign: "right" }]} onPress={
+                                <TouchableOpacity style={styles.row_container} onPress={
                                     () => { this.checkwalletlimit(this.state.topupselectchoice.third) }
-                                }> {this.state.topupselectchoice.third}</Text></TouchableOpacity>
+                                }>
+                                    <Image source={require('../Resource/img/right_button.png')}
+                                        style={styles.next_button}
+                                    />
+                                    <Text style={[styles.text_info, { textAlign: "right" }]} > {this.state.topupselectchoice.third}</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
                         </View>
                     </View >
 
-                    <View style={{ flexDirection: 'row' }}>
+                    <View style={styles.box_container}>
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
                             <View>
-                                <TouchableOpacity><Text style={[styles.text_info, { textAlign: "right" }]} onPress={
+                                <TouchableOpacity style={styles.row_container} onPress={
                                     () => { this.checkwalletlimit(this.state.topupselectchoice.fourth) }
-                                }> {this.state.topupselectchoice.fourth}</Text></TouchableOpacity>
+                                }>
+                                    <Image source={require('../Resource/img/right_button.png')}
+                                        style={styles.next_button}
+                                    />
+                                    <Text style={[styles.text_info, { textAlign: "right" }]} > {this.state.topupselectchoice.fourth}</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
                         </View>
                     </View >
+                    <View style={{ paddingTop: 10 }}>
+                        <Text style={[styles.text_info, { textAlign: "center", color: "gray" }]}> {this.state.TopUpNote}</Text>
+                    </View>
 
-                    <View
-                        style={{
-                            borderBottomColor: 'grey',
-                            borderBottomWidth: 0.5,
-                            margin: 15
-                        }}
-                    />
 
 
                 </View >
 
                 <View style={styles.bottom_container}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <View>
-                                <Text style={[styles.text_info, { textAlign: "center" }]}> {this.state.TopUpNote}</Text>
-                            </View>
+                    <TouchableOpacity onPress={
+                        () => { this.moveTopUpAmount() }
+                    }>
+
+                        <View style={styles.button}>
+                            <Text style={styles.text}>Next</Text>
                         </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-                            <TouchableOpacity onPress={
-                                () => { this.postTransaction() }
-                            }>
-                                <Text style={styles.text}> > </Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
+
+                    </TouchableOpacity>
+
 
 
 
@@ -194,16 +209,23 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     top_container: {
-        // flex: 3,
+        flex: 5,
         backgroundColor: '#fff',
         justifyContent: 'center',
     },
     bottom_container: {
-        // flex: 1,
+        flex: 2,
         backgroundColor: '#fff',
         alignItems: 'center',
         // justifyContent: 'center',
         justifyContent: "flex-end",
+    },
+    box_container: {
+
+        flexDirection: 'row',
+        // backgroundColor: 'pink',
+        // borderWidth: 1,
+
     },
     button: {
         // backgroundColor: '#f88fb0',
@@ -223,6 +245,12 @@ const styles = StyleSheet.create({
         fontSize: 22
     },
     text_info: {
-        fontSize: 19
-    }
+        fontSize: 19,
+        paddingTop:5
+    },
+    next_button: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+    },
 });
