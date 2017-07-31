@@ -13,15 +13,6 @@ export default class TransferCheckReceiver extends React.Component {
     super(props);
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
-<<<<<<< HEAD
-
-    var xx = api.getData(params.data.userId).then((data)=>{
-      this.setState(sender);
-    });
-
-    var yy = api.getData(params.data.receiverId).then((data)=>{
-      this.setState(receiver);
-=======
     this.state = {
       amount: 0.00,
       sender: "",
@@ -35,17 +26,7 @@ export default class TransferCheckReceiver extends React.Component {
 
     api.getData(params.data.receiverId).then((data) => {
       this.setState({ receiver: data[0] });
->>>>>>> 5e8f2bf9205f690e02dd06688ea9187a57ebda29
     });
-
-    this.state = {
-      amount: 0.00,
-      sender: xx,
-      receiver: yy,
-
-    };
-
-
 
 
   }
@@ -67,11 +48,7 @@ export default class TransferCheckReceiver extends React.Component {
             <View style={styles.top_container}>
               <View style={styles.box}>
                 <View ><Text style={styles.text_bold}> Receiver Name</Text></View>
-<<<<<<< HEAD
-                <Text style={styles.text_info}> {`${this.state.sender.name} ${this.state.surname}`}</Text>
-=======
                 <Text style={styles.text_info}> {`${this.state.receiver.name} ${this.state.receiver.surname}`}</Text>
->>>>>>> 5e8f2bf9205f690e02dd06688ea9187a57ebda29
               </View>
               <View style={styles.box}>
                 <View ><Text style={styles.text_bold}> ReceiverID</Text></View>

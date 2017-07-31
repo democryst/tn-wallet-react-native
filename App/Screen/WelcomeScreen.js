@@ -5,24 +5,25 @@ import api from '../../API/RequestAPI.js';
 
 var { height, width } = Dimensions.get('window');
 
-// var testTranferRequest = function(){
-//     fetch('http://188.166.214.163/transfer/', {
-//       method: 'POST',
-//       headers: {
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({
-//         type: 'transfer',
-//         scrc_acc_id: '1234567890',
-//         des_acc_initial_id: '9876543210',
-//         des_acc_initial_balance: 2000,
-//         amount: 300,
-//         src_remain_balance: 1700,
-//         des_remain_balance: 5000,
-//       })
-//     })
-// }
+var testTranferRequest = function(){
+    fetch('http://188.166.214.163/transactions', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        type: "transfer",
+        src_acc_id: "1234567890",
+        src_initial_balance: "2000",
+        des_acc_id: "7582983660",
+        des_initial_balance: "0",
+        amount: "300",
+        src_remain_balance: "1700",
+        des_remain_balance: "300"
+      })
+    })
+}
 
 
 
@@ -84,7 +85,7 @@ export default class HomeScreen extends React.Component {
             </TouchableOpacity>
           </View>
           <View style={styles.button_box}>
-            <TouchableOpacity onPress={() => alert("Not ready yet")} style={styles.button}>
+            <TouchableOpacity onPress={() => testTranferRequest()} style={styles.button}>
               <Text> Top Up </Text>
             </TouchableOpacity>
           </View>

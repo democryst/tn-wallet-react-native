@@ -5,10 +5,15 @@ var { height, width } = Dimensions.get('window');
 export default class TransferResult extends React.Component {
     static navigationOptions = {
     title: 'Transfer',
-   
+
     };
     constructor(props) {
-        super(props);
+      super(props);
+      const { navigate } = this.props.navigation;
+      const { params } = this.props.navigation.state;
+
+        console.log("pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp");
+        console.log(params.user);
         this.state = {
             date: "25/7/17",
             transferID: "1234567890",
