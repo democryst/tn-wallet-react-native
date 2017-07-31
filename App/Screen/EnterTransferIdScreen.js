@@ -6,7 +6,7 @@ var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 
 export default class EnterTransferScreen extends React.Component {
-  static a = null;
+  static textInputId = "";
   static navigationOptions = {
     title: 'Transfer',
 
@@ -15,23 +15,27 @@ export default class EnterTransferScreen extends React.Component {
     super(props);
     this.state = { receiverId: null };
     this.onChangePage = this.onChangePage.bind(this);
-
+    this.onChangeText = this.onChangeText.bind(this);
 
   }
   onChangeText(text) {
-    a = null;
-     a = text;
-
+    textInputId = text.replace(new RegExp("-",'g'),"");
+    // this.setState({ receiverId: textInputId });
+    this.state.receiverId = textInputId;
   }
-  onChangePage(){
-       this.setState({receiverId: a });
-     const { navigate } = this.props.navigation;
-       const { params } = this.props.navigation.state;
-     
-    navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } });
-   
-
+  onChangePage() {
+    
+    const { navigate } = this.props.navigation;
+    const { params } = this.props.navigation.state;
+    if(textInputId){
+      navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } });
+    }else{
+    alert("กรอกให้ครบดิสาส")
+    }
+  
+    
   }
+
   render() {
 
 
@@ -44,13 +48,11 @@ export default class EnterTransferScreen extends React.Component {
           <View style={styles.top_container} >
             <RkText rkType='xlarge' >Receiver Account Number</RkText>
 
-
             <TextInputMask style={styles.textInput}
+            text=""
               onChangeText={this.onChangeText.bind(this)}
               keyboardType='numeric'
-              ref={'myDateText'}
               type={'custom'}
-
               options={{
                 mask: '999-9-999999'
               }} />
@@ -66,7 +68,7 @@ export default class EnterTransferScreen extends React.Component {
           </View >
           <View style={styles.bottom_container}>
             {/* <TouchableOpacity onPress={() => navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } })}> */}
-              <TouchableOpacity onPress={() =>this.onChangePage()}>
+            <TouchableOpacity onPress={() => this.onChangePage()}>
               <View style={styles.button}>
                 <Text style={styles.text}>Enter</Text>
               </View>
