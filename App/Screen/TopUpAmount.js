@@ -148,10 +148,12 @@ const styles = StyleSheet.create({
         height: 100,
         padding: 10,
         fontSize: 40,
-        // borderWidth: 1,
-        // borderRadius: 30,
+        borderWidth: 1,
+        borderRadius: 30,
         width: width*0.7,
-        margin: 40
+        margin: 40,
+        color:"gray",
+        
 
     },
 });

@@ -6,7 +6,7 @@ import RestClient from 'react-native-rest-client';
 
 export default class TransferConfirm extends React.Component {
     static navigationOptions = {
-        title: 'Transfer',
+        title: 'Top Up Amount',
 
     };
     constructor(props) {
@@ -22,7 +22,7 @@ export default class TransferConfirm extends React.Component {
                 third: 500,
                 fourth: 1000,
             },
-            TopUpNote: "Please select topup amount",
+            TopUpNote: "Please select top up amount",
             walletLimit: 5000,
             topupallow: false,
             apidata: "",
@@ -43,7 +43,7 @@ export default class TransferConfirm extends React.Component {
         }
         else if ((this.state.currentbalance + amount) <= this.state.walletLimit) {
             this.setState({
-                TopUpNote: "Topup for " + amount,
+                TopUpNote: "Top up for " + amount + " THB",
                 topupallow: true
             })
         }
@@ -62,7 +62,7 @@ export default class TransferConfirm extends React.Component {
             const { navigate } = this.props.navigation;
             const { params } = this.props.navigation.state;
             console.log("top up allow");
-            console.log("top up amount", this.state.amount );
+            console.log("top up amount", this.state.amount);
             console.log("top up currentbalance", this.state.currentbalance);
             console.log("top up apidata", this.state.apidata);
             navigate('TopUpAmount', {
@@ -167,33 +167,25 @@ export default class TransferConfirm extends React.Component {
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
                         </View>
                     </View >
+                    <View style={{ paddingTop: 10 }}>
+                        <Text style={[styles.text_info, { textAlign: "center", color: "gray" }]}> {this.state.TopUpNote}</Text>
+                    </View>
 
 
 
                 </View >
 
                 <View style={styles.bottom_container}>
-                    <View style={{ flexDirection: 'row' }}>
-                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 8, paddingLeft: 10, paddingBottom: 10}]}>
-                            <View>
-                                <Text style={[styles.text_info, { textAlign: "center" }]}> {this.state.TopUpNote}</Text>
-                            </View>
+                    <TouchableOpacity onPress={
+                        () => { this.moveTopUpAmount() }
+                    }>
+
+                        <View style={styles.button}>
+                            <Text style={styles.text}>Next</Text>
                         </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-                            <TouchableOpacity onPress={
-                                () => { this.moveTopUpAmount() }
-                            }>
-                                <Image source={require('../Resource/img/next_button.png')}
-                                    style={{
-                                        width: 40,
-                                        height: 40,
-                                        borderRadius: 20,
-                                    }}
-                                />
-                            </TouchableOpacity>
-                        </View> 
-                    </View>
-                    
+
+                    </TouchableOpacity>
+
 
 
 
@@ -229,11 +221,11 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end",
     },
     box_container: {
-        
+
         flexDirection: 'row',
         // backgroundColor: 'pink',
         // borderWidth: 1,
-        
+
     },
     button: {
         // backgroundColor: '#f88fb0',
@@ -253,7 +245,8 @@ const styles = StyleSheet.create({
         fontSize: 22
     },
     text_info: {
-        fontSize: 19
+        fontSize: 19,
+        paddingTop:5
     },
     next_button: {
         width: 40,
