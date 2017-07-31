@@ -27,10 +27,10 @@ export default class TopUpResult extends React.Component {
                 <View style={styles.container}>
 
                     <View style={styles.top_container} >
-                        <Text style={styles.text_bold}>Top Up Amount</Text>
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                        <Text style={styles.text_bold}>Top Up Amount :</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                             <Text style={styles.input}>
-                               {params.data.amount + params.data.currentbalance} THB
+                               {params.data.amount + params.data.currentbalance} <Text style={{fontSize: 20}}>THB</Text>
                             </Text>
                         </View>
                     </View >
@@ -42,9 +42,9 @@ export default class TopUpResult extends React.Component {
                         }}
                     />
                     <View style={styles.top_container} >
-                        <Text style={styles.text_bold}>Status</Text>
-                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                            <Text style={styles.input}>
+                        <Text style={styles.text_bold}>Status :</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                            <Text style={{fontSize:50, color:'green',margin:40,fontWeight: "bold",}}>
                                  Success
                                  </Text>
                         </View>
@@ -120,6 +120,9 @@ const styles = StyleSheet.create({
         height: 100,
         padding: 10,
         fontSize: 40,
+        color:"gray",
+        borderWidth:1,
+        borderRadius: 30,
     },
 });
 
