@@ -7,9 +7,10 @@ import EnterTransferIdScreen from './App/Screen/EnterTransferIdScreen';
 import TransferCheckReceiver from './App/Screen/TransferCheckReceiver';
 import TransferConfirm from './App/Screen/TransferConfirm';
 import TransferResult from './App/Screen/TransferResult';
-
+import TopUpSelectAmountScreen from './App/Screen/TopUpSelectAmountScreen';
 
 const SimpleApp = StackNavigator({
+  TopUpSelectAmountScreen: { screen:TopUpSelectAmountScreen},
   Home: { screen: WelcomeScreen },
   EnterTransferIdScreen: { screen: EnterTransferIdScreen },
   TransferCheckReceiver: { screen: TransferCheckReceiver },
