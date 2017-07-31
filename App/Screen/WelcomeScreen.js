@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, Image, Dimensions ,Platform, PixelRatio  } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { RkButton, RkTheme, RkText } from 'react-native-ui-kitten';
 import api from '../../API/RequestAPI.js';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 var { height, width } = Dimensions.get('window');
 var numeral = require('numeral');
@@ -52,18 +53,18 @@ export default class HomeScreen extends React.Component {
             <Image source={pic} style={styles.container_image_profile} />
           </View>
           <View style={styles.container_userdetail}>
-            <RkText rkType='xlarge'>{`${this.state.name}  ${this.state.surname}`}</RkText>
+            <RkText style={{ fontSize: responsiveFontSize(2)}}>{`${this.state.name}  ${this.state.surname}`}</RkText>
             <View style={{ flexDirection: 'row', marginTop: 8 }}>
               <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}>
                 <View style={{ flexDirection: 'row' }}>
                   <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}>
-                    <RkText style={{ fontSize: 40 }}>{`${balance}`}</RkText>
+                    <RkText style={{ fontSize: responsiveFontSize(4.5)}}>{`${balance}`}</RkText>
                   </View>
-                  <View style={{ flexDirection: 'column', justifyContent: 'flex-end', marginBottom: 5 }}>
-                    <RkText rkType='large'>{`${balanceStang}  `}</RkText>
+                  <View style={{ flexDirection: 'column', justifyContent: 'flex-end', marginBottom: 4 }}>
+                    <RkText style={{ fontSize: responsiveFontSize(2.2)}}>{`${balanceStang}  `}</RkText>
                   </View>
-                  <View style={{ flexDirection: 'column', justifyContent: 'flex-end', marginBottom: 5 }}>
-                    <RkText rkType='xlarge'>THB</RkText>
+                  <View style={{ flexDirection: 'column', justifyContent: 'flex-end', marginBottom: 3 }}>
+                    <RkText style={{ fontSize: responsiveFontSize(3)}}>THB</RkText>
                   </View>
                 </View>
               </View>
@@ -75,34 +76,34 @@ export default class HomeScreen extends React.Component {
           style={{
             borderBottomColor: 'gray',
             borderBottomWidth: 1,
-            marginLeft: 8,
-            marginRight: 8
+            marginLeft: 5,
+            marginRight: 5,
+            marginTop: responsiveHeight(1),
+            marginBottom: responsiveHeight(1),
           }}
         />
 
         <View style={styles.container_button}>
           <View style={[styles.menuContainer, { marginTop: 0 }]}>
             <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen', { userId: this.state.account_id })} style={styles.button}>
-              <View style={{ flexDirection: 'row' , marginLeft: -38}}>
-                <View style={{marginTop: 10}}>
+              {/* <View style={{ flexDirection: 'row' , marginLeft: -38}}> */}
+                {/* <View style={{marginTop: 10}}>
                   <Image source={pic} style={styles.icon} />
+                </View> */}
+                <View style={{ justifyContent: 'center',alignItems: 'center', marginTop: responsiveHeight(4.5)}}>
+                  <RkText style={{ fontSize: responsiveFontSize(3)}} > Transfer </RkText>
                 </View>
-                <View style={{ justifyContent: 'center', marginTop: 10, paddingLeft: 30 }}>
-                  <RkText rkType='xxlarge'> Transfer </RkText>
-                </View>
-              </View>
+              {/* </View> */}
             </TouchableOpacity>
           </View>
           <View style={[styles.menuContainer, { marginTop: 0 }]}>
             <TouchableOpacity onPress={() => alert("Not ready yet")} style={styles.button}>
-              <View style={{ flexDirection: 'row' , marginLeft: -38}}>
-                <View style={{marginTop: 10}}>
+                {/* <View style={{marginTop: 10}}>
                   <Image source={pic} style={styles.icon} />
-                </View>
-                <View style={{ justifyContent: 'center', marginTop: 10, paddingLeft: 30 }}>
-                  <RkText rkType='xxlarge'> Top Up </RkText>
-                </View>
-              </View>
+                </View> */}
+                <View style={{ justifyContent: 'center',alignItems: 'center', marginTop: responsiveHeight(4.5)}}>
+                  <RkText style={{ fontSize: responsiveFontSize(3)}}> Top Up </RkText>
+                </View>          
             </TouchableOpacity>
           </View>
         </View>
@@ -118,10 +119,10 @@ const styles = StyleSheet.create({
     height: height,
   },
   container_image_profile: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    margin: 35,
+    width: responsiveHeight(14),
+    height: responsiveHeight(14),
+    borderRadius: 50*(responsiveHeight(14)/100),
+    margin: 38,
     borderWidth: 1,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -147,6 +148,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   container_userbar: {
+    marginTop: responsiveHeight(1),
     flex: 1.5,
     flexDirection: 'row',
   },
@@ -173,7 +175,7 @@ const styles = StyleSheet.create({
     // flexDirection: "column",
     // justifyContent: "flex-end",
     // padding: 30,
-    height: 100,
+    height: responsiveHeight(14),
     width: width * 2 / 3,
     // marginRight: -100
     shadowColor: '#000',
