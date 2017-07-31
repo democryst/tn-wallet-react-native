@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { RkButton, RkTextInput, RkTheme, RkText, RkAvoidKeyboard, RkCard } from 'react-native-ui-kitten';
 import { AppRegistry, StyleSheet, Text, TextInput, View, Button, TouchableOpacity, Dimensions, TouchableWithoutFeedback } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
+import api from '../../API/RequestAPI.js';
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 
@@ -19,21 +20,31 @@ export default class EnterTransferScreen extends React.Component {
 
   }
   onChangeText(text) {
-    textInputId = text.replace(new RegExp("-",'g'),"");
+    textInputId = text.replace(new RegExp("-", 'g'), "");
     // this.setState({ receiverId: textInputId });
     this.state.receiverId = textInputId;
   }
   onChangePage() {
-    
+
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
-    if(textInputId){
-      navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } });
-    }else{
-    alert("กรอกให้ครบดิสาส")
-    }
-  
-    
+    api.getData(this.state.receiverId).then((data) => {
+      if (textInputId) {
+        if (data[0] === undefined) {
+          alert("Account Invalid");
+        }
+        else {
+          navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } });
+
+        }
+      } else {
+        alert("Please fill account nummber");
+      }
+
+    });
+
+
+
   }
 
   render() {
@@ -49,7 +60,7 @@ export default class EnterTransferScreen extends React.Component {
             <RkText rkType='xlarge' >Receiver Account Number</RkText>
 
             <TextInputMask style={styles.textInput}
-            text=""
+              text=""
               onChangeText={this.onChangeText.bind(this)}
               keyboardType='numeric'
               type={'custom'}
