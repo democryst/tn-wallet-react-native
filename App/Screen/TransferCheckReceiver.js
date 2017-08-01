@@ -1,11 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Dimensions, TouchableWithoutFeedback } from 'react-native';
+
+import { TextInputMask } from 'react-native-masked-text';
+import api from '../../API/RequestAPI.js';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
-import api from '../../API/RequestAPI.js';
-
-
-
+var textInputAmount = 0.00;
 export default class TransferCheckReceiver extends React.Component {
 
 
@@ -19,12 +21,13 @@ export default class TransferCheckReceiver extends React.Component {
       receiver: "",
 
     };
+    let textInputId = params.data.receiverId.replace(new RegExp("-", 'g'), "");
 
     api.getData(params.data.userId).then((data) => {
       this.setState({ sender: data[0] });
     });
 
-    api.getData(params.data.receiverId).then((data) => {
+    api.getData(textInputId).then((data) => {
       this.setState({ receiver: data[0] });
     });
 
@@ -35,7 +38,10 @@ export default class TransferCheckReceiver extends React.Component {
     title: 'Transfer',
 
   };
-
+  onChangeText(text) {
+   textInputAmount = text.replace(new RegExp(",", 'g'), ""); 
+    this.state.amount = textInputAmount;
+  }
 
 
   render() {
@@ -46,22 +52,45 @@ export default class TransferCheckReceiver extends React.Component {
         <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
           <View style={{ flex: 1 }}>
             <View style={styles.top_container}>
-              <View style={styles.box}>
-                <View ><Text style={styles.text_bold}> Receiver Name</Text></View>
-                <Text style={styles.text_info}> {`${this.state.receiver.name} ${this.state.receiver.surname}`}</Text>
-              </View>
-              <View style={styles.box}>
-                <View ><Text style={styles.text_bold}> ReceiverID</Text></View>
-                <Text style={styles.text_info}> {`${params.data.receiverId}`}</Text>
+              <View style={{ flexDirection: 'row' }}>
+                <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
+                  <Text style={styles.text_bold}>Receiver</Text>
+                </View>
+                <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
+                  <View>
+                    <Text style={[styles.text_info, { textAlign: "right" }]}> {this.state.receiver.account_id}</Text>
+                    <Text style={[styles.text_info, { textAlign: "right" }]}> {this.state.receiver.name}</Text>
+                    <Text style={[styles.text_info, { textAlign: "right" }]}> {this.state.receiver.surname}</Text>
+                  </View>
+                </View>
               </View>
 
-              <View style={styles.box}>
-                <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}><Text style={styles.text_bold}> Amount</Text></View>
-                <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}><TextInput style={styles.textinput1} keyboardType='numeric'
-                  placeholder={'0.00'} onChangeText={(amount) => this.setState({ amount })} /></View>
-              </View>
-              <View style={styles.box}></View>
+              <View
+                style={{
+                  borderBottomColor: 'grey',
+                  borderBottomWidth: 0.5,
+                  margin: 15
+                }}
+              />
+              <View style={{ flex: 1, justifyContent: 'center' }}>
+               <Text style={styles.text_bold}> Amount (THB)</Text>
 
+                <TextInputMask style={styles.textInput}
+                text=''
+                  maxLength={8}
+                  onChangeText={this.onChangeText.bind(this)}
+                  keyboardType='numeric'
+                  placeholder={'0.00'}
+                  type={'money'}
+                  options={ {  
+                  
+                    precision:2,
+                    separator: '.',
+                      delimiter:',',
+                  unit:''
+                  }} 
+                />
+              </View>
             </View>
 
             <View style={styles.bottom_container}>
@@ -82,7 +111,7 @@ export default class TransferCheckReceiver extends React.Component {
                   transferAmount: this.state.amount
                 }
               })}>
-                <Text style={styles.text}>Next ></Text>
+                <Text style={styles.text}>Next</Text>
               </TouchableOpacity>
 
             </View>
@@ -96,17 +125,19 @@ export default class TransferCheckReceiver extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // marginTop: 10,
     backgroundColor: '#fff',
   },
-  box: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'flex-start'
+  row_container: {
+    // justifyContent: 'space-between',
+    flexDirection: 'row',
+    padding: 10,
   },
   top_container: {
     flex: 3,
+    margin:10,
     backgroundColor: '#fff',
-    // justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   bottom_container: {
     // flex: 1,
@@ -119,27 +150,32 @@ const styles = StyleSheet.create({
     // backgroundColor: '#f88fb0',
     backgroundColor: '#f06da1',
     // backgroundColor: '#e64f93',
-    flexDirection: "column",
+    // flexDirection: "column",
     padding: 25,
     width: width,
-    justifyContent: 'center',
-    alignItems: 'center'
   },
-  textinput1: {
-    // paddingLeft: 20,
-    paddingRight: 20,
-    width: 250,
-    fontSize: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    fontWeight: 'bold',
+  text: {
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 25
   },
   text_bold: {
     fontWeight: "bold",
-    fontSize: 24
+    fontSize: 25
   },
   text_info: {
-    fontSize: 20
+    fontSize: 19
+  },
+  textInput: {
+    alignItems: 'flex-end',
+    borderColor: 'gray',
+    borderRadius: 10,
+    borderWidth: 1,
+    height: 100,
+    padding: 10,
+    fontSize: 50,
+    margin: 10,
+   
+
   }
 });
