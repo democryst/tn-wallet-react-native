@@ -59,7 +59,7 @@ export default class HomeScreen extends React.Component {
         </TouchableOpacity>
       </View>
       <View style ={styles.button_box}>
-        <TouchableOpacity onPress={() => alert("Not ready yet")} style={styles.button}>
+        <TouchableOpacity onPress={() => navigate('TopUpSelectAmountScreen' , {userId:7582983660})} style={styles.button}>
           <Text> Top Up </Text>
         </TouchableOpacity>
       </View>

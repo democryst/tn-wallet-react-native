@@ -40,27 +40,29 @@ export default class TransferConfirm extends React.Component {
         this.getAccount();
         this.checkwallet = this.checkwallet.bind(this);  
         this.checkwalletlimit = this.checkwalletlimit.bind(this);
+        this.moveTopUpAmount = this.moveTopUpAmount.bind(this);
     }
     checkwalletlimit(topupchoice) {
-        this.setState({ amount: topupchoice });
+        // this.setState({ amount: topupchoice });
+        this.state.amount = topupchoice
         this.checkwallet(topupchoice);
     }
     checkwallet(amount) {
         console.log("checkwallet")
-        console.log("balance : " + this.state.currentbalance)
+        console.log("balance : " + this.state.currentbalance, "amount ", amount)
         if ((this.state.currentbalance + amount) > this.state.walletLimit) {
             console.log("topupallow false")
-            this.setState({
-                TopUpNote: "Balance Excess The Limit",
-                topupallow: false
-            })
+            // this.setState({
+            //     TopUpNote: "Balance Excess The Limit",
+            //     topupallow: false
+            // })
+            this.state.topupallow = false
+            this.state.TopUpNote = "Balance Excess The Limit"
         }
         else if ((this.state.currentbalance + amount) <= this.state.walletLimit) {
             console.log("topupallow True")
-            this.setState({
-                TopUpNote: "",
-                topupallow: true
-            })
+            this.state.topupallow= true
+
             console.log(this.state)
         }
     }
@@ -68,7 +70,7 @@ export default class TransferConfirm extends React.Component {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
         // api.getData(params.userId).then((data) => {
-        api.getData(1231231233).then((data) => {
+        api.getData(params.userId).then((data) => {
             this.setState({ apidata: data[0], currentbalance: data[0].balance });
         });
         console.log("balance : " + this.state.currentbalance)
@@ -258,7 +260,7 @@ export default class TransferConfirm extends React.Component {
 
                 </View >
 
-                <View style={styles.bottom_container}>
+                {/* <View style={styles.bottom_container}>
                     <TouchableOpacity onPress={
                         () => { this.moveTopUpAmount() }
                     }>
@@ -272,7 +274,7 @@ export default class TransferConfirm extends React.Component {
 
 
 
-                </View>
+                </View> */}
 
             </View >
         );
