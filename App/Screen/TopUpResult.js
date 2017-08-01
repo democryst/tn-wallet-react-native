@@ -27,7 +27,7 @@ export default class TopUpResult extends React.Component {
                 <View style={styles.container}>
 
                     <View style={styles.top_container} >
-                        <Text style={styles.text_bold}>Top Up Amount :</Text>
+                        <Text style={styles.text_bold}>Total Balance :</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                             <Text style={styles.input}>
                                {params.data.amount + params.data.currentbalance} <Text style={{fontSize: 20}}>THB</Text>
