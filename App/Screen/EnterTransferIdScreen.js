@@ -3,16 +3,20 @@ import { RkButton, RkTextInput, RkTheme, RkText, RkAvoidKeyboard, RkCard } from 
 import { AppRegistry, StyleSheet, Text, TextInput, View, Button, TouchableOpacity, Dimensions, TouchableWithoutFeedback } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
 import api from '../../API/RequestAPI.js';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
+
 var textInputId = null;
+var textInputIdFormat = null;
 export default class EnterTransferScreen extends React.Component {
-  
+
   static navigationOptions = {
     title: 'Transfer',
 
   };
-  
+
   constructor(props) {
     super(props);
     this.state = { receiverId: null };
@@ -20,22 +24,25 @@ export default class EnterTransferScreen extends React.Component {
     this.onChangeText = this.onChangeText.bind(this);
 
   }
+
   onChangeText(text) {
+    textInputIdFormat = text;
     textInputId = text.replace(new RegExp("-", 'g'), "");
     // this.setState({ receiverId: textInputId });
     this.state.receiverId = textInputId;
   }
+
   onChangePage() {
-    console.log('textInputId-------------');
-    console.log(textInputId);
+    
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
     api.getData(this.state.receiverId).then((data) => {
-      if (textInputId!=null) {
+      if (textInputId != null) {
         if (data[0] === undefined) {
           alert("Account Invalid");
         }
         else {
+           this.state.receiverId = textInputId;
           navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } });
 
         }
@@ -59,7 +66,7 @@ export default class EnterTransferScreen extends React.Component {
         <View style={styles.container}>
 
           <View style={styles.top_container} >
-            <RkText rkType='xlarge' >Receiver Account Number</RkText>
+            <RkText style={{ fontSize: responsiveFontSize(2.5) }} >Receiver Account Number</RkText>
 
             <TextInputMask style={styles.textInput}
               text=""
@@ -83,7 +90,7 @@ export default class EnterTransferScreen extends React.Component {
             {/* <TouchableOpacity onPress={() => navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } })}> */}
             <TouchableOpacity onPress={() => this.onChangePage()}>
               <View style={styles.button}>
-                <Text style={styles.text}>Enter</Text>
+                <Text style={styles.text}>Next</Text>
               </View>
             </TouchableOpacity>
 
@@ -132,7 +139,7 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 25
+    fontSize: responsiveFontSize(3)
   },
   text_bold: {
     fontWeight: "bold",
@@ -148,6 +155,7 @@ const styles = StyleSheet.create({
     height: 50,
     padding: 10,
     fontSize: 25,
+    margin:10
 
 
   }
