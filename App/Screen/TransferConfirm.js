@@ -11,27 +11,29 @@ export default class TransferConfirm extends React.Component {
   };
   constructor(props) {
     super(props);
-    this.state = {
-      date: "25/7/17",
-      senderName: "Thanaporn",
-      senderSurname: "Suwathanawongchai",
-      senderID: "6302335476",
-      receiverName: "Phansawuth",
-      receiverSurname: "Jenthaworn",
-      receiverID: "7582983660",
-      amount: 500,
-      fee: "0.00",
-      remaining: "4,200.00",
-      sB: 1000,
-      dB: 500,
-    }
+    this.state = {}
   }
 
   postTransaction() {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
-    api.postTransaction(this.state.senderID, this.state.sB, this.state.receiverID, this.state.dB, params.data.transferAmount);
-    // console.log("kuy");
+    api.postTransaction(params.data.senderAccountInfo.senderID,
+      params.data.senderAccountInfo.senderBalance,
+      params.data.receiverAccountInfo.receiverID,
+      params.data.receiverAccountInfo.receiverBalance,
+      params.data.transferAmount
+    )
+    .then( resp=> resp.json())
+    .then((resp)=>{
+      navigate('TransferResult' , { result: resp , data: params.data}) ;
+    })
+    .catch((res)=>{
+      console.log("temp resp");
+      console.log(res)
+    });
+
+
+    //return temp ;
   }
 
   render() {
@@ -144,7 +146,7 @@ export default class TransferConfirm extends React.Component {
               <Text style={styles.text_bold}> Fee</Text>
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-              <Text style={styles.text_info}> {this.state.fee}</Text>
+              <Text style={styles.text_info}> 0.00</Text>
             </View>
           </View>
 
@@ -168,7 +170,7 @@ export default class TransferConfirm extends React.Component {
         </View>
 
         <View style={styles.bottom_container}>
-          <TouchableOpacity style={styles.button} onPress={() => { this.postTransaction(), navigate('TransferResult', { user: 'Lucy' }) }}>
+          <TouchableOpacity style={styles.button} onPress={() => { this.postTransaction() }}>
             <Text style={styles.text}>Confirm</Text>
           </TouchableOpacity>
 

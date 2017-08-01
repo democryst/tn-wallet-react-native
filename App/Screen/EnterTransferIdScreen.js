@@ -5,13 +5,14 @@ import { TextInputMask } from 'react-native-masked-text';
 import api from '../../API/RequestAPI.js';
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
-
+var textInputId = null;
 export default class EnterTransferScreen extends React.Component {
-  static textInputId = "";
+  
   static navigationOptions = {
     title: 'Transfer',
 
   };
+  
   constructor(props) {
     super(props);
     this.state = { receiverId: null };
@@ -25,11 +26,12 @@ export default class EnterTransferScreen extends React.Component {
     this.state.receiverId = textInputId;
   }
   onChangePage() {
-
+    console.log('textInputId-------------');
+    console.log(textInputId);
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
     api.getData(this.state.receiverId).then((data) => {
-      if (textInputId) {
+      if (textInputId!=null) {
         if (data[0] === undefined) {
           alert("Account Invalid");
         }
