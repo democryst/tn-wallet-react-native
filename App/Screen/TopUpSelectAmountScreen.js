@@ -90,7 +90,8 @@ export default class TransferConfirm extends React.Component {
                 data: {
                     amount: this.state.amount,
                     currentbalance: this.state.currentbalance,
-                    apidata: this.state.apidata
+                    apidata: this.state.apidata,
+                    userId: params.userId
                 }
             })
         }

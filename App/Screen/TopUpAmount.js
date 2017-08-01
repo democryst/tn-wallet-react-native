@@ -11,26 +11,29 @@ export default class TopUpAmount extends React.Component {
     };
     constructor(props) {
         super(props);
+
+        const { navigate } = this.props.navigation;
+        const { params } = this.props.navigation.state;
+
         this.state = {
-            sender_bank_account_id: 1111111111,
-            sender_bank_currentbalance: 0.00,
-            receiverId: null,
-            currentbalance: 4100.00 ,
-            amount: 500.00  
+            receiverId: params.data.userId,
+            currentbalance: params.data.currentbalance,
+            amount: params.data.amount
         };
-        this.getAccount(); 
+        // this.getAccount();
+        
 
 
     }
     getAccount() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
-        
+
 
         api.getData(1111111111).then((data) => {
-            this.setState({ sender_bank_account_id: data[0].account_id ,sender_bank_currentbalance: data[0].balance});
+            this.setState({ sender_bank_account_id: data[0].account_id, sender_bank_currentbalance: data[0].balance });
         });
-     
+
     }
     postTransaction() {
         console.log("bank acc", this.state.sender_bank_account_id);
@@ -41,7 +44,7 @@ export default class TopUpAmount extends React.Component {
         api.postTransaction(this.state.sender_bank_account_id, this.state.sender_bank_currentbalance, apidata.account_id, apidata.balance, params.data.amount);
         // console.log("kuy");
     }
-        
+
     render() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
@@ -54,7 +57,7 @@ export default class TopUpAmount extends React.Component {
                         <Text style={styles.text_bold}>Top Up Amount:</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                             <Text style={styles.input}>
-                               {params.data.amount} <Text style={{fontSize: 20}}>THB</Text>
+                                {params.data.amount} <Text style={{ fontSize: 20 }}>THB</Text>
                             </Text>
                         </View>
                     </View >
@@ -69,13 +72,28 @@ export default class TopUpAmount extends React.Component {
                         <Text style={styles.text_bold}>Current Balance:</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                             <Text style={styles.input}>
-                                 {params.data.currentbalance} <Text style={{fontSize: 20}}>THB</Text>
+                                {params.data.currentbalance} <Text style={{ fontSize: 20 }}>THB</Text>
                             </Text>
-                            
+
                         </View>
                     </View >
                     <View style={styles.bottom_container}>
-                        <TouchableOpacity onPress={() => navigate('TopUpResult', { data: { amount: params.data.amount, currentbalance: params.data.currentbalance} })}>
+                        <TouchableOpacity onPress={() => {
+                            {/* console.log("state account : ", this.state.receiverId) */}
+                            api.postTransactionTopUp(this.state.receiverId,this.state.currentbalance,this.state.amount)
+                            .then(resp => resp.json())
+                            .then((data)=>{
+                                {/* console.log("postTransactionTopUp")
+                                console.log(data) */}
+                                return api.getTransaction(data.transaction_id)
+                            })
+                            .then((data)=>{
+                                navigate('TopUpResult', { data: { currentbalance: data.des_remain_balance} })
+                            })
+                            .catch((err)=>{
+                                console.log("error ", err)
+                            })
+                        }}>
                             <View style={styles.button}>
                                 <Text style={styles.text}>Confirm</Text>
                             </View>
@@ -150,10 +168,10 @@ const styles = StyleSheet.create({
         fontSize: 40,
         borderWidth: 1,
         borderRadius: 30,
-        width: width*0.7,
+        width: width * 0.7,
         margin: 40,
-        color:"gray",
-        
+        color: "gray",
+
 
     },
 });

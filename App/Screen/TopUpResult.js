@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, TextInput, View, Button, TouchableOpacity, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import api from '../../API/RequestAPI.js';
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 
@@ -30,7 +31,7 @@ export default class TopUpResult extends React.Component {
                         <Text style={styles.text_bold}>Total Balance :</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                             <Text style={styles.input}>
-                               {params.data.amount + params.data.currentbalance} <Text style={{fontSize: 20}}>THB</Text>
+                               {params.data.currentbalance} <Text style={{fontSize: 20}}>THB</Text>
                             </Text>
                         </View>
                     </View >
@@ -50,7 +51,7 @@ export default class TopUpResult extends React.Component {
                         </View>
                     </View >
                     <View style={styles.bottom_container}>
-                         <TouchableOpacity onPress={() => navigate('home', { data: { amount:this.state.amount } })}> 
+                         <TouchableOpacity onPress={() => navigate('Home')}> 
                             <View style={styles.button}>
                                 <Text style={styles.text}>Done</Text>
                             </View>
