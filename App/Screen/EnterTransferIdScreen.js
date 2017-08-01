@@ -42,7 +42,7 @@ export default class EnterTransferScreen extends React.Component {
           alert("Account Invalid");
         }
         else {
-           this.state.receiverId = textInputId;
+           this.state.receiverId = textInputIdFormat;
           navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } });
 
         }

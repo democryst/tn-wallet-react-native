@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Button, Dimensions, TouchableWithoutFeedback } from 'react-native';
 
 import { TextInputMask } from 'react-native-masked-text';
 import api from '../../API/RequestAPI.js';
@@ -39,78 +39,94 @@ export default class TransferCheckReceiver extends React.Component {
 
   };
   onChangeText(text) {
-   textInputAmount = text.replace(new RegExp(",", 'g'), ""); 
+    textInputAmount = text.replace(new RegExp(",", 'g'), "");
     this.state.amount = textInputAmount;
   }
-
+  onChangePage() {
+    const { navigate } = this.props.navigation;
+    const { params } = this.props.navigation.state;
+    if (this.state.amount > this.state.sender.balance) {
+      alert('Your money not enough')
+    }
+    else {
+      navigate('TransferConfirm', {
+        data: {
+          senderAccountInfo: {
+            senderName: this.state.sender.name,
+            senderSurname: this.state.sender.surname,
+            senderID: this.state.sender.account_id,
+            senderBalance: this.state.sender.balance
+          },
+          receiverAccountInfo: {
+            receiverName: this.state.receiver.name,
+            receiverSurname: this.state.receiver.surname,
+            receiverID: this.state.receiver.account_id,
+            receiverBalance: this.state.receiver.balance
+          },
+          transferAmount: this.state.amount
+        }
+      })
+    }
+  }
 
   render() {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
     return (
+
       <View style={styles.container}>
         <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
           <View style={{ flex: 1 }}>
-            <View style={styles.top_container}>
-              <View style={{ flexDirection: 'row' }}>
-                <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                  <Text style={styles.text_bold}>Receiver</Text>
-                </View>
-                <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-                  <View>
-                    <Text style={[styles.text_info, { textAlign: "right" }]}> {this.state.receiver.account_id}</Text>
-                    <Text style={[styles.text_info, { textAlign: "right" }]}> {this.state.receiver.name}</Text>
-                    <Text style={[styles.text_info, { textAlign: "right" }]}> {this.state.receiver.surname}</Text>
+            <ScrollView>
+              <View style={styles.top_container}>
+                <View style={{ flexDirection: 'row' }}>
+                  <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
+                    <Text style={styles.text}>Receiver</Text>
+                  </View>
+                  <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 2 }]}>
+                    <View>
+                      <Text style={[styles.text_bold, { textAlign: "right" }]}> {params.data.receiverId}</Text>
+                      <Text style={[styles.text_bold, { textAlign: "right" }]}> {this.state.receiver.name}</Text>
+                      <Text style={[styles.text_bold, { textAlign: "right" }]}> {this.state.receiver.surname}</Text>
+                    </View>
                   </View>
                 </View>
-              </View>
 
-              <View
-                style={{
-                  borderBottomColor: 'grey',
-                  borderBottomWidth: 0.5,
-                  margin: 15
-                }}
-              />
-              <View style={{ flex: 1, justifyContent: 'center' }}>
-               <Text style={styles.text_bold}> Amount (THB)</Text>
-
-                <TextInputMask style={styles.textInput}
-                text=''
-                  maxLength={5}
-                  onChangeText={this.onChangeText.bind(this)}
-                  keyboardType='numeric'
-                  placeholder={'0.00'}
-                  type={'money'}
-                  options={ {  
-                  
-                    precision:0,
-                    separator: '.',
-                      delimiter:',',
-                  unit:''
-                  }} 
+                <View
+                  style={{
+                    borderBottomColor: 'grey',
+                    borderBottomWidth: 0.5,
+                    margin: 15
+                  }}
                 />
-              </View>
-            </View>
 
+                <View style={{ flex: 1, justifyContent: 'center' }}>
+                  <Text style={styles.text_bold}> Amount (THB)</Text>
+
+                  <TextInputMask style={styles.textInput}
+                    text=''
+                    maxLength={5}
+                    onChangeText={this.onChangeText.bind(this)}
+                    keyboardType='numeric'
+                    placeholder={'0.00'}
+                    type={'money'}
+                    options={{
+
+                      precision: 0,
+                      separator: '.',
+                      delimiter: ',',
+                      unit: ''
+                    }}
+                  />
+                  <View style={styles.avilableBalance}>
+                    <Text style={styles.text_info}>Available balance {this.state.sender.balance} THB</Text>
+                  </View>
+                </View>
+
+              </View>
+            </ScrollView>
             <View style={styles.bottom_container}>
-              <TouchableOpacity style={styles.button} onPress={() => navigate('TransferConfirm', {
-                data: {
-                  senderAccountInfo: {
-                    senderName: this.state.sender.name,
-                    senderSurname: this.state.sender.surname,
-                    senderID: this.state.sender.account_id,
-                    senderBalance: this.state.sender.balance
-                  },
-                  receiverAccountInfo: {
-                    receiverName: this.state.receiver.name,
-                    receiverSurname: this.state.receiver.surname,
-                    receiverID: this.state.receiver.account_id,
-                    receiverBalance: this.state.receiver.balance
-                  },
-                  transferAmount: this.state.amount
-                }
-              })}>
+              <TouchableOpacity style={styles.button} onPress={() => this.onChangePage()}>
                 <Text style={styles.text}>Next</Text>
               </TouchableOpacity>
 
@@ -118,6 +134,7 @@ export default class TransferCheckReceiver extends React.Component {
           </View>
         </TouchableWithoutFeedback>
       </View>
+
     );
   }
 }
@@ -135,7 +152,7 @@ const styles = StyleSheet.create({
   },
   top_container: {
     flex: 3,
-    margin:10,
+    margin: 10,
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
   },
@@ -156,26 +173,31 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: "center",
-    fontWeight: "bold",
-    fontSize: 25
+    fontSize: 20
   },
   text_bold: {
     fontWeight: "bold",
     fontSize: 25
   },
   text_info: {
-    fontSize: 19
+    fontSize: 19,
+    color: 'green',
+  },
+  avilableBalance: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    margin: 10,
   },
   textInput: {
     alignItems: 'flex-end',
     borderColor: 'gray',
     borderRadius: 10,
     borderWidth: 1,
-    height: 100,
+    height: 80,
     padding: 10,
     fontSize: 50,
     margin: 10,
-   
+
 
   }
 });
