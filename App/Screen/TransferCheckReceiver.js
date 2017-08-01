@@ -77,14 +77,14 @@ export default class TransferCheckReceiver extends React.Component {
 
                 <TextInputMask style={styles.textInput}
                 text=''
-                  maxLength={8}
+                  maxLength={5}
                   onChangeText={this.onChangeText.bind(this)}
                   keyboardType='numeric'
                   placeholder={'0.00'}
                   type={'money'}
                   options={ {  
                   
-                    precision:2,
+                    precision:0,
                     separator: '.',
                       delimiter:',',
                   unit:''
