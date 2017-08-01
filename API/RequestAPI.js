@@ -46,3 +46,28 @@ exports.postTransaction = function (sourceID, sourceInitialBalance, destinationI
           })
         })
 }
+
+exports.postTransactionTopUp = function (destinationID, destinationInitialBalance, amount) {
+    let destinationRemain = parseFloat(destinationInitialBalance) + parseFloat(amount);
+    console.log({
+            type: "topup",
+            des_acc_id: destinationID,
+            des_initial_balance: destinationInitialBalance,
+            amount: amount,
+            des_remain_balance: destinationRemain
+          })
+    return fetch('http://188.166.214.163/transactions', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            type: "topup",
+            des_acc_id: destinationID,
+            des_initial_balance: destinationInitialBalance,
+            amount: amount,
+            des_remain_balance: destinationRemain
+          })
+        })
+}
