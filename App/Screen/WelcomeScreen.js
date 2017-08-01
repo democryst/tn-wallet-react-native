@@ -5,10 +5,12 @@ import { RkButton, RkTheme, RkText } from 'react-native-ui-kitten';
 import api from '../../API/RequestAPI.js';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
+
 var { height, width } = Dimensions.get('window');
 var numeral = require('numeral');
 
 let accent = '#ed1c4d';
+
 
 RkTheme.setType('RkButton', 'accent', {
   backgroundColor: accent,
@@ -34,6 +36,16 @@ export default class HomeScreen extends React.Component {
     });
 
   }
+
+
+  componentDidMount(){
+      const timer = require('react-native-timer');
+      timer.setInterval("Update_money", ()=>{api.getData(1234567890).then((data) => {
+        this.setState(data[0]);
+      });}, 5000);
+  }
+
+
   static navigationOptions = {
     title: 'Home',
     headerLeft: null,
