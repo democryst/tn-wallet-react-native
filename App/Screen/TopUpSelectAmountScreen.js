@@ -26,6 +26,13 @@ export default class TransferConfirm extends React.Component {
             walletLimit: 5000,
             topupallow: false,
             apidata: "",
+            button_pressed: {
+                first_button: false,
+                second_button: false,
+                third_button: false,
+                fourth_button: false
+            }
+
         }
         this.getAccount();
     }
@@ -80,31 +87,49 @@ export default class TransferConfirm extends React.Component {
     render() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
-
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1; //January is 0!
-        var yyyy = today.getFullYear();
-
-        if (dd < 10) {
-            dd = '0' + dd
-        }
-
-        if (mm < 10) {
-            mm = '0' + mm
-        }
-
-        today = dd + '/' + mm + '/' + yyyy;
+        //
+        // var today = new Date();
+        // var dd = today.getDate();
+        // var mm = today.getMonth() + 1; //January is 0!
+        // var yyyy = today.getFullYear();
+        //
+        // if (dd < 10) {
+        //     dd = '0' + dd
+        // }
+        //
+        // if (mm < 10) {
+        //     mm = '0' + mm
+        // }
+        //
+        // today = dd + '/' + mm + '/' + yyyy;
         return (
             <View style={styles.container}>
                 <View style={styles.top_container}>
+                    <View style={[styles.box_container]}>
+                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
+                            <Text>Account Balance:</Text>
+                        </View>
+                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
+                            <Text>{this.state.currentbalance}</Text>
+                        </View>
+                    </View>
 
-
-                    <View style={styles.box_container}>
+                    <View style={[styles.box_container, this.state.button_pressed.first_button ? { backgroundColor: "pink" } : {}]}>
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
                             <View>
                                 <TouchableOpacity style={styles.row_container} onPress={
-                                    () => { this.checkwalletlimit(this.state.topupselectchoice.first) }
+                                    () => {
+                                        this.checkwalletlimit(this.state.topupselectchoice.first), this.setState(
+                                            {
+                                                button_pressed: {
+                                                    first_button: true,
+                                                    second_button: false,
+                                                    third_button: false,
+                                                    fourth_button: false
+                                                }
+                                            }
+                                        )
+                                    }
                                 }>
                                     <Image source={require('../Resource/img/right_button.png')}
                                         style={styles.next_button}
@@ -117,11 +142,22 @@ export default class TransferConfirm extends React.Component {
                         </View>
                     </View>
 
-                    <View style={styles.box_container}>
+                    <View style={[styles.box_container, this.state.button_pressed.second_button ? { backgroundColor: "pink" } : {}]}>
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
                             <View>
                                 <TouchableOpacity style={styles.row_container} onPress={
-                                    () => { this.checkwalletlimit(this.state.topupselectchoice.second) }
+                                    () => {
+                                        this.checkwalletlimit(this.state.topupselectchoice.second), this.setState(
+                                            {
+                                                button_pressed: {
+                                                    first_button: false,
+                                                    second_button: true,
+                                                    third_button: false,
+                                                    fourth_button: false
+                                                }
+                                            }
+                                        )
+                                    }
                                 }>
                                     <Image source={require('../Resource/img/right_button.png')}
                                         style={styles.next_button}
@@ -134,11 +170,22 @@ export default class TransferConfirm extends React.Component {
                         </View>
                     </View>
 
-                    <View style={styles.box_container}>
+                    <View style={[styles.box_container, this.state.button_pressed.third_button ? { backgroundColor: "pink" } : {}]}>
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
                             <View>
                                 <TouchableOpacity style={styles.row_container} onPress={
-                                    () => { this.checkwalletlimit(this.state.topupselectchoice.third) }
+                                    () => {
+                                        this.checkwalletlimit(this.state.topupselectchoice.third), this.setState(
+                                            {
+                                                button_pressed: {
+                                                    first_button: false,
+                                                    second_button: false,
+                                                    third_button: true,
+                                                    fourth_button: false
+                                                }
+                                            }
+                                        )
+                                    }
                                 }>
                                     <Image source={require('../Resource/img/right_button.png')}
                                         style={styles.next_button}
@@ -151,11 +198,22 @@ export default class TransferConfirm extends React.Component {
                         </View>
                     </View >
 
-                    <View style={styles.box_container}>
+                    <View style={[styles.box_container, this.state.button_pressed.fourth_button ? { backgroundColor: "pink" } : {}]}>
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
                             <View>
                                 <TouchableOpacity style={styles.row_container} onPress={
-                                    () => { this.checkwalletlimit(this.state.topupselectchoice.fourth) }
+                                    () => {
+                                        this.checkwalletlimit(this.state.topupselectchoice.fourth), this.setState(
+                                            {
+                                                button_pressed: {
+                                                    first_button: false,
+                                                    second_button: false,
+                                                    third_button: false,
+                                                    fourth_button: true
+                                                }
+                                            }
+                                        )
+                                    }
                                 }>
                                     <Image source={require('../Resource/img/right_button.png')}
                                         style={styles.next_button}
@@ -246,7 +304,7 @@ const styles = StyleSheet.create({
     },
     text_info: {
         fontSize: 19,
-        paddingTop:5
+        paddingTop: 5
     },
     next_button: {
         width: 40,
