@@ -10,13 +10,20 @@ export default class TransferResult extends React.Component {
     };
     constructor(props) {
       super(props);
-      this.state = {
-        transactionId: params.result.transaction_id 
-      };
       const { navigate } = this.props.navigation;
       const { params } = this.props.navigation.state;
+      this.state = {
+        transactionResult : {},
+        senderId : params.data.senderAccountInfo.senderID,
+        senderName : params.data.senderAccountInfo.senderName,
+        senderSurname : params.data.senderAccountInfo.senderSurname,
+        receiverId : params.data.receiverAccountInfo.receiverID,
+        receiverName : params.data.receiverAccountInfo.receiverName,
+        receiverSurname : params.data.receiverAccountInfo.receiverSurname
+      };
 
-      //console.log("pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp");
+
+
 
 
 
@@ -25,16 +32,16 @@ export default class TransferResult extends React.Component {
     componentDidMount(){
       const { navigate } = this.props.navigation;
       const { params } = this.props.navigation.state;
-      console.log("componentDidMount");
-      console.log(params.result.transaction_id);
       api.getTransaction(params.result.transaction_id).then((data) => {
         this.setState({ transactionResult: data });
-        console.log("lllllllllllllllllllllllllllllllllllllllllllllllllllllll",data);
       });
     };
 
     render() {
         const { navigate } = this.props.navigation;
+        let tempSenderId = this.state.senderId ;
+        let tempReceiverId = this.state.receiverId ;
+
         return (
             <View style={styles.container}>
                 <View style={styles.top_container}>
@@ -52,7 +59,7 @@ export default class TransferResult extends React.Component {
                             <Text style={styles.text_bold}> Transaction ID</Text>
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-                            <Text style={styles.text_info}> {this.state.transferID}</Text>
+                            <Text style={styles.text_info}> {this.state.transactionResult.id}</Text>
                         </View>
                     </View>
 
@@ -70,7 +77,7 @@ export default class TransferResult extends React.Component {
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
                             <View>
-                                <Text style={[styles.text_info, { textAlign: "right" }]}> {this.state.transactionResult.id}</Text>
+                                <Text style={[styles.text_info, { textAlign: "right" }]}> {this.state.senderName}</Text>
                                 <Text style={[styles.text_info, { textAlign: "right" }]}> {this.state.senderSurname}</Text>
                             </View>
                         </View>
@@ -81,7 +88,7 @@ export default class TransferResult extends React.Component {
                             <Text style={styles.text_bold}> Sender ID</Text>
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-                            <Text style={styles.text_info}> {this.state.senderID}</Text>
+                            <Text style={styles.text_info}> {tempSenderId}</Text>
                         </View>
                     </View>
 
@@ -110,7 +117,7 @@ export default class TransferResult extends React.Component {
                             <Text style={styles.text_bold}> Receiver ID</Text>
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-                            <Text style={styles.text_info}> {this.state.receiverID}</Text>
+                            <Text style={styles.text_info}> {tempReceiverId}</Text>
                         </View>
                     </View>
 
@@ -127,7 +134,7 @@ export default class TransferResult extends React.Component {
                             <Text style={styles.text_bold}> Amount</Text>
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-                            <Text style={styles.text_info}> {this.state.amount}</Text>
+                            <Text style={styles.text_info}> {this.state.transactionResult.amount}</Text>
                         </View>
                     </View>
 
@@ -136,7 +143,7 @@ export default class TransferResult extends React.Component {
                             <Text style={styles.text_bold}> Fee</Text>
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-                            <Text style={styles.text_info}> {this.state.fee}</Text>
+                            <Text style={styles.text_info}> {this.state.transactionResult.fee}</Text>
                         </View>
                     </View>
 

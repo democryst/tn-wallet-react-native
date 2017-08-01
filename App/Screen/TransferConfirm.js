@@ -11,20 +11,7 @@ export default class TransferConfirm extends React.Component {
   };
   constructor(props) {
     super(props);
-    this.state = {
-      date: "25/7/17",
-      senderName: "Thanaporn",
-      senderSurname: "Suwathanawongchai",
-      senderID: "6302335476",
-      receiverName: "Phansawuth",
-      receiverSurname: "Jenthaworn",
-      receiverID: "7582983660",
-      amount: 500,
-      fee: "0.00",
-      remaining: "4,200.00",
-      sB: 1000,
-      dB: 500,
-    }
+    this.state = {}
   }
 
   postTransaction() {
@@ -38,7 +25,7 @@ export default class TransferConfirm extends React.Component {
     )
     .then( resp=> resp.json())
     .then((resp)=>{
-      navigate('TransferResult' , { result: resp }) ;
+      navigate('TransferResult' , { result: resp , data: params.data}) ;
     })
     .catch((res)=>{
       console.log("temp resp");
@@ -159,7 +146,7 @@ export default class TransferConfirm extends React.Component {
               <Text style={styles.text_bold}> Fee</Text>
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-              <Text style={styles.text_info}> {this.state.fee}</Text>
+              <Text style={styles.text_info}> 0.00</Text>
             </View>
           </View>
 
