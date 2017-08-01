@@ -4,6 +4,9 @@ var { height, width } = Dimensions.get('window');
 import api from '../../API/RequestAPI.js';
 import RestClient from 'react-native-rest-client';
 
+var { height, width } = Dimensions.get('window');
+var numeral = require('numeral');2
+
 export default class TransferConfirm extends React.Component {
     static navigationOptions = {
         title: 'Top Up Amount',
@@ -22,7 +25,7 @@ export default class TransferConfirm extends React.Component {
                 third: 500,
                 fourth: 1000,
             },
-            TopUpNote: "Please select top up amount",
+            TopUpNote: "",
             walletLimit: 5000,
             topupallow: false,
             apidata: "",
@@ -35,37 +38,46 @@ export default class TransferConfirm extends React.Component {
 
         }
         this.getAccount();
+        this.checkwallet = this.checkwallet.bind(this);  
+        this.checkwalletlimit = this.checkwalletlimit.bind(this);
     }
     checkwalletlimit(topupchoice) {
         this.setState({ amount: topupchoice });
         this.checkwallet(topupchoice);
     }
     checkwallet(amount) {
+        console.log("checkwallet")
         console.log("balance : " + this.state.currentbalance)
         if ((this.state.currentbalance + amount) > this.state.walletLimit) {
+            console.log("topupallow false")
             this.setState({
-                TopUpNote: "Topup amount exceeding wallet limit",
+                TopUpNote: "Balance Excess The Limit",
                 topupallow: false
             })
         }
         else if ((this.state.currentbalance + amount) <= this.state.walletLimit) {
+            console.log("topupallow True")
             this.setState({
-                TopUpNote: "Top up for " + amount + " THB",
+                TopUpNote: "",
                 topupallow: true
             })
+            console.log(this.state)
         }
     }
     getAccount() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
         // api.getData(params.userId).then((data) => {
-        api.getData(1234567890).then((data) => {
+        api.getData(1231231233).then((data) => {
             this.setState({ apidata: data[0], currentbalance: data[0].balance });
         });
         console.log("balance : " + this.state.currentbalance)
     }
     moveTopUpAmount() {
+        console.log("inside moveTopUpAmount")
+        console.log(this.state.topupallow)
         if (this.state.topupallow) {
+            console.log("insid topupallow")
             const { navigate } = this.props.navigation;
             const { params } = this.props.navigation.state;
             console.log("top up allow");
@@ -87,7 +99,9 @@ export default class TransferConfirm extends React.Component {
     render() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
-        //
+        var balance = numeral(this.state.currentbalance).format('0,0');
+        var balanceStang = numeral(this.state.currentbalance).format('.00');
+            //
         // var today = new Date();
         // var dd = today.getDate();
         // var mm = today.getMonth() + 1; //January is 0!
@@ -106,11 +120,14 @@ export default class TransferConfirm extends React.Component {
             <View style={styles.container}>
                 <View style={styles.top_container}>
                     <View style={[styles.box_container]}>
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <Text>Account Balance:</Text>
+                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1}]}>
+                            <Text style = {{fontSize:15,paddingLeft:5,paddingTop:20}}>Account Balance:</Text>
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-                            <Text>{this.state.currentbalance}</Text>
+                            <Text style={{fontSize:30}}>{balance}</Text>
+                               <Text style={{fontSize:11,paddingTop:18,paddingRight:2}}>.00</Text>
+                               <Text style={{fontSize:15,paddingTop:14,paddingRight:5}}>THB</Text>
+
                         </View>
                     </View>
 
@@ -125,10 +142,15 @@ export default class TransferConfirm extends React.Component {
                                                     first_button: true,
                                                     second_button: false,
                                                     third_button: false,
-                                                    fourth_button: false
+                                                    fourth_button: false,
                                                 }
+                                                
                                             }
                                         )
+                                    
+                                          this.moveTopUpAmount() 
+                                         
+                                        
                                     }
                                 }>
                                     <Image source={require('../Resource/img/right_button.png')}
@@ -157,6 +179,7 @@ export default class TransferConfirm extends React.Component {
                                                 }
                                             }
                                         )
+                                         this.moveTopUpAmount()
                                     }
                                 }>
                                     <Image source={require('../Resource/img/right_button.png')}
@@ -185,6 +208,7 @@ export default class TransferConfirm extends React.Component {
                                                 }
                                             }
                                         )
+                                         this.moveTopUpAmount() 
                                     }
                                 }>
                                     <Image source={require('../Resource/img/right_button.png')}
@@ -213,6 +237,7 @@ export default class TransferConfirm extends React.Component {
                                                 }
                                             }
                                         )
+                                         this.moveTopUpAmount() 
                                     }
                                 }>
                                     <Image source={require('../Resource/img/right_button.png')}
@@ -226,7 +251,7 @@ export default class TransferConfirm extends React.Component {
                         </View>
                     </View >
                     <View style={{ paddingTop: 10 }}>
-                        <Text style={[styles.text_info, { textAlign: "center", color: "gray" }]}> {this.state.TopUpNote}</Text>
+                        <Text style={[styles.text_info, { textAlign: "center", color: "red",fontWeight:"bold" }]}> {this.state.TopUpNote}</Text>
                     </View>
 
 
@@ -264,7 +289,7 @@ const styles = StyleSheet.create({
     row_container: {
         // justifyContent: 'space-between',
         flexDirection: 'row',
-        padding: 10,
+        paddingTop: 10,
     },
     top_container: {
         flex: 5,
@@ -279,7 +304,7 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end",
     },
     box_container: {
-
+        
         flexDirection: 'row',
         // backgroundColor: 'pink',
         // borderWidth: 1,
@@ -304,7 +329,8 @@ const styles = StyleSheet.create({
     },
     text_info: {
         fontSize: 19,
-        paddingTop: 5
+        paddingTop: 5,
+        // fontWeight:"bold",
     },
     next_button: {
         width: 40,
