@@ -57,7 +57,7 @@ export default class TransferConfirm extends React.Component {
             //     topupallow: false
             // })
             this.state.topupallow = false
-            this.state.TopUpNote = "Balance Excess The Limit"
+            this.state.TopUpNote = "Maximum limit exceeded"
         }
         else if ((this.state.currentbalance + amount) <= this.state.walletLimit) {
             console.log("topupallow True")
@@ -128,7 +128,7 @@ export default class TransferConfirm extends React.Component {
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
                             <Text style={{fontSize:30}}>{balance}</Text>
-                               <Text style={{fontSize:11,paddingTop:18,paddingRight:2}}>.00</Text>
+                               <Text style={{fontSize:11,paddingTop:18,paddingRight:2}}>{balanceStang}</Text>
                                <Text style={{fontSize:15,paddingTop:14,paddingRight:5}}>THB</Text>
 
                         </View>
