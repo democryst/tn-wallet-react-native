@@ -4,6 +4,7 @@ import api from '../../API/RequestAPI.js';
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 var numeral = require('numeral');
+var styles = require('../Resource/style.js');
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 export default class TopUpAmount extends React.Component {
@@ -23,8 +24,6 @@ export default class TopUpAmount extends React.Component {
             amount: params.data.amount
         };
 
-
-
     }
 
     render() {
@@ -32,56 +31,44 @@ export default class TopUpAmount extends React.Component {
         const { params } = this.props.navigation.state;
         return (
             <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
-                <View style={[styles.container,{paddingTop:responsiveHeight(12)}]}>
+                <View style={[styles.container, { paddingTop: responsiveHeight(12) }]}>
 
                     <View style={styles.row_container} >
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <Text style={{ fontSize: responsiveFontSize(2.5),color:"gray",paddingTop:responsiveHeight(1.5) }}>TopUp Amount:</Text>
+                            <Text style={styles.textTittle}>TopUp Amount:</Text>
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-                            <Text style={{ fontSize: responsiveFontSize(3.5),fontWeight: "bold" }}>{numeral(params.data.amount).format('0,0')}</Text>
-                            <Text style={{ fontSize: responsiveFontSize(2.5), paddingRight: 20 ,paddingTop:responsiveHeight(1.2)}}>{numeral(params.data.amount).format('.00')}</Text>
-                            <Text style={{ fontSize: responsiveFontSize(3) ,paddingTop:responsiveHeight(0.5) }}>THB</Text>
+                            <Text style={styles.textAmount}>{numeral(params.data.amount).format('0,0')}</Text>
+                            <Text style={styles.textAmountSatang}>{numeral(params.data.amount).format('.00')}</Text>
+                            <Text style={styles.textAmountTHB}>THB</Text>
 
                         </View>
                     </View>
 
-                    <View
-                        style={{
-                            borderBottomColor: 'grey',
-                            borderBottomWidth: 0.5,
-                            margin: 15
-                        }}
-                    />
+                    <View style={styles.underline} />
 
                     <View style={styles.row_container} >
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <Text style={{ fontSize: responsiveFontSize(2.5) ,color:"gray",paddingTop:7,paddingTop:responsiveHeight(1.5) }}>Current Balance:</Text>
+                            <Text style={styles.textTittle}>Current Balance:</Text>
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-                            <Text style={{ fontSize: responsiveFontSize(3.5),fontWeight: "bold" }}>{numeral(params.data.currentbalance).format('0,0')}</Text>
-                            <Text style={{ fontSize: responsiveFontSize(2.5), paddingRight: 20,paddingTop:responsiveHeight(1.2) }}>{numeral(params.data.currentbalance).format('.00')}</Text>
-                            <Text style={{ fontSize: responsiveFontSize(3),paddingTop:responsiveHeight(0.5) }}>THB</Text>
+                            <Text style={styles.textAmount}>{numeral(params.data.currentbalance).format('0,0')}</Text>
+                            <Text style={styles.textAmountSatang}>{numeral(params.data.currentbalance).format('.00')}</Text>
+                            <Text style={styles.textAmountTHB}>THB</Text>
 
                         </View>
                     </View>
 
-                    <View
-                        style={{
-                            borderBottomColor: 'grey',
-                            borderBottomWidth: 0.5,
-                            margin: 15
-                        }}
-                    />
+                    <View style={styles.underline} />
 
                     <View style={styles.row_container} >
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <Text style={{ fontSize: responsiveFontSize(2.5),paddingTop:responsiveHeight(1.5),color:"gray" }}>New Balance:</Text>
+                            <Text style={styles.textTittle}>New Balance:</Text>
                         </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1}]}>
-                            <Text style={{ fontSize: responsiveFontSize(3.5) ,fontWeight: "bold"}}>{numeral(params.data.amount + params.data.currentbalance).format('0,0')}</Text>
-                            <Text style={{ fontSize: responsiveFontSize(2.5), paddingRight: 20,paddingTop:responsiveHeight(1.2) }}>{numeral(params.data.amount + params.data.currentbalance).format('.00')}</Text>
-                            <Text style={{ fontSize: responsiveFontSize(3),paddingTop:responsiveHeight(0.5) }}>THB</Text>
+                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
+                            <Text style={styles.textAmount}>{numeral(params.data.amount + params.data.currentbalance).format('0,0')}</Text>
+                            <Text style={styles.textAmountSatang}>{numeral(params.data.amount + params.data.currentbalance).format('.00')}</Text>
+                            <Text style={styles.textAmountTHB}>THB</Text>
 
                         </View>
                     </View>
@@ -119,72 +106,3 @@ export default class TopUpAmount extends React.Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
-    row_container: {
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        padding: 10,
-    },
-    top_container: {
-        flex: 3,
-        margin: 15,
-        backgroundColor: '#fff',
-        justifyContent: 'center',
-    },
-    bottom_container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-
-    },
-    button: {
-        // backgroundColor: '#f88fb0',
-        backgroundColor: '#f06da1',
-        // backgroundColor: '#e64f93',
-        // flexDirection: "column",
-        // justifyContent: "flex-end",
-        padding: 20,
-        width: width,
-
-    },
-    text: {
-        textAlign: "center",
-        fontWeight: "bold",
-        fontSize: responsiveFontSize(3.5)
-    },
-    text_bold: {
-        fontWeight: "bold",
-        fontSize: 20
-    },
-    text_info: {
-        fontSize: 24
-    },
-    textInput: {
-        borderWidth: 1,
-        height: 50,
-        padding: 10,
-        fontSize: 25,
-
-
-    },
-
-    input: {
-        height: 100,
-        padding: 10,
-        fontSize: 40,
-        // borderWidth: 1,
-        // borderRadius: 30,
-        width: width * 0.7,
-        margin: 40,
-        color: "gray",
-
-
-    },
-});
-
