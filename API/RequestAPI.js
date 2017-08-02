@@ -3,12 +3,20 @@ let URL = 'http://188.166.214.163/';
 
 
 exports.getData = function(userId){
-  return fetch(URL+'accounts/'+userId)
+  return fetch(URL+'accounts/'+userId, {
+      headers: {
+        'Cache-Control': 'no-cache'
+      }
+    })
     .then((resp)=>resp.json());
 }
 
 exports.getTransaction = function(transactionId){
-  return fetch(URL+'transactions/'+transactionId)
+  return fetch(URL+'transactions/'+transactionId, {
+      headers: {
+        'Cache-Control': 'no-cache'
+      }
+    })
     .then((resp)=>resp.json());
 }
 
@@ -23,6 +31,8 @@ exports.getTransaction = function(transactionId){
 //   return fetch(`${link}/transfer/${sourceID}/${sourceInitialBalance}/${destinationID}/${destinationInitialBalance}/${amount}/${sourceRemain}/${destinationRemain}`)
 //     .then((resp)=>resp.json());
 
+
+
 exports.postTransaction = function (sourceID, sourceInitialBalance, destinationID, destinationInitialBalance, amount) {
     let sourceRemain = sourceInitialBalance - amount;
     let destinationRemain = parseFloat(destinationInitialBalance) + parseFloat(amount);
@@ -33,6 +43,7 @@ exports.postTransaction = function (sourceID, sourceInitialBalance, destinationI
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
           },
           body: JSON.stringify({
             type: "transfer",
@@ -46,6 +57,7 @@ exports.postTransaction = function (sourceID, sourceInitialBalance, destinationI
           })
         })
 }
+
 
 exports.postTransactionTopUp = function (destinationID, destinationInitialBalance, amount) {
     let destinationRemain = parseFloat(destinationInitialBalance) + parseFloat(amount);
@@ -61,6 +73,7 @@ exports.postTransactionTopUp = function (destinationID, destinationInitialBalanc
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
           },
           body: JSON.stringify({
             type: "topup",
