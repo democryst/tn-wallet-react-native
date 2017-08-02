@@ -5,7 +5,7 @@ import api from '../../API/RequestAPI.js';
 import RestClient from 'react-native-rest-client';
 
 var { height, width } = Dimensions.get('window');
-var numeral = require('numeral');2
+var numeral = require('numeral');
 
 export default class TransferConfirm extends React.Component {
     static navigationOptions = {
@@ -48,8 +48,7 @@ export default class TransferConfirm extends React.Component {
         this.checkwallet(topupchoice);
     }
     checkwallet(amount) {
-        console.log("checkwallet")
-        console.log("balance : " + this.state.currentbalance, "amount ", amount)
+    
         if ((this.state.currentbalance + amount) > this.state.walletLimit) {
             console.log("topupallow false")
             // this.setState({
@@ -57,7 +56,7 @@ export default class TransferConfirm extends React.Component {
             //     topupallow: false
             // })
             this.state.topupallow = false
-            this.state.TopUpNote = "Balance Excess The Limit"
+            this.state.TopUpNote = "Maximum limit exceed"
         }
         else if ((this.state.currentbalance + amount) <= this.state.walletLimit) {
             console.log("topupallow True")
@@ -76,16 +75,9 @@ export default class TransferConfirm extends React.Component {
         console.log("balance : " + this.state.currentbalance)
     }
     moveTopUpAmount() {
-        console.log("inside moveTopUpAmount")
-        console.log(this.state.topupallow)
         if (this.state.topupallow) {
-            console.log("insid topupallow")
             const { navigate } = this.props.navigation;
             const { params } = this.props.navigation.state;
-            console.log("top up allow");
-            console.log("top up amount", this.state.amount);
-            console.log("top up currentbalance", this.state.currentbalance);
-            console.log("top up apidata", this.state.apidata);
             navigate('TopUpAmount', {
                 data: {
                     amount: this.state.amount,
@@ -104,21 +96,6 @@ export default class TransferConfirm extends React.Component {
         const { params } = this.props.navigation.state;
         var balance = numeral(this.state.currentbalance).format('0,0');
         var balanceStang = numeral(this.state.currentbalance).format('.00');
-            //
-        // var today = new Date();
-        // var dd = today.getDate();
-        // var mm = today.getMonth() + 1; //January is 0!
-        // var yyyy = today.getFullYear();
-        //
-        // if (dd < 10) {
-        //     dd = '0' + dd
-        // }
-        //
-        // if (mm < 10) {
-        //     mm = '0' + mm
-        // }
-        //
-        // today = dd + '/' + mm + '/' + yyyy;
         return (
             <View style={styles.container}>
                 <View style={styles.top_container}>

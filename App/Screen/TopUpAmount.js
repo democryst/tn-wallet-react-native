@@ -3,6 +3,7 @@ import { AppRegistry, StyleSheet, Text, TextInput, View, Button, TouchableOpacit
 import api from '../../API/RequestAPI.js';
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
+var numeral = require('numeral');
 
 export default class TopUpAmount extends React.Component {
     static navigationOptions = {
@@ -21,7 +22,7 @@ export default class TopUpAmount extends React.Component {
             amount: params.data.amount
         };
         // this.getAccount();
-        
+
 
 
     }
@@ -48,19 +49,25 @@ export default class TopUpAmount extends React.Component {
     render() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
-        console.log("apidata __ : ", params.data.apidata);
+
+        var balance = numeral(this.state.currentbalance).format('0,0');
+        var balanceStang = numeral(this.state.currentbalance).format('.00');
         return (
             <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
                 <View style={styles.container}>
 
-                    <View style={styles.top_container} >
-                        <Text style={styles.text_bold}>Top Up Amount:</Text>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                            <Text style={styles.input}>
-                                {params.data.amount} <Text style={{ fontSize: 20 }}>THB</Text>
-                            </Text>
+                    <View style={styles.row_container} >
+                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
+                            <Text style={{ fontSize: 15,color:"gray" }}>TopUp Balance:</Text>
                         </View>
-                    </View >
+                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
+                            <Text style={{ fontSize: 20,fontWeight: "bold" }}>{numeral(params.data.amount).format('0,0')}</Text>
+                            <Text style={{ fontSize: 15, paddingRight: 20 ,paddingTop:5}}>{numeral(params.data.amount).format('.00')}</Text>
+                            <Text style={{ fontSize: 17 ,paddingTop:3 }}>THB</Text>
+
+                        </View>
+                    </View>
+
                     <View
                         style={{
                             borderBottomColor: 'grey',
@@ -68,31 +75,58 @@ export default class TopUpAmount extends React.Component {
                             margin: 15
                         }}
                     />
-                    <View style={styles.top_container} >
-                        <Text style={styles.text_bold}>Current Balance:</Text>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                            <Text style={styles.input}>
-                                {params.data.currentbalance} <Text style={{ fontSize: 20 }}>THB</Text>
-                            </Text>
+
+                    <View style={styles.row_container} >
+                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
+                            <Text style={{ fontSize: 15 ,color:"gray" }}>Current Balance:</Text>
+                        </View>
+                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
+                            <Text style={{ fontSize: 20,fontWeight: "bold" }}>{numeral(params.data.currentbalance).format('0,0')}</Text>
+                            <Text style={{ fontSize: 15, paddingRight: 20,paddingTop:5 }}>{numeral(params.data.currentbalance).format('.00')}</Text>
+                            <Text style={{ fontSize: 17,paddingTop:3 }}>THB</Text>
 
                         </View>
-                    </View >
+                    </View>
+
+                    <View
+                        style={{
+                            borderBottomColor: 'grey',
+                            borderBottomWidth: 0.5,
+                            margin: 15
+                        }}
+                    />
+
+                    <View style={styles.row_container} >
+                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
+                            <Text style={{ fontSize: 15,color:"gray",fontWeight: "bold"  }}>New TopUp Balance:</Text>
+                        </View>
+                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 2 ,borderWidth:1}]}>
+                            <Text style={{ fontSize: 25 ,fontWeight: "bold"}}>{numeral(params.data.amount + params.data.currentbalance).format('0,0')}</Text>
+                            <Text style={{ fontSize: 15, paddingRight: 20,paddingTop:10 }}>{numeral(params.data.amount + params.data.currentbalance).format('.00')}</Text>
+                            <Text style={{ fontSize: 17,paddingTop:5 }}>THB</Text>
+
+                        </View>
+                    </View>
+
+
+
+
                     <View style={styles.bottom_container}>
                         <TouchableOpacity onPress={() => {
-                            {/* console.log("state account : ", this.state.receiverId) */}
-                            api.postTransactionTopUp(this.state.receiverId,this.state.currentbalance,this.state.amount)
-                            .then(resp => resp.json())
-                            .then((data)=>{
-                                {/* console.log("postTransactionTopUp")
+                            {/* console.log("state account : ", this.state.receiverId) */ }
+                            api.postTransactionTopUp(this.state.receiverId, this.state.currentbalance, this.state.amount)
+                                .then(resp => resp.json())
+                                .then((data) => {
+                                    {/* console.log("postTransactionTopUp")
                                 console.log(data) */}
-                                return api.getTransaction(data.transaction_id)
-                            })
-                            .then((data)=>{
-                                navigate('TopUpResult', { data: { currentbalance: data.des_remain_balance} })
-                            })
-                            .catch((err)=>{
-                                console.log("error ", err)
-                            })
+                                    return api.getTransaction(data.transaction_id)
+                                })
+                                .then((data) => {
+                                    navigate('TopUpResult', { data: { currentbalance: data.des_remain_balance, amount: data.amount, } })
+                                })
+                                .catch((err) => {
+                                    console.log("error ", err)
+                                })
                         }}>
                             <View style={styles.button}>
                                 <Text style={styles.text}>Confirm</Text>
@@ -148,7 +182,7 @@ const styles = StyleSheet.create({
     },
     text_bold: {
         fontWeight: "bold",
-        fontSize: 25
+        fontSize: 20
     },
     text_info: {
         fontSize: 24
@@ -166,8 +200,8 @@ const styles = StyleSheet.create({
         height: 100,
         padding: 10,
         fontSize: 40,
-        borderWidth: 1,
-        borderRadius: 30,
+        // borderWidth: 1,
+        // borderRadius: 30,
         width: width * 0.7,
         margin: 40,
         color: "gray",
