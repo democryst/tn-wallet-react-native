@@ -99,7 +99,7 @@ export default class TransferConfirm extends React.Component {
     render() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
-        var balance = numeral(this.state.currentbalance).format('0,0');
+        var balance = numeral(Math.floor(this.state.currentbalance)).format('0,0');
         var balanceStang = numeral(this.state.currentbalance).format('.00');
         return (
             <View style={styles.col_container}>
