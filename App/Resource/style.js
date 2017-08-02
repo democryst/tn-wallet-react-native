@@ -59,7 +59,7 @@ module.exports = StyleSheet.create({
         fontSize: responsiveFontSize(3),
         paddingTop: responsiveHeight(0.5)
     },
-    underline: {
+    linebar: {
         borderBottomColor: 'grey',
         borderBottomWidth: 0.5,
         margin: 15
