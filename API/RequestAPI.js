@@ -3,20 +3,12 @@ let URL = 'http://188.166.214.163/';
 
 
 exports.getData = function(userId){
-  return fetch(URL+'accounts/'+userId, {
-        headers: {
-          'Cache-Control': 'no-cache'
-        }
-      })
+  return fetch(URL+'accounts/'+userId)
     .then((resp)=>resp.json());
 }
 
 exports.getTransaction = function(transactionId){
-  return fetch(URL+'transactions/'+transactionId, {
-        headers: {
-          'Cache-Control': 'no-cache'
-        }
-      })
+  return fetch(URL+'transactions/'+transactionId)
     .then((resp)=>resp.json());
 }
 
@@ -41,7 +33,6 @@ exports.postTransaction = function (sourceID, sourceInitialBalance, destinationI
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Cache-Control': 'no-cache'
           },
           body: JSON.stringify({
             type: "transfer",

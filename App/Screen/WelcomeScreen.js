@@ -30,6 +30,8 @@ export default class HomeScreen extends React.Component {
 
   updateUI = function(){
     api.getData(currentAccount).then((data) => {
+      console.log("-------------------------------------------------------");
+      console.log(data[0]);
       this.setState(data[0]);
     });
   }
