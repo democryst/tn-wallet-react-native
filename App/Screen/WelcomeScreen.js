@@ -53,11 +53,11 @@ export default class HomeScreen extends React.Component {
       return (
         <View style={styles.container_button}>
           <View style={[styles.menuContainer, { marginTop: 0 }]}>
-            <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen', { userId: this.state.account_id })} style={[styles.button]}>
+            <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen', { userId: this.state.account_id })} style={[styles.buttoniOS]}>
               <View style={{ marginLeft: 0 }}>
                 <View style={{ flexDirection: 'row', marginLeft: -38 }}>
                   <View>
-                    <Image source={require('../Resource/img/topup.png')} style={[styles.icon, { marginTop: responsiveHeight(1.5) }]} />
+                    <Image source={require('../Resource/img/transfer_ios.png')} style={[styles.icon, { marginTop: responsiveHeight(1.5) }]} />
                   </View>
                   <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(2.5), marginLeft: 20 }}>
                     <RkText style={{ fontSize: responsiveFontSize(3) }}> Transfer </RkText>
@@ -67,10 +67,10 @@ export default class HomeScreen extends React.Component {
             </TouchableOpacity>
           </View>
           <View style={[styles.menuContainer, { marginTop: 0 }]}>
-            <TouchableOpacity onPress={() => navigate('TopUpSelectAmountScreen', { userId: this.state.account_id, balance: this.state.balance })} style={styles.button}>
+            <TouchableOpacity onPress={() => navigate('TopUpSelectAmountScreen', { userId: this.state.account_id, balance: this.state.balance })} style={styles.buttoniOS}>
                <View style={{ flexDirection: 'row', marginLeft: -38 }}>
                 <View>
-                  <Image source={require('../Resource/img/topup.png')} style={[styles.icon, { marginTop: responsiveHeight(1.5) }]} />
+                  <Image source={require('../Resource/img/topup_ios.png')} style={[styles.icon, { marginTop: responsiveHeight(1.5) }]} />
                 </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(2.5), marginLeft: 20 }}>
                   <RkText style={{ fontSize: responsiveFontSize(3) }}> Top Up </RkText>
@@ -84,10 +84,10 @@ export default class HomeScreen extends React.Component {
       return (
         <View style={styles.container_button}>
           <View style={[styles.menuContainer, { marginTop: 0 }]}>
-            <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen', { userId: this.state.account_id })} style={[styles.button]}>
+            <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen', { userId: this.state.account_id })} style={[styles.buttonAndroid]}>
               <View style={{ marginLeft: 0 }}>
                 <View>
-                  <Image source={require('../Resource/img/transfer.png')} style={{ height: 85, width: 250 }} />
+                  <Image source={require('../Resource/img/transfer_android.png')} style={{ height: 85, width: 250 }} />
                 </View>
                 {/* <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(2.5), marginLeft: 20 }}>
                   <RkText style={{ fontSize: responsiveFontSize(3) }} > Transfer </RkText>
@@ -96,10 +96,10 @@ export default class HomeScreen extends React.Component {
             </TouchableOpacity>
           </View>
           <View style={[styles.menuContainer, { marginTop: 0 }]}>
-            <TouchableOpacity onPress={() => navigate('TopUpSelectAmountScreen', { userId: this.state.account_id, balance: this.state.balance })} style={styles.button}>
+            <TouchableOpacity onPress={() => navigate('TopUpSelectAmountScreen', { userId: this.state.account_id, balance: this.state.balance })} style={styles.buttonAndroid}>
               <View style={{ marginLeft: 0 }}>
                 <View>
-                  <Image source={require('../Resource/img/topup.png')} style={{ height: 85, width: 250 }} />
+                  <Image source={require('../Resource/img/topup_android.png')} style={{ height: 85, width: 250 }} />
                 </View>
                 
               </View>
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     // alignItems: 'center'
   },
-  button: {
+  buttonAndroid: {
     //backgroundColor: '#f88fb0',
     // backgroundColor: '#f06da1',
     // backgroundColor: '#e64f93',
@@ -235,6 +235,22 @@ const styles = StyleSheet.create({
     // shadowOffset: { width: 0, height: 2 },
     // shadowOpacity: 0.3,
     // shadowRadius: 2,
+    // elevation: 1,
+  },
+  buttoniOS: {
+    backgroundColor: '#f88fb0',
+    // backgroundColor: '#f06da1',
+    // backgroundColor: '#e64f93',
+    // flexDirection: "column",
+    // justifyContent: "flex-end",
+    // padding: 30,
+    height: responsiveHeight(14),
+    width: width * 2 / 3,
+    // marginRight: -100
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
     // elevation: 1,
   },
   font_standard: {
