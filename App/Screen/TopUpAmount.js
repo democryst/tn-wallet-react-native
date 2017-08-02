@@ -36,7 +36,7 @@ export default class TopUpAmount extends React.Component {
 
                     <View style={styles.row_container} >
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <Text style={{ fontSize: responsiveFontSize(2.5),color:"gray" }}>TopUp Amount:</Text>
+                            <Text style={{ fontSize: responsiveFontSize(2.5),color:"gray",paddingTop:responsiveHeight(1.5) }}>TopUp Amount:</Text>
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
                             <Text style={{ fontSize: responsiveFontSize(3.5),fontWeight: "bold" }}>{numeral(params.data.amount).format('0,0')}</Text>
@@ -56,7 +56,7 @@ export default class TopUpAmount extends React.Component {
 
                     <View style={styles.row_container} >
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <Text style={{ fontSize: responsiveFontSize(2.5) ,color:"gray",paddingTop:7 }}>Current Balance:</Text>
+                            <Text style={{ fontSize: responsiveFontSize(2.5) ,color:"gray",paddingTop:7,paddingTop:responsiveHeight(1.5) }}>Current Balance:</Text>
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
                             <Text style={{ fontSize: responsiveFontSize(3.5),fontWeight: "bold" }}>{numeral(params.data.currentbalance).format('0,0')}</Text>
@@ -76,7 +76,7 @@ export default class TopUpAmount extends React.Component {
 
                     <View style={styles.row_container} >
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <Text style={{ fontSize: responsiveFontSize(2.5),color:"gray" }}>New Balance:</Text>
+                            <Text style={{ fontSize: responsiveFontSize(2.5),paddingTop:responsiveHeight(1.5),color:"gray" }}>New Balance:</Text>
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1}]}>
                             <Text style={{ fontSize: responsiveFontSize(3.5) ,fontWeight: "bold"}}>{numeral(params.data.amount + params.data.currentbalance).format('0,0')}</Text>
