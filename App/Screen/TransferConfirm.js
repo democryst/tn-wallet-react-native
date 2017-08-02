@@ -189,6 +189,7 @@ const styles = StyleSheet.create({
   },
   textInfo: {
     fontSize: responsiveFontSize(2.5),
+    fontWeight: "bold",
   },
   lineBar: {
     borderBottomColor: 'grey',
