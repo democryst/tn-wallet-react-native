@@ -10,7 +10,6 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 export default class TopUpAmount extends React.Component {
     static navigationOptions = {
         title: 'Top Up Amount',
-
     };
     constructor(props) {
         super(props);
