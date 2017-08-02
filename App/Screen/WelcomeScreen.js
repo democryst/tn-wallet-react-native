@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, Image, Dimensions, Platform, PixelRatio } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, Image, Dimensions, Platform, PixelRatio, StatusBar } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { RkButton, RkTheme, RkText } from 'react-native-ui-kitten';
 import api from '../../API/RequestAPI.js';
@@ -29,8 +29,6 @@ export default class HomeScreen extends React.Component {
 
   updateUI = function(){
     api.getData(currentAccount).then((data) => {
-      console.log("-------------------------------------------------------");
-      console.log(data[0]);
       this.setState(data[0]);
     });
   }
@@ -49,8 +47,9 @@ export default class HomeScreen extends React.Component {
 
   static navigationOptions = {
     title: 'Home',
-    headerLeft: null,
+    headerLeft: null
   };
+
 
   renderUserMessage() {
     const { navigate } = this.props.navigation;
@@ -92,7 +91,7 @@ export default class HomeScreen extends React.Component {
             <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen', { userId: this.state.account_id })} style={[styles.buttonAndroid]}>
               <View style={{ marginLeft: 0 }}>
                 <View>
-                  <Image source={require('../Resource/img/transfer_android.png')} style={{ height: 85, width: 250 }} />
+                  <Image source={require('../Resource/img/transfer_android.png')} style={{ height: 85, width: width*(2/3) }} />
                 </View>
                 {/* <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(2.5), marginLeft: 20 }}>
                   <RkText style={{ fontSize: responsiveFontSize(3) }} > Transfer </RkText>
@@ -104,7 +103,7 @@ export default class HomeScreen extends React.Component {
             <TouchableOpacity onPress={() => navigate('TopUpSelectAmountScreen', { userId: this.state.account_id, balance: this.state.balance })} style={styles.buttonAndroid}>
               <View style={{ marginLeft: 0 }}>
                 <View>
-                  <Image source={require('../Resource/img/topup_android.png')} style={{ height: 85, width: 250 }} />
+                  <Image source={require('../Resource/img/topup_android.png')} style={{ height: 85, width: width*(2/3) }} />
                 </View>
 
               </View>
@@ -159,11 +158,7 @@ export default class HomeScreen extends React.Component {
             marginBottom: responsiveHeight(1),
           }}
         />
-
-        {this.renderUserMessage()}
-
-
-
+          { this.renderUserMessage() }
       </Image>
     )
   }
