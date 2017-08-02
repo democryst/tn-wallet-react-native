@@ -30,7 +30,12 @@ export default class HomeScreen extends React.Component {
   updateUI = function () {
     api.getData(currentAccount).then((data) => {
       this.setState(data[0]);
-    });
+    })
+      .then(() => {
+        var id = this.state.account_id;
+        id = `${id.slice(0, 3)}-${id.slice(3, 4)}-${id.slice(4, 10)}`;
+        this.setState({ account_id: id });
+      });
   }
 
   constructor(props) {
@@ -119,9 +124,7 @@ export default class HomeScreen extends React.Component {
     };
     let balance = numeral(Math.floor(this.state.balance)).format('0,0');
     let balanceStang = numeral(this.state.balance).format('.00');
-    var id = this.state.account_id;
-    id = `${id.slice(0, 3)}-${id.slice(3, 4)}-${id.slice(4, 10)}`;
-    this.state.account_id=id;
+
     return (
       <Image source={require('../Resource/img/pink_background.png')} style={styles.container}>
         <View style={styles.container_userbar}>
@@ -131,7 +134,7 @@ export default class HomeScreen extends React.Component {
           <View style={styles.container_userdetail}>
 
             <Text style={{ fontSize: responsiveFontSize(2.2) }}>{`${this.state.name}  ${this.state.surname}`}</Text>
-            <Text style={{ color: '#333333', marginRight: 14, textAlign: 'right', fontSize: responsiveFontSize(2) }}>{`${id}`}</Text>
+            <Text style={{ color: '#333333', marginRight: 14, textAlign: 'right', fontSize: responsiveFontSize(2) }}>{`${this.state.account_id}`}</Text>
             <View style={{ flexDirection: 'row', marginTop: 2 }}>
               <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}>
                 <View style={{ flexDirection: 'row' }}>
