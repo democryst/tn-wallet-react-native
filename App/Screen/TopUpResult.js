@@ -72,13 +72,7 @@ export default class TopUpResult extends React.Component {
                         </View>
                     </View>
                     
-                         <View
-                        style={{
-                            borderBottomColor: 'grey',
-                            borderBottomWidth: 0.5,
-                            margin: 15
-                        }}
-                    />
+
 
                     {/* <View style={styles.top_container} >
                         <Text style={styles.text_bold}>Total Balance :</Text>
