@@ -8,8 +8,8 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 
-var textInputId;
-var textInputIdFormat;
+var textInputId=null;
+var textInputIdFormat=null;
 export default class EnterTransferScreen extends React.Component {
 
   static navigationOptions = {
@@ -36,7 +36,8 @@ export default class EnterTransferScreen extends React.Component {
 
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
-    if (textInputId != null) {
+    console.log('--------------'+textInputId);
+    if (textInputId !== '') {
       if (textInputId !== params.userId.replace(new RegExp("-", 'g'), "")) {
         api.getData(this.state.receiverId.replace(new RegExp("-", 'g'), "")).then((data) => {
           if (data[0] === undefined) {
@@ -87,7 +88,7 @@ export default class EnterTransferScreen extends React.Component {
            keyboardType='numeric'
               style={styles.textInput}
               placeholder='XXX-X-XXXXXX'
-              
+
               onChangeText={(receiverId) => this.setState({ receiverId })}
             />   */}
           </View >
@@ -171,4 +172,3 @@ RkTheme.setType('RkText', 'xlarge', {
 
 
 });
-

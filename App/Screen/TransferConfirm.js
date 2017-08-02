@@ -16,6 +16,8 @@ export default class TransferConfirm extends React.Component {
     this.state = {}
   }
 
+
+
   postTransaction() {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
@@ -131,7 +133,7 @@ export default class TransferConfirm extends React.Component {
               <Text style={styles.textTitle}> Amount</Text>
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-              <Text style={styles.textInfo}> {params.data.transferAmount}</Text>
+              <Text style={styles.textInfo}> {params.data.transferAmount}  THB</Text>
             </View>
           </View>
 
@@ -140,7 +142,7 @@ export default class TransferConfirm extends React.Component {
               <Text style={styles.textTitle}> Fee</Text>
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-              <Text style={styles.textInfo}> 0.00</Text>
+              <Text style={styles.textInfo}> 0.00  THB</Text>
             </View>
           </View>
 

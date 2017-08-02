@@ -5,43 +5,47 @@ var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 var numeral = require('numeral');
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import { NavigationActions } from 'react-navigation';
+
+const resetAction = NavigationActions.reset({
+  index: 0,
+  actions: [
+    NavigationActions.navigate({ routeName: 'Home'})
+  ]
+});
 
 export default class TopUpResult extends React.Component {
     static navigationOptions = {
         title: 'Top Up Result',
-
     };
+
     constructor(props) {
         super(props);
-        this.state = { 
-    
+        this.state = {
              receiverId: null };
-
-
-
     }
-    
+
     render() {
         const { navigate } = this.props.navigation;
          const { params } = this.props.navigation.state;
 
          var balance = numeral(this.state.currentbalance).format('0,0');
         var balanceStang = numeral(this.state.currentbalance).format('.00');
-         
+
         return (
-            
+
                 <View style={styles.container}>
                      <View style={[styles.top_container,{flex:1}]} >
                             <Text style={{fontSize:responsiveFontSize(8), color:'green',margin:40,fontWeight: "bold",}}>
                                  Success
                             </Text>
                     </View >
-                    
+
                     {/* <View
                         style={{
                             borderBottomColor: 'grey',
                             borderBottomWidth: 0.5,
-                           
+
                         }}
                     /> */}
 
@@ -58,7 +62,7 @@ export default class TopUpResult extends React.Component {
                         </View>
                     </View>
 
-                    
+
                     {/* CURRENT BALANCE */}
                     <View style={[styles.row_container,{flex:1}]} >
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
@@ -71,14 +75,14 @@ export default class TopUpResult extends React.Component {
 
                         </View>
                     </View>
-                    
+
                     <View style={{flex:2}}>
                     </View>
 
-            
+
                    {/* DONE BUTTON */}
                     <View style={[styles.bottom_container,{flex:1}]}>
-                         <TouchableOpacity onPress={() => navigate('Home')}> 
+                         <TouchableOpacity onPress={() => this.props.navigation.dispatch(resetAction)}>
                             <View style={styles.button}>
                                 <Text style={styles.text}>Done</Text>
                             </View>
@@ -87,7 +91,7 @@ export default class TopUpResult extends React.Component {
                     </View>
 
                 </View>
-           
+
 
         );
     }
@@ -102,7 +106,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         flexDirection: 'row',
         padding: 10,
-        
+
     },
     top_container: {
         flex: 2,

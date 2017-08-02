@@ -2,15 +2,24 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import api from '../../API/RequestAPI.js';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import { NavigationActions } from 'react-navigation';
 
 var { height, width } = Dimensions.get('window');
 var numeral = require('numeral');
+
+const resetAction = NavigationActions.reset({
+  index: 0,
+  actions: [
+    NavigationActions.navigate({ routeName: 'Home'})
+  ]
+});
 
 export default class TransferResult extends React.Component {
     static navigationOptions = {
         title: 'Transfer',
 
     };
+
     constructor(props) {
         super(props);
         const { navigate } = this.props.navigation;
@@ -49,17 +58,17 @@ export default class TransferResult extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ fontWeight: 'bold', color: 'green', fontSize: responsiveFontSize(3.8) }}>SUCCESS</Text>
+                    <Text style={{ fontWeight: 'bold', color: 'green', fontSize: responsiveFontSize(3.8) }}>Success</Text>
                 </View>
                 <View style={{
-                    flex: 5, borderWidth: 2, borderBottomWidth: 0, marginLeft: 10, marginRight: 10, borderColor: 'lightgrey',
+                    flex: 6, borderWidth: 2, borderBottomWidth: 0, marginLeft: 10, marginRight: 10, borderColor: 'lightgrey',
                     shadowColor: '#000',
                     shadowOffset: { width: 0, height: 2 },
                     shadowOpacity: 0.3,
                     shadowRadius: 3,
                 }}>
                     <ScrollView>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 15, marginBottom: 10 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 15, marginBottom: 10, marginTop: 4}}>
                             <Text style={{ color: 'grey', margin: 4 }}>Date</Text>
                             <Text style={{ fontSize: responsiveFontSize(2.3) }}>Wed 02/08/17</Text>
                         </View>
@@ -109,11 +118,11 @@ export default class TransferResult extends React.Component {
                         />
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 15, marginBottom: 10 }}>
                             <Text style={{ color: 'grey', margin: 4 }}>Amount</Text>
-                            <Text style={{ fontSize: responsiveFontSize(4), fontWeight: 'bold' }}>{amount}</Text>
+                            <Text style={{ fontSize: responsiveFontSize(4), fontWeight: 'bold' }}>{amount}  THB</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 15, marginTop: 0 }}>
                             <Text style={{ color: 'grey', margin: 4 }}>Fee</Text>
-                            <Text style={{ fontSize: responsiveFontSize(2.3) }}>{fee}</Text>
+                            <Text style={{ fontSize: responsiveFontSize(2.3) }}>{fee}  THB</Text>
                         </View>
                         <View
                             style={{
@@ -126,14 +135,14 @@ export default class TransferResult extends React.Component {
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 15 }}>
                             <Text style={{ color: 'grey', margin: 4 }}>Available Balance</Text>
-                            <Text style={{ fontSize: responsiveFontSize(2.3) }}>{remain}</Text>
+                            <Text style={{ fontSize: responsiveFontSize(2.3) }}>{remain}  THB</Text>
                         </View>
                         <View />
 
                     </ScrollView>
                 </View>
                 <View style={styles.bottom_container}>
-                    <TouchableOpacity style={styles.button} onPress={() => navigate('Home', { user: 'Lucy' })}>
+                    <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.dispatch(resetAction)}>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={styles.text}>Done</Text>
                         </View>

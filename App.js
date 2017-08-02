@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar, Platform } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator,NavigationActions } from 'react-navigation';
 
 import WelcomeScreen from './App/Screen/WelcomeScreen';
 import EnterTransferIdScreen from './App/Screen/EnterTransferIdScreen';
@@ -31,6 +31,7 @@ const SimpleApp = StackNavigator({
 const AppNavigation = () => (
   <SimpleApp />
 );
+
 
 export default class App extends React.Component {
   render() {
