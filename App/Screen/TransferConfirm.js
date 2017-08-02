@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-nati
 var { height, width } = Dimensions.get('window');
 import api from '../../API/RequestAPI.js';
 import RestClient from 'react-native-rest-client';
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+
 
 export default class TransferConfirm extends React.Component {
   static navigationOptions = {
@@ -17,6 +19,7 @@ export default class TransferConfirm extends React.Component {
   postTransaction() {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
+    var balance = params.data.senderAccountInfo.senderBalance - params.data.transferAmount;
     api.postTransaction(params.data.senderAccountInfo.senderID,
       params.data.senderAccountInfo.senderBalance,
       params.data.receiverAccountInfo.receiverID,
@@ -25,21 +28,17 @@ export default class TransferConfirm extends React.Component {
     )
     .then( resp=> resp.json())
     .then((resp)=>{
-      navigate('TransferResult' , { result: resp , data: params.data}) ;
+      navigate('TransferResult' , { result: resp , data: params.data ,remaining: balance}) ;
     })
     .catch((res)=>{
       console.log("temp resp");
       console.log(res)
     });
-
-
-    //return temp ;
   }
 
   render() {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
-    var balance = params.data.senderAccountInfo.senderBalance - params.data.transferAmount;
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
@@ -55,14 +54,15 @@ export default class TransferConfirm extends React.Component {
 
     today = dd + '/' + mm + '/' + yyyy;
     return (
+
       <View style={styles.container}>
         <View style={styles.top_container}>
           <View style={{ flexDirection: 'row' }}>
             <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-              <Text style={styles.text_bold}> Date</Text>
+              <Text style={styles.textTitle}> Date</Text>
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-              <Text style={styles.text_info}> {today}</Text>
+              <Text style={styles.textInfo}> {today}</Text>
             </View>
           </View>
 
@@ -76,94 +76,65 @@ export default class TransferConfirm extends React.Component {
 
           <View style={{ flexDirection: 'row' }}>
             <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-              <Text style={styles.text_bold}>From</Text>
+              <Text style={styles.textTitle}>From</Text>
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
               <View>
-                <Text style={[styles.text_info, { textAlign: "right" }]}> {params.data.senderAccountInfo.senderName}</Text>
-                <Text style={[styles.text_info, { textAlign: "right" }]}> {params.data.senderAccountInfo.senderSurname}</Text>
+                <Text style={[styles.textInfo, { textAlign: "right" }]}> {params.data.senderAccountInfo.senderName}</Text>
+                <Text style={[styles.textInfo, { textAlign: "right" }]}> {params.data.senderAccountInfo.senderSurname}</Text>
               </View>
             </View>
           </View>
 
           <View style={{ flexDirection: 'row' }}>
             <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-              {/* <Text style={styles.text_bold}> Sender ID</Text> */}
+              {/* <Text style={styles.textTitle}> Sender ID</Text> */}
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-              <Text style={styles.text_info}> {params.data.senderAccountInfo.senderID}</Text>
+              <Text style={styles.textInfo}> {params.data.senderAccountInfo.senderID}</Text>
             </View>
           </View>
 
-          <View
-            style={{
-              borderBottomColor: 'grey',
-              borderBottomWidth: 0.5,
-              margin: 15
-            }}
-          />
+          <View style={styles.lineBar} />
 
           <View style={{ flexDirection: 'row' }}>
             <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-              <Text style={styles.text_bold}>To</Text>
+              <Text style={styles.textTitle}>To</Text>
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
               <View>
-                <Text style={[styles.text_info, { textAlign: "right" }]}> {params.data.receiverAccountInfo.receiverName}</Text>
-                <Text style={[styles.text_info, { textAlign: "right" }]}> {params.data.receiverAccountInfo.receiverSurname}</Text>
+                <Text style={[styles.textInfo, { textAlign: "right" }]}> {params.data.receiverAccountInfo.receiverName}</Text>
+                <Text style={[styles.textInfo, { textAlign: "right" }]}> {params.data.receiverAccountInfo.receiverSurname}</Text>
               </View>
             </View>
           </View>
 
           <View style={{ flexDirection: 'row' }}>
             <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-              {/* <Text style={styles.text_bold}> Receiver ID</Text> */}
+              {/* <Text style={styles.textTitle}> Receiver ID</Text> */}
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-              <Text style={styles.text_info}> {params.data.receiverAccountInfo.receiverID}</Text>
+              <Text style={styles.textInfo}> {params.data.receiverAccountInfo.receiverID}</Text>
             </View>
           </View>
 
-          <View
-            style={{
-              borderBottomColor: 'grey',
-              borderBottomWidth: 0.5,
-              margin: 15
-            }}
-          />
+          <View style={styles.lineBar} />
 
           <View style={{ flexDirection: 'row' }}>
             <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-              <Text style={styles.text_bold}> Amount</Text>
+              <Text style={styles.textTitle}> Amount</Text>
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-              <Text style={styles.text_info}> {params.data.transferAmount}</Text>
+              <Text style={styles.textInfo}> {params.data.transferAmount}</Text>
             </View>
           </View>
 
           <View style={{ flexDirection: 'row' }}>
             <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-              <Text style={styles.text_bold}> Fee</Text>
+              <Text style={styles.textTitle}> Fee</Text>
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-              <Text style={styles.text_info}> 0.00</Text>
-            </View>
-          </View>
-
-          <View
-            style={{
-              borderBottomColor: 'grey',
-              borderBottomWidth: 0.5,
-              margin: 15
-            }}
-          />
-
-          <View style={{ flexDirection: 'row' }}>
-            <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-              <Text style={styles.text_bold}> Remaining</Text>
-            </View>
-            <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-              <Text style={styles.text_info}> {balance}</Text>
+              <Text style={styles.textInfo}> 0.00</Text>
             </View>
           </View>
 
@@ -212,16 +183,21 @@ const styles = StyleSheet.create({
     padding: 25,
     width: width,
   },
+  textTitle: {
+    fontSize: responsiveFontSize(2.0),
+    color: 'grey'
+  },
+  textInfo: {
+    fontSize: responsiveFontSize(2.5),
+  },
+  lineBar: {
+    borderBottomColor: 'grey',
+    borderBottomWidth: 0.5,
+    margin: 15
+  },
   text: {
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 25
+    fontSize: responsiveFontSize(3)
   },
-  text_bold: {
-    fontWeight: "bold",
-    fontSize: 22
-  },
-  text_info: {
-    fontSize: 19
-  }
 });
