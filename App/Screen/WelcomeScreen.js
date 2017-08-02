@@ -93,7 +93,7 @@ export default class HomeScreen extends React.Component {
             <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen', { userId: this.state.account_id })} style={[styles.buttonAndroid]}>
               <View style={{ marginLeft: 0 }}>
                 <View>
-                  <Image source={require('../Resource/img/transfer_android.png')} style={{ height: 85, width: 250 }} />
+                  <Image source={require('../Resource/img/transfer_android.png')} style={{ height: 85, width: width*(2/3) }} />
                 </View>
                 {/* <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(2.5), marginLeft: 20 }}>
                   <RkText style={{ fontSize: responsiveFontSize(3) }} > Transfer </RkText>
@@ -105,7 +105,7 @@ export default class HomeScreen extends React.Component {
             <TouchableOpacity onPress={() => navigate('TopUpSelectAmountScreen', { userId: this.state.account_id, balance: this.state.balance })} style={styles.buttonAndroid}>
               <View style={{ marginLeft: 0 }}>
                 <View>
-                  <Image source={require('../Resource/img/topup_android.png')} style={{ height: 85, width: 250 }} />
+                  <Image source={require('../Resource/img/topup_android.png')} style={{ height: 85, width: width*(2/3) }} />
                 </View>
 
               </View>
