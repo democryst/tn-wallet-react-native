@@ -72,8 +72,7 @@ export default class TransferCheckReceiver extends React.Component {
   }
 
   render() {
-    var balance = numeral(this.state.sender.balance).format('0,0');
-    console.log('dsadasdsad' + balance);
+    var balance = numeral(Math.floor(this.state.sender.balance)).format('0,0'); 
     var balanceStang = numeral(this.state.sender.balance).format('.00');
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
