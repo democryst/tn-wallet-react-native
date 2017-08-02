@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { RkButton, RkTextInput, RkTheme, RkText, RkAvoidKeyboard, RkCard } from 'react-native-ui-kitten';
-import { AppRegistry, StyleSheet, Text, TextInput, View, Button, TouchableOpacity, Dimensions, TouchableWithoutFeedback,Modal} from 'react-native';
+import { AppRegistry, StyleSheet, Text, TextInput, View, Button, TouchableOpacity, Dimensions, TouchableWithoutFeedback, Modal } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
 import api from '../../API/RequestAPI.js';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
@@ -49,8 +49,8 @@ export default class EnterTransferScreen extends React.Component {
 
         });
       }
-      else{
-         alert("Can't transfer to your own account.");
+      else {
+        alert("Can't transfer to your own account.");
       }
     }
     else {

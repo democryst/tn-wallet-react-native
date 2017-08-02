@@ -72,7 +72,7 @@ export default class TransferCheckReceiver extends React.Component {
   }
 
   render() {
-    var balance = numeral(Math.floor(this.state.sender.balance)).format('0,0'); 
+    var balance = numeral(Math.floor(this.state.sender.balance)).format('0,0');
     var balanceStang = numeral(this.state.sender.balance).format('.00');
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
@@ -85,13 +85,13 @@ export default class TransferCheckReceiver extends React.Component {
               <View style={styles.top_container}>
                 <View style={{ flexDirection: 'row' }}>
                   <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                    <Text style={[styles.text, { fontSize: responsiveFontSize(2.5) }]}>Receiver</Text>
+                    <Text style={[styles.textGray, { fontSize: responsiveFontSize(2) }]}>Receiver Info.</Text>
                   </View>
                   <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 2 }]}>
                     <View>
-                      <Text style={[styles.text_bold, { fontSize: responsiveFontSize(3), textAlign: "right" }]}> {params.data.receiverId}</Text>
-                      <Text style={[styles.text_bold, { fontSize: responsiveFontSize(3), textAlign: "right" }]}> {this.state.receiver.name}</Text>
-                      <Text style={[styles.text_bold, { fontSize: responsiveFontSize(3), textAlign: "right" }]}> {this.state.receiver.surname}</Text>
+                      <Text style={[styles.text_bold, { fontSize: responsiveFontSize(3), textAlign: 'right' }]}> {params.data.receiverId}</Text>
+                      <Text style={[styles.text_bold, { fontSize: responsiveFontSize(3), textAlign: 'right' }]}> {this.state.receiver.name}</Text>
+                      <Text style={[styles.text_bold, { fontSize: responsiveFontSize(3), textAlign: 'right' }]}> {this.state.receiver.surname}</Text>
                     </View>
                   </View>
                 </View>
@@ -107,7 +107,7 @@ export default class TransferCheckReceiver extends React.Component {
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                   <Text style={[styles.text_bold, { fontSize: responsiveFontSize(3) }]}> Amount (THB)</Text>
 
-                  <TextInputMask style={[styles.textInput, { textAlign: "right" }]}
+                  <TextInputMask style={[styles.textInput, { textAlign: 'right' }]}
                     text=''
                     maxLength={8}
                     onChangeText={this.onChangeText.bind(this)}
@@ -140,7 +140,7 @@ export default class TransferCheckReceiver extends React.Component {
             </ScrollView>
             <View style={styles.bottom_container}>
               <TouchableOpacity style={styles.button} onPress={() => this.onChangePage()}>
-                <Text style={styles.text}>Next</Text>
+                <Text style={styles.text_button}>Next</Text>
               </TouchableOpacity>
 
             </View>
@@ -176,39 +176,46 @@ const styles = StyleSheet.create({
   },
   bottomColumnContainer: {
     flexDirection: 'column',
-    justifyContent: "flex-end"
+    justifyContent: 'flex-end'
   },
   bottom_container: {
     // flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     // justifyContent: 'center',
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
   },
   button: {
     // backgroundColor: '#f88fb0',
     backgroundColor: '#f06da1',
     // backgroundColor: '#e64f93',
-    // flexDirection: "column",
+    // flexDirection: 'column',
     padding: 25,
     width: width,
   },
   text: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 20
   },
-
+textGray:{
+color:'gray'
+},
   text_bold: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 25
+  },
+  text_button: {
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: responsiveFontSize(3)
   },
   text_info: {
     fontSize: 19,
     color: 'green',
   },
   avilableBalance: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
     marginLeft: 10,
     marginRight: 10,
   },
