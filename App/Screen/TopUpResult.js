@@ -5,12 +5,20 @@ var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 var numeral = require('numeral');
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import { NavigationActions } from 'react-navigation';
+
+const resetAction = NavigationActions.reset({
+  index: 0,
+  actions: [
+    NavigationActions.navigate({ routeName: 'Home'})
+  ]
+});
 
 export default class TopUpResult extends React.Component {
     static navigationOptions = {
         title: 'Top Up Result',
-
     };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -42,7 +50,7 @@ export default class TopUpResult extends React.Component {
                         style={{
                             borderBottomColor: 'grey',
                             borderBottomWidth: 0.5,
-                           
+
                         }}
                     /> */}
                 <View style={{

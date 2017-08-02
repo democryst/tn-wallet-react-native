@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { StyleSheet, Text, View, StatusBar, Platform } from 'react-native';
+import { StackNavigator,NavigationActions } from 'react-navigation';
 
 import WelcomeScreen from './App/Screen/WelcomeScreen';
 import EnterTransferIdScreen from './App/Screen/EnterTransferIdScreen';
@@ -14,7 +14,7 @@ import TopUpSelectAmountScreen from './App/Screen/TopUpSelectAmountScreen';
 
 const SimpleApp = StackNavigator({
 
-  
+
 
 
   Home: { screen: WelcomeScreen },
@@ -25,17 +25,20 @@ const SimpleApp = StackNavigator({
     TopUpSelectAmountScreen: { screen:TopUpSelectAmountScreen},
    TopUpAmount: {screen: TopUpAmount },
   TopUpResult: {screen: TopUpResult},
-  
+
 });
 
 const AppNavigation = () => (
   <SimpleApp />
 );
 
+
 export default class App extends React.Component {
   render() {
     return (
-      <AppNavigation />
+        <View style={{flex:1 ,marginTop:Platform.OS === 'ios' ? 0 : 10}} >
+          <AppNavigation />
+        </View>
     );
   }
 }
