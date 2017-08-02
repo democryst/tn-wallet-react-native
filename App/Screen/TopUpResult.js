@@ -64,7 +64,7 @@ export default class TopUpResult extends React.Component {
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
                             <Text style={{ fontSize: responsiveFontSize(2.5) ,color:"gray" }}>Current Balance:</Text>
                         </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1,borderWidth:1,paddingTop:responsiveHeight(1),marginLeft:responsiveWidth(5) }]}>
+                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1,borderWidth:1,paddingTop:responsiveHeight(1) }]}>
                             <Text style={{ fontSize: responsiveFontSize(3.5),fontWeight: "bold" }}>{numeral(params.data.currentbalance).format('0,0')}</Text>
                             <Text style={{ fontSize: responsiveFontSize(2.5), paddingRight: 10,paddingTop:responsiveHeight(1.2) }}>{numeral(params.data.currentbalance).format('.00')}</Text>
                             <Text style={{ fontSize: responsiveFontSize(3),paddingTop:responsiveHeight(0.5) }}>THB</Text>
