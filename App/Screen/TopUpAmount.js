@@ -44,7 +44,7 @@ export default class TopUpAmount extends React.Component {
                         </View>
                     </View>
 
-                    <View style={styles.underline} />
+                    <View style={styles.linebar} />
 
                     <View style={styles.row_container} >
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
@@ -58,7 +58,7 @@ export default class TopUpAmount extends React.Component {
                         </View>
                     </View>
 
-                    <View style={styles.underline} />
+                    <View style={styles.linebar} />
 
                     <View style={styles.row_container} >
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
