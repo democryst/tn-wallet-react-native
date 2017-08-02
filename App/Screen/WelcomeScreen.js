@@ -5,7 +5,6 @@ import { RkButton, RkTheme, RkText } from 'react-native-ui-kitten';
 import api from '../../API/RequestAPI.js';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
-
 var { height, width } = Dimensions.get('window');
 var numeral = require('numeral');
 
@@ -117,7 +116,7 @@ export default class HomeScreen extends React.Component {
     let pic = {
       uri: 'http://simpleicon.com/wp-content/uploads/account.png'
     };
-    var balance = numeral(this.state.balance).format('0,0');
+    var balance = Math.floor(this.state.balance);
     var balanceStang = numeral(this.state.balance).format('.00');
     return (
       <Image source={require('../Resource/img/pink_background.png')} style={styles.container}>
