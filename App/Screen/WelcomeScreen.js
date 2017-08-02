@@ -9,6 +9,7 @@ var { height, width } = Dimensions.get('window');
 var numeral = require('numeral');
 
 let accent = '#ed1c4d';
+var currentAccount = "1234567890";
 
 
 RkTheme.setType('RkButton', 'accent', {
@@ -22,24 +23,28 @@ RkTheme.setType('RkText', 'primaryBackground', {
   backgroundColor: theme => theme.colors.primary
 });
 
+
+
 export default class HomeScreen extends React.Component {
+
+  updateUI = function(){
+    api.getData(currentAccount).then((data) => {
+      console.log("-------------------------------------------------------");
+      console.log(data[0]);
+      this.setState(data[0]);
+    });
+  }
+
   constructor(props) {
     super(props);
     this.state = {};
-
-    api.getData(6302335476).then((data) => {
-      this.setState(data[0]);
-    });
-
+    this.updateUI();
   }
 
-  componentDidMount() {
-    const timer = require('react-native-timer');
-    timer.setInterval("Update_money", () => {
-      api.getData(6302335476).then((data) => {
-        this.setState(data[0]);
-      });
-    }, 5000);
+
+  componentDidMount(){
+      const timer = require('react-native-timer');
+      timer.setInterval("Update_money",()=>{this.updateUI()}, 5000);
   }
 
   static navigationOptions = {
