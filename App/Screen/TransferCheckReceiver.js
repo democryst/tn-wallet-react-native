@@ -103,16 +103,16 @@ export default class TransferCheckReceiver extends React.Component {
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                   <Text style={styles.text_bold}> Amount (THB)</Text>
 
-                  <TextInputMask style={styles.textInput}
+                  <TextInputMask style={[styles.textInput,{textAlign: "right"}]}
                     text=''
-                    maxLength={5}
+                    maxLength={8}
                     onChangeText={this.onChangeText.bind(this)}
                     keyboardType='numeric'
                     placeholder={'0.00'}
                     type={'money'}
                     options={{
 
-                      precision: 0,
+                      precision: 2,
                       separator: '.',
                       delimiter: ',',
                       unit: ''

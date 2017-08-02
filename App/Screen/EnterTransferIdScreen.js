@@ -8,8 +8,8 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 
-var textInputId = null;
-var textInputIdFormat = null;
+var textInputId ;
+var textInputIdFormat ;
 export default class EnterTransferScreen extends React.Component {
 
   static navigationOptions = {
@@ -36,10 +36,10 @@ export default class EnterTransferScreen extends React.Component {
     
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
-    api.getData(this.state.receiverId).then((data) => {
+    api.getData(this.state.receiverId.replace(new RegExp("-", 'g'), "")).then((data) => {
       if (textInputId != null) {
         if (data[0] === undefined) {
-          alert("Account Invalid");
+          alert("Invalid Account ");
         }
         else {
            this.state.receiverId = textInputIdFormat;
