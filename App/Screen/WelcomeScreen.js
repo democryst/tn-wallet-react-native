@@ -17,10 +17,7 @@ RkTheme.setType('RkButton', 'accent', {
   color: 'white'
 });
 
-// RkTheme.setType('RkText', 'basic', {
-//   fontSize: 50,
-//   color: 'midnightblue'
-// });
+
 
 RkTheme.setType('RkText', 'primaryBackground', {
   backgroundColor: theme => theme.colors.primary
@@ -31,7 +28,7 @@ export default class HomeScreen extends React.Component {
     super(props);
     this.state = {};
 
-    api.getData(1234567890).then((data) => {
+    api.getData(6302335476).then((data) => {
       this.setState(data[0]);
     });
 
@@ -40,7 +37,7 @@ export default class HomeScreen extends React.Component {
 
   componentDidMount(){
       const timer = require('react-native-timer');
-      timer.setInterval("Update_money", ()=>{api.getData(1234567890).then((data) => {
+      timer.setInterval("Update_money", ()=>{api.getData(6302335476).then((data) => {
         this.setState(data[0]);
       });}, 5000);
   }
