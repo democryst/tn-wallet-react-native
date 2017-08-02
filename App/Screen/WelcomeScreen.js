@@ -28,6 +28,8 @@ RkTheme.setType('RkText', 'primaryBackground', {
 
 export default class HomeScreen extends React.Component {
 
+
+
   updateUI = function(){
     api.getData(currentAccount).then((data) => {
       this.setState(data[0]);
@@ -95,9 +97,6 @@ export default class HomeScreen extends React.Component {
                 <View>
                   <Image source={require('../Resource/img/transfer_android.png')} style={{ height: 85, width: 250 }} />
                 </View>
-                {/* <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(2.5), marginLeft: 20 }}>
-                  <RkText style={{ fontSize: responsiveFontSize(3) }} > Transfer </RkText>
-                </View> */}
               </View>
             </TouchableOpacity>
           </View>
