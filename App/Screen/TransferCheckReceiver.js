@@ -23,13 +23,14 @@ export default class TransferCheckReceiver extends React.Component {
       receiver: "",
 
     };
-    let textInputId = params.data.receiverId.replace(new RegExp("-", 'g'), "");
+    let textReceiverId = params.data.receiverId.replace(new RegExp("-", 'g'), "");
+    let textSenderId = params.data.userId.replace(new RegExp("-", 'g'), "");
 
-    api.getData(params.data.userId).then((data) => {
+    api.getData(textSenderId).then((data) => {
       this.setState({ sender: data[0] });
     });
 
-    api.getData(textInputId).then((data) => {
+    api.getData(textReceiverId).then((data) => {
       this.setState({ receiver: data[0] });
     });
 

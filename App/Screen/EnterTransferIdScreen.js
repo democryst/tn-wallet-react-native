@@ -37,7 +37,7 @@ export default class EnterTransferScreen extends React.Component {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
     if (textInputId != null) {
-      if (textInputId !== params.userId) {
+      if (textInputId !== params.userId.replace(new RegExp("-", 'g'), "")) {
         api.getData(this.state.receiverId.replace(new RegExp("-", 'g'), "")).then((data) => {
           if (data[0] === undefined) {
             alert("Invalid Account.");
