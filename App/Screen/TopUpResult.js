@@ -3,6 +3,7 @@ import { AppRegistry, StyleSheet, Text, TextInput, View, Button, TouchableOpacit
 import api from '../../API/RequestAPI.js';
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 export default class TopUpResult extends React.Component {
     static navigationOptions = {
@@ -26,13 +27,12 @@ export default class TopUpResult extends React.Component {
         return (
             <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
                 <View style={styles.container}>
-
                     <View style={styles.top_container} >
-                        <Text style={styles.text_bold}>Total Balance :</Text>
+                        <Text style={styles.text_bold}>Status :</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                            <Text style={styles.input}>
-                               {params.data.currentbalance} <Text style={{fontSize: 20}}>THB</Text>
-                            </Text>
+                            <Text style={{fontSize:responsiveFontSize(7), color:'green',margin:40,fontWeight: "bold",}}>
+                                 Success
+                                 </Text>
                         </View>
                     </View >
                     <View
@@ -43,13 +43,15 @@ export default class TopUpResult extends React.Component {
                         }}
                     />
                     <View style={styles.top_container} >
-                        <Text style={styles.text_bold}>Status :</Text>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                            <Text style={{fontSize:50, color:'green',margin:40,fontWeight: "bold",}}>
-                                 Success
-                                 </Text>
+                        <Text style={styles.text_bold}>Total Balance :</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' ,marginTop:30}}>
+                            <Text style={styles.input}>
+                               {params.data.currentbalance} <Text style={{fontSize: responsiveFontSize(3)}}>THB</Text>
+                            </Text>
                         </View>
                     </View >
+
+
                     <View style={styles.bottom_container}>
                          <TouchableOpacity onPress={() => navigate('Home')}> 
                             <View style={styles.button}>
@@ -102,25 +104,32 @@ const styles = StyleSheet.create({
     text: {
         textAlign: "center",
         fontWeight: "bold",
-        fontSize: 25
+        //fontSize: 25
+        fontSize:responsiveFontSize(3.5)
     },
     text_bold: {
         fontWeight: "bold",
-        fontSize: 25
+        //fontSize: 25
+        fontSize:responsiveFontSize(3.5)
     },
     text_info: {
         fontSize: 24
+        //Didn't use in this page
     },
     textInput: {
         borderWidth: 1,
         height: 50,
         padding: 10,
         fontSize: 25,
+        //Didn't use in this page
     },
     input: {
-        height: 100,
-        padding: 10,
-        fontSize: 40,
+        //height: 100,
+        height: responsiveHeight(15),
+        //padding: 22,
+        padding: responsiveHeight(3.5),
+        //fontSize: 40,
+        fontSize:responsiveFontSize(5),
         color:"gray",
         borderWidth:1,
         borderRadius: 30,
