@@ -17,7 +17,7 @@ const resetAction = NavigationActions.reset({
 export default class TransferResult extends React.Component {
     static navigationOptions = {
         title: 'Transfer',
-
+        headerLeft: null
     };
 
     constructor(props) {

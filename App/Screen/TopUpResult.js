@@ -17,6 +17,7 @@ const resetAction = NavigationActions.reset({
 export default class TopUpResult extends React.Component {
     static navigationOptions = {
         title: 'Top Up Result',
+        headerLeft: null
     };
 
     constructor(props) {
