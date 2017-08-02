@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { RkButton, RkTextInput, RkTheme, RkText, RkAvoidKeyboard, RkCard } from 'react-native-ui-kitten';
-import { AppRegistry, StyleSheet, Text, TextInput, View, Button, TouchableOpacity, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import { AppRegistry, StyleSheet, Text, TextInput, View, Button, TouchableOpacity, Dimensions, TouchableWithoutFeedback, Modal } from 'react-native';
 import { TextInputMask } from 'react-native-masked-text';
 import api from '../../API/RequestAPI.js';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
@@ -37,20 +37,24 @@ export default class EnterTransferScreen extends React.Component {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
     if (textInputId != null) {
-      api.getData(this.state.receiverId.replace(new RegExp("-", 'g'), "")).then((data) => {
+      if (textInputId !== params.userId) {
+        api.getData(this.state.receiverId.replace(new RegExp("-", 'g'), "")).then((data) => {
+          if (data[0] === undefined) {
+            alert("Invalid Account.");
+          }
+          else {
+            this.state.receiverId = textInputIdFormat;
+            navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } });
+          }
 
-        if (data[0] === undefined) {
-          alert("Invalid Account ");
-        }
-        else {
-          this.state.receiverId = textInputIdFormat;
-          navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } });
-        }
-
-      });
+        });
+      }
+      else {
+        alert("Can't transfer to your own account.");
+      }
     }
     else {
-      alert("Please fill account nummber");
+      alert("Please fill account nummber.");
     }
 
 

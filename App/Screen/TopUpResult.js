@@ -4,6 +4,7 @@ import api from '../../API/RequestAPI.js';
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 var numeral = require('numeral');
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 export default class TopUpResult extends React.Component {
     static navigationOptions = {
@@ -33,7 +34,7 @@ export default class TopUpResult extends React.Component {
                      <View style={styles.top_container} >
                         {/* <Text style={styles.text_bold}>Status :</Text> */}
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                            <Text style={{fontSize:50, color:'green',margin:40,fontWeight: "bold",}}>
+                            <Text style={{fontSize:responsiveFontSize(8), color:'green',margin:40,fontWeight: "bold",}}>
                                  Success
                                  </Text>
                         </View>
@@ -41,12 +42,12 @@ export default class TopUpResult extends React.Component {
                     
                     <View style={styles.row_container} >
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <Text style={{ fontSize: 15,color:"gray" }}>TopUp Balance:</Text>
+                            <Text style={{ fontSize: responsiveFontSize(2.5),color:"gray",paddingTop:responsiveHeight(2) }}>TopUp Balance:</Text>
                         </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-                            <Text style={{ fontSize: 20,fontWeight: "bold" }}>{numeral(params.data.amount).format('0,0')}</Text>
-                            <Text style={{ fontSize: 15, paddingRight: 20 ,paddingTop:5}}>{numeral(params.data.amount).format('.00')}</Text>
-                            <Text style={{ fontSize: 17 ,paddingTop:3 }}>THB</Text>
+                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1,paddingTop:20 }]}>
+                            <Text style={{ fontSize: responsiveFontSize(3.5),fontWeight: "bold" }}>{numeral(params.data.amount).format('0,0')}</Text>
+                            <Text style={{ fontSize: responsiveFontSize(2.5), paddingRight: 20 ,paddingTop:responsiveHeight(1.2)}}>{numeral(params.data.amount).format('.00')}</Text>
+                            <Text style={{ fontSize: responsiveFontSize(3) ,paddingTop:3 }}>THB</Text>
 
                         </View>
                     </View>
@@ -61,12 +62,12 @@ export default class TopUpResult extends React.Component {
 
                     <View style={styles.row_container} >
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <Text style={{ fontSize: 15 ,color:"gray" }}>Current Balance:</Text>
+                            <Text style={{ fontSize: responsiveFontSize(2.5) ,color:"gray" }}>Current Balance:</Text>
                         </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 2,borderWidth:1 }]}>
-                            <Text style={{ fontSize: 20,fontWeight: "bold" }}>{numeral(params.data.currentbalance).format('0,0')}</Text>
-                            <Text style={{ fontSize: 15, paddingRight: 20,paddingTop:5 }}>{numeral(params.data.currentbalance).format('.00')}</Text>
-                            <Text style={{ fontSize: 17,paddingTop:3 }}>THB</Text>
+                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1,borderWidth:1,paddingTop:responsiveHeight(1),marginLeft:responsiveWidth(5) }]}>
+                            <Text style={{ fontSize: responsiveFontSize(3.5),fontWeight: "bold" }}>{numeral(params.data.currentbalance).format('0,0')}</Text>
+                            <Text style={{ fontSize: responsiveFontSize(2.5), paddingRight: 10,paddingTop:responsiveHeight(1.2) }}>{numeral(params.data.currentbalance).format('.00')}</Text>
+                            <Text style={{ fontSize: responsiveFontSize(3),paddingTop:3 }}>THB</Text>
 
                         </View>
                     </View>
@@ -147,20 +148,24 @@ const styles = StyleSheet.create({
     text: {
         textAlign: "center",
         fontWeight: "bold",
-        fontSize: 25
+        //fontSize: 25,
+        fontSize: responsiveFontSize(3.5)
     },
     text_bold: {
         fontWeight: "bold",
         fontSize: 25
+        //Didn't use on this page
     },
     text_info: {
         fontSize: 24
+    //Didn't use on this page
     },
     textInput: {
         borderWidth: 1,
         height: 50,
         padding: 10,
         fontSize: 25,
+    //Didn't use on this page
     },
     input: {
         height: 100,
@@ -169,6 +174,6 @@ const styles = StyleSheet.create({
         color:"gray",
         borderWidth:1,
         borderRadius: 30,
+        //Didn't use on this page
     },
 });
-

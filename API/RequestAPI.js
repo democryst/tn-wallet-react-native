@@ -36,7 +36,6 @@ exports.getTransaction = function(transactionId){
 exports.postTransaction = function (sourceID, sourceInitialBalance, destinationID, destinationInitialBalance, amount) {
     let sourceRemain = sourceInitialBalance - amount;
     let destinationRemain = parseFloat(destinationInitialBalance) + parseFloat(amount);
-    console.log("-------------------------------------------------------------------------");
 
     return fetch('http://188.166.214.163/transactions', {
           method: 'POST',
