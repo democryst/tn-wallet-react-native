@@ -44,9 +44,9 @@ export default class TopUpResult extends React.Component {
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
                             <Text style={{ fontSize: responsiveFontSize(3),color:"gray" }}>TopUp Balance:</Text>
                         </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
+                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1,paddingTop:20 }]}>
                             <Text style={{ fontSize: responsiveFontSize(3.5),fontWeight: "bold" }}>{numeral(params.data.amount).format('0,0')}</Text>
-                            <Text style={{ fontSize: responsiveFontSize(2.5), paddingRight: 20 ,paddingTop:5}}>{numeral(params.data.amount).format('.00')}</Text>
+                            <Text style={{ fontSize: responsiveFontSize(2.5), paddingRight: 20 ,paddingTop:10}}>{numeral(params.data.amount).format('.00')}</Text>
                             <Text style={{ fontSize: responsiveFontSize(3) ,paddingTop:3 }}>THB</Text>
 
                         </View>
@@ -64,9 +64,9 @@ export default class TopUpResult extends React.Component {
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
                             <Text style={{ fontSize: responsiveFontSize(3) ,color:"gray" }}>Current Balance:</Text>
                         </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 2,borderWidth:1 }]}>
+                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 2,borderWidth:1,paddingTop:20 }]}>
                             <Text style={{ fontSize: responsiveFontSize(3.5),fontWeight: "bold" }}>{numeral(params.data.currentbalance).format('0,0')}</Text>
-                            <Text style={{ fontSize: responsiveFontSize(2.5), paddingRight: 20,paddingTop:5 }}>{numeral(params.data.currentbalance).format('.00')}</Text>
+                            <Text style={{ fontSize: responsiveFontSize(2.5), paddingRight: 20,paddingTop:10 }}>{numeral(params.data.currentbalance).format('.00')}</Text>
                             <Text style={{ fontSize: responsiveFontSize(3),paddingTop:3 }}>THB</Text>
 
                         </View>
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontWeight: "bold",
         //fontSize: 25,
-        fontSize: responsiveFontSize(4)
+        fontSize: responsiveFontSize(3.5)
     },
     text_bold: {
         fontWeight: "bold",
