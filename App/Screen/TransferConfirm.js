@@ -20,9 +20,15 @@ export default class TransferConfirm extends React.Component {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
     var balance = params.data.senderAccountInfo.senderBalance - params.data.transferAmount;
-    api.postTransaction(params.data.senderAccountInfo.senderID,
+    var receiverIdFormat= params.data.receiverAccountInfo.receiverID;
+    var senderIdFormat=params.data.senderAccountInfo.senderID;
+    console.log(receiverIdFormat);
+    console.log(senderIdFormat);
+    var receiverId= receiverIdFormat.replace(new RegExp("-", 'g'), "");
+    var senderId=senderIdFormat.replace(new RegExp("-", 'g'), "");
+    api.postTransaction(senderId,
       params.data.senderAccountInfo.senderBalance,
-      params.data.receiverAccountInfo.receiverID,
+      receiverId,
       params.data.receiverAccountInfo.receiverBalance,
       params.data.transferAmount
     )
@@ -166,7 +172,7 @@ const styles = StyleSheet.create({
   top_container: {
     flex: 3,
     backgroundColor: '#fff',
-    justifyContent: 'center',
+   marginTop:15,
   },
   bottom_container: {
     // flex: 1,
