@@ -8,8 +8,8 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 
-var textInputId ;
-var textInputIdFormat ;
+var textInputId;
+var textInputIdFormat;
 export default class EnterTransferScreen extends React.Component {
 
   static navigationOptions = {
@@ -33,24 +33,25 @@ export default class EnterTransferScreen extends React.Component {
   }
 
   onChangePage() {
-    
+
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
-    api.getData(this.state.receiverId.replace(new RegExp("-", 'g'), "")).then((data) => {
-      if (textInputId != null) {
+    if (textInputId != null) {
+      api.getData(this.state.receiverId.replace(new RegExp("-", 'g'), "")).then((data) => {
+
         if (data[0] === undefined) {
           alert("Invalid Account ");
         }
         else {
-           this.state.receiverId = textInputIdFormat;
+          this.state.receiverId = textInputIdFormat;
           navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } });
-
         }
-      } else {
-        alert("Please fill account nummber");
-      }
 
-    });
+      });
+    }
+    else {
+      alert("Please fill account nummber");
+    }
 
 
 
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
     height: 50,
     padding: 10,
     fontSize: 25,
-    margin:10
+    margin: 10
 
 
   }
