@@ -3,6 +3,7 @@ import { AppRegistry, StyleSheet, Text, TextInput, View, Button, TouchableOpacit
 import api from '../../API/RequestAPI.js';
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
+var numeral = require('numeral');
 
 export default class TopUpResult extends React.Component {
     static navigationOptions = {
@@ -22,17 +23,68 @@ export default class TopUpResult extends React.Component {
     render() {
         const { navigate } = this.props.navigation;
          const { params } = this.props.navigation.state;
+
+         var balance = numeral(this.state.currentbalance).format('0,0');
+        var balanceStang = numeral(this.state.currentbalance).format('.00');
          
         return (
             <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
                 <View style={styles.container}>
+                     <View style={styles.top_container} >
+                        {/* <Text style={styles.text_bold}>Status :</Text> */}
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                            <Text style={{fontSize:50, color:'green',margin:40,fontWeight: "bold",}}>
+                                 Success
+                                 </Text>
+                        </View>
+                    </View >
+                    
+                    <View style={styles.row_container} >
+                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
+                            <Text style={{ fontSize: 15,color:"gray" }}>TopUp Balance:</Text>
+                        </View>
+                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
+                            <Text style={{ fontSize: 20,fontWeight: "bold" }}>{numeral(params.data.amount).format('0,0')}</Text>
+                            <Text style={{ fontSize: 15, paddingRight: 20 ,paddingTop:5}}>{numeral(params.data.amount).format('.00')}</Text>
+                            <Text style={{ fontSize: 17 ,paddingTop:3 }}>THB</Text>
 
-                    <View style={styles.top_container} >
+                        </View>
+                    </View>
+
+                    <View
+                        style={{
+                            borderBottomColor: 'grey',
+                            borderBottomWidth: 0.5,
+                            margin: 15
+                        }}
+                    />
+
+                    <View style={styles.row_container} >
+                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
+                            <Text style={{ fontSize: 15 ,color:"gray" }}>Current Balance:</Text>
+                        </View>
+                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 2,borderWidth:1 }]}>
+                            <Text style={{ fontSize: 20,fontWeight: "bold" }}>{numeral(params.data.currentbalance).format('0,0')}</Text>
+                            <Text style={{ fontSize: 15, paddingRight: 20,paddingTop:5 }}>{numeral(params.data.currentbalance).format('.00')}</Text>
+                            <Text style={{ fontSize: 17,paddingTop:3 }}>THB</Text>
+
+                        </View>
+                    </View>
+                    
+                         <View
+                        style={{
+                            borderBottomColor: 'grey',
+                            borderBottomWidth: 0.5,
+                            margin: 15
+                        }}
+                    />
+
+                    {/* <View style={styles.top_container} >
                         <Text style={styles.text_bold}>Total Balance :</Text>
                         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                            <Text style={styles.input}>
-                               {params.data.currentbalance} <Text style={{fontSize: 20}}>THB</Text>
-                            </Text>
+                            <Text style={{ fontSize: 20,fontWeight: "bold" }}>{numeral(params.data.currentbalance).format('0,0')}</Text>
+                            <Text style={{ fontSize: 15, paddingRight: 20 ,paddingTop:5}}>{numeral(params.data.currentbalance).format('.00')}</Text>
+                            <Text style={{fontSize:15,paddingTop:5}}> <Text style={{fontSize: 20}}>THB</Text></Text>
                         </View>
                     </View >
                     <View
@@ -41,15 +93,8 @@ export default class TopUpResult extends React.Component {
                             borderBottomWidth: 0.5,
                             margin: 15
                         }}
-                    />
-                    <View style={styles.top_container} >
-                        <Text style={styles.text_bold}>Status :</Text>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                            <Text style={{fontSize:50, color:'green',margin:40,fontWeight: "bold",}}>
-                                 Success
-                                 </Text>
-                        </View>
-                    </View >
+                    /> */}
+                   
                     <View style={styles.bottom_container}>
                          <TouchableOpacity onPress={() => navigate('Home')}> 
                             <View style={styles.button}>
@@ -77,7 +122,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     top_container: {
-        flex: 3,
+        flex: 2,
         margin: 15,
         backgroundColor: '#fff',
         justifyContent: 'center',
