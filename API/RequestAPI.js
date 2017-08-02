@@ -3,12 +3,20 @@ let URL = 'http://188.166.214.163/';
 
 
 exports.getData = function(userId){
-  return fetch(URL+'accounts/'+userId)
+  return fetch(URL+'accounts/'+userId, {
+        headers: {
+          'Cache-Control': 'no-cache'
+        }
+      })
     .then((resp)=>resp.json());
 }
 
 exports.getTransaction = function(transactionId){
-  return fetch(URL+'transactions/'+transactionId)
+  return fetch(URL+'transactions/'+transactionId, {
+        headers: {
+          'Cache-Control': 'no-cache'
+        }
+      })
     .then((resp)=>resp.json());
 }
 
@@ -33,6 +41,7 @@ exports.postTransaction = function (sourceID, sourceInitialBalance, destinationI
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
           },
           body: JSON.stringify({
             type: "transfer",
@@ -42,31 +51,6 @@ exports.postTransaction = function (sourceID, sourceInitialBalance, destinationI
             des_initial_balance: destinationInitialBalance,
             amount: amount,
             src_remain_balance: sourceRemain,
-            des_remain_balance: destinationRemain
-          })
-        })
-}
-
-exports.postTransactionTopUp = function (destinationID, destinationInitialBalance, amount) {
-    let destinationRemain = parseFloat(destinationInitialBalance) + parseFloat(amount);
-    console.log({
-            type: "topup",
-            des_acc_id: destinationID,
-            des_initial_balance: destinationInitialBalance,
-            amount: amount,
-            des_remain_balance: destinationRemain
-          })
-    return fetch('http://188.166.214.163/transactions', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            type: "topup",
-            des_acc_id: destinationID,
-            des_initial_balance: destinationInitialBalance,
-            amount: amount,
             des_remain_balance: destinationRemain
           })
         })
