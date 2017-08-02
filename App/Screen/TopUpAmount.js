@@ -21,37 +21,14 @@ export default class TopUpAmount extends React.Component {
             currentbalance: params.data.currentbalance,
             amount: params.data.amount
         };
-        // this.getAccount();
 
 
 
-    }
-    getAccount() {
-        const { navigate } = this.props.navigation;
-        const { params } = this.props.navigation.state;
-
-
-        api.getData(1111111111).then((data) => {
-            this.setState({ sender_bank_account_id: data[0].account_id, sender_bank_currentbalance: data[0].balance });
-        });
-
-    }
-    postTransaction() {
-        console.log("bank acc", this.state.sender_bank_account_id);
-        console.log("bank balance", this.state.sender_bank_currentbalance);
-        const { navigate } = this.props.navigation;
-        const { params } = this.props.navigation.state;
-        const { apidata } = params.data.apidata;
-        api.postTransaction(this.state.sender_bank_account_id, this.state.sender_bank_currentbalance, apidata.account_id, apidata.balance, params.data.amount);
-        // console.log("kuy");
     }
 
     render() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
-
-        var balance = numeral(this.state.currentbalance).format('0,0');
-        var balanceStang = numeral(this.state.currentbalance).format('.00');
         return (
             <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
                 <View style={styles.container}>
@@ -78,12 +55,12 @@ export default class TopUpAmount extends React.Component {
 
                     <View style={styles.row_container} >
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <Text style={{ fontSize: 15 ,color:"gray" }}>Current Balance:</Text>
+                            <Text style={{ fontSize: 15 ,color:"rgb(100,100,100)",fontWeight: "bold",paddingTop:7 }}>Current Balance:</Text>
                         </View>
                         <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-                            <Text style={{ fontSize: 20,fontWeight: "bold" }}>{numeral(params.data.currentbalance).format('0,0')}</Text>
-                            <Text style={{ fontSize: 15, paddingRight: 20,paddingTop:5 }}>{numeral(params.data.currentbalance).format('.00')}</Text>
-                            <Text style={{ fontSize: 17,paddingTop:3 }}>THB</Text>
+                            <Text style={{ fontSize: 25,fontWeight: "bold" }}>{numeral(params.data.currentbalance).format('0,0')}</Text>
+                            <Text style={{ fontSize: 15, paddingRight: 20,paddingTop:10 }}>{numeral(params.data.currentbalance).format('.00')}</Text>
+                            <Text style={{ fontSize: 17,paddingTop:8 }}>THB</Text>
 
                         </View>
                     </View>
@@ -98,12 +75,12 @@ export default class TopUpAmount extends React.Component {
 
                     <View style={styles.row_container} >
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <Text style={{ fontSize: 15,color:"gray",fontWeight: "bold"  }}>New TopUp Balance:</Text>
+                            <Text style={{ fontSize: 15,color:"gray" }}>New TopUp Balance:</Text>
                         </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 2 ,borderWidth:1}]}>
-                            <Text style={{ fontSize: 25 ,fontWeight: "bold"}}>{numeral(params.data.amount + params.data.currentbalance).format('0,0')}</Text>
-                            <Text style={{ fontSize: 15, paddingRight: 20,paddingTop:10 }}>{numeral(params.data.amount + params.data.currentbalance).format('.00')}</Text>
-                            <Text style={{ fontSize: 17,paddingTop:5 }}>THB</Text>
+                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1}]}>
+                            <Text style={{ fontSize: 20 ,fontWeight: "bold"}}>{numeral(params.data.amount + params.data.currentbalance).format('0,0')}</Text>
+                            <Text style={{ fontSize: 15, paddingRight: 20,paddingTop:5 }}>{numeral(params.data.amount + params.data.currentbalance).format('.00')}</Text>
+                            <Text style={{ fontSize: 17,paddingTop:3 }}>THB</Text>
 
                         </View>
                     </View>
