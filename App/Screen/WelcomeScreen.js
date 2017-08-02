@@ -76,7 +76,7 @@ export default class HomeScreen extends React.Component {
             </TouchableOpacity>
           </View>
           <View style={[styles.menuContainer, { marginTop: 0 }]}>
-            <TouchableOpacity onPress={() => navigate('TopUpSelectAmountScreen', { userId: this.state.account_id, balance: this.state.balance })} style={styles.buttoniOS}>
+            <TouchableOpacity onPress={() => navigate('TopUpSelectAmountScreen', { userId: this.state.account_id.replace(new RegExp("-", 'g'), ""), balance: this.state.balance })} style={styles.buttoniOS}>
               <View style={{ flexDirection: 'row', marginLeft: -38 }}>
                 <View>
                   <Image source={require('../Resource/img/topup_ios.png')} style={[styles.icon, { marginTop: responsiveHeight(1.5) }]} />
