@@ -33,7 +33,7 @@ export default class TopUpResult extends React.Component {
                 <View style={styles.container}>
                      <View style={styles.top_container} >
                         {/* <Text style={styles.text_bold}>Status :</Text> */}
-                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                        <View style={{ flex:1,flexDirection: 'row', justifyContent: 'center' }}>
                             <Text style={{fontSize:responsiveFontSize(8), color:'green',margin:40,fontWeight: "bold",}}>
                                  Success
                                  </Text>
@@ -74,21 +74,7 @@ export default class TopUpResult extends React.Component {
                     
 
 
-                    {/* <View style={styles.top_container} >
-                        <Text style={styles.text_bold}>Total Balance :</Text>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 20,fontWeight: "bold" }}>{numeral(params.data.currentbalance).format('0,0')}</Text>
-                            <Text style={{ fontSize: 15, paddingRight: 20 ,paddingTop:5}}>{numeral(params.data.currentbalance).format('.00')}</Text>
-                            <Text style={{fontSize:15,paddingTop:5}}> <Text style={{fontSize: 20}}>THB</Text></Text>
-                        </View>
-                    </View >
-                    <View
-                        style={{
-                            borderBottomColor: 'grey',
-                            borderBottomWidth: 0.5,
-                            margin: 15
-                        }}
-                    /> */}
+            
                    
                     <View style={styles.bottom_container}>
                          <TouchableOpacity onPress={() => navigate('Home')}> 
