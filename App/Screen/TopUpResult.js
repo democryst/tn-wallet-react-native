@@ -35,7 +35,7 @@ export default class TopUpResult extends React.Component {
         return (
 
                 <View style={styles.container}>
-                     <View style={[styles.top_container,{flex:1}]} >
+                     <View style={[styles.top_container,{flex:1, marginTop:20}]} >
                             <Text style={{fontSize:responsiveFontSize(8), color:'green',margin:40,fontWeight: "bold",}}>
                                  Success
                             </Text>
