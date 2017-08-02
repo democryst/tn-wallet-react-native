@@ -29,18 +29,24 @@ export default class TopUpResult extends React.Component {
         var balanceStang = numeral(this.state.currentbalance).format('.00');
          
         return (
-            <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
+            
                 <View style={styles.container}>
-                     <View style={styles.top_container} >
-                        {/* <Text style={styles.text_bold}>Status :</Text> */}
-                        <View style={{ flex:1,flexDirection: 'row', justifyContent: 'center' }}>
+                     <View style={[styles.top_container,{flex:1}]} >
                             <Text style={{fontSize:responsiveFontSize(8), color:'green',margin:40,fontWeight: "bold",}}>
                                  Success
-                                 </Text>
-                        </View>
+                            </Text>
                     </View >
                     
-                    <View style={styles.row_container} >
+                    {/* <View
+                        style={{
+                            borderBottomColor: 'grey',
+                            borderBottomWidth: 0.5,
+                           
+                        }}
+                    /> */}
+
+                    {/* TOPUP BALANCE */}
+                    <View style={[styles.row_container,{flex:1, marginTop: 20}]} >
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
                             <Text style={{ fontSize: responsiveFontSize(2.5),color:"gray",paddingTop:responsiveHeight(2) }}>TopUp Balance:</Text>
                         </View>
@@ -52,19 +58,13 @@ export default class TopUpResult extends React.Component {
                         </View>
                     </View>
 
-                    <View
-                        style={{
-                            borderBottomColor: 'grey',
-                            borderBottomWidth: 0.5,
-                            margin: 15
-                        }}
-                    />
-
-                    <View style={styles.row_container} >
+                    
+                    {/* CURRENT BALANCE */}
+                    <View style={[styles.row_container,{flex:1}]} >
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
                             <Text style={{ fontSize: responsiveFontSize(2.5) ,color:"gray" }}>Current Balance:</Text>
                         </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1,borderWidth:1,paddingTop:responsiveHeight(1) }]}>
+                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1,paddingTop:responsiveHeight(1) }]}>
                             <Text style={{ fontSize: responsiveFontSize(3.5),fontWeight: "bold" }}>{numeral(params.data.currentbalance).format('0,0')}</Text>
                             <Text style={{ fontSize: responsiveFontSize(2.5), paddingRight: 10,paddingTop:responsiveHeight(1.2) }}>{numeral(params.data.currentbalance).format('.00')}</Text>
                             <Text style={{ fontSize: responsiveFontSize(3),paddingTop:responsiveHeight(0.5) }}>THB</Text>
@@ -72,21 +72,22 @@ export default class TopUpResult extends React.Component {
                         </View>
                     </View>
                     
-
+                    <View style={{flex:2}}>
+                    </View>
 
             
-                   
-                    <View style={styles.bottom_container}>
+                   {/* DONE BUTTON */}
+                    <View style={[styles.bottom_container,{flex:1}]}>
                          <TouchableOpacity onPress={() => navigate('Home')}> 
                             <View style={styles.button}>
                                 <Text style={styles.text}>Done</Text>
                             </View>
-                    </TouchableOpacity>
+                        </TouchableOpacity>
 
                     </View>
 
                 </View>
-            </TouchableWithoutFeedback>
+           
 
         );
     }
@@ -101,12 +102,14 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         flexDirection: 'row',
         padding: 10,
+        
     },
     top_container: {
         flex: 2,
-        margin: 15,
+        // margin: 15,
         backgroundColor: '#fff',
         justifyContent: 'center',
+        alignItems: 'center'
     },
     bottom_container: {
         flex: 1,
