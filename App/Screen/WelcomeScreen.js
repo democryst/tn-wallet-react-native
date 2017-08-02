@@ -133,8 +133,8 @@ export default class HomeScreen extends React.Component {
           </View>
           <View style={styles.container_userdetail}>
 
-            <Text style={{ fontSize: responsiveFontSize(2.2) }}>{`${this.state.name}  ${this.state.surname}`}</Text>
-            <Text style={{ color: '#333333', marginRight: 14, textAlign: 'right', fontSize: responsiveFontSize(2) }}>{`${this.state.account_id}`}</Text>
+            <Text style={{ fontSize: responsiveFontSize(2.1) }}>{`${this.state.name}  ${this.state.surname}`}</Text>
+            <Text style={{ color: '#333333', fontSize: responsiveFontSize(1.8) }}>{`${this.state.account_id}`}</Text>
             <View style={{ flexDirection: 'row', marginTop: 2 }}>
               <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}>
                 <View style={{ flexDirection: 'row' }}>
