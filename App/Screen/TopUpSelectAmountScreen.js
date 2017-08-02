@@ -105,11 +105,11 @@ export default class TransferConfirm extends React.Component {
             <View style={styles.col_container}>
                 <View style={ [{'flex':3}]}>
                         <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1, marginLeft : 20}]}>
-                            <Text style={{ fontSize: 20, paddingTop: 10, fontWeight: "600" }}>Balance Account:</Text>
+                            <Text style={{ fontSize: 20, paddingTop: 10, fontWeight: "600" }}>Account Balance:</Text>
                         </View>
                     {/* <View style={[styles.box_container]}> */}
                         <View style={[{ flex: 1}]}></View>
-                        <View style={[styles.row_container, { alignItems: "center",justifyContent: 'center', flex: 2,borderColor:'rgba(236,89,141,0.4)',borderWidth:4,borderRadius:20,marginHorizontal:40 }]}>
+                        <View style={[styles.row_container, { alignItems: "center",justifyContent: 'center', flex: 2,borderColor:'rgba(206,59,111,0.2)',borderWidth:4,borderRadius:20,marginHorizontal:40 }]}>
                             <Text style={{ fontSize: 30, fontWeight: "500"}}>{balance}</Text>
                             <Text style={{ fontSize: 15, paddingTop: 12, paddingRight: 10 }}>{balanceStang}</Text>
                             <Text style={{ fontSize: 20, paddingTop: 7, paddingRight: 5 }}>THB</Text>
@@ -127,7 +127,7 @@ export default class TransferConfirm extends React.Component {
                         }}
                     />
                 <View style={ [{'flex':5, padding : 20}]}>
-                    <TouchableHighlight underlayColor='pink' style={styles.row_container} onPress={
+                    <TouchableHighlight underlayColor='pink' style={[styles.row_container,{alignItems:'center',marginBottom: 5,padding: 10,paddingBottom:12,justifyContent:"center",borderWidth:2, borderColor:"rgba(150,150,150,0.5)",borderRadius:10}]} onPress={
                         () => {
                             this.checkwalletlimit(this.state.topupselectchoice.first), this.setState(
                                 {
@@ -142,19 +142,11 @@ export default class TransferConfirm extends React.Component {
                             )
                             // Delay to make button highlight 
                             timer.setTimeout("delay_select_amount",()=>{this.moveTopUpAmount()}, 1); 
-                            
-
-
                         }
                     }>
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <Image source={require('../Resource/img/right_button.png')}
-                                style={styles.next_button}
-                            />
-                            <Text style={[styles.text_info, { textAlign: "right" }]} > {this.state.topupselectchoice.first}</Text>
-                        </View>
+                    <Text style={[styles.text_info, { textAlign: "center" }]} > {this.state.topupselectchoice.first}</Text>
                     </TouchableHighlight>
-                    <TouchableHighlight underlayColor='pink' style={styles.row_container} onPress={
+                    <TouchableHighlight underlayColor='pink' style={[styles.row_container,{alignItems:'center',marginBottom: 5,padding: 10,paddingBottom:12,justifyContent:"center",borderWidth:2, borderColor:"rgba(150,150,150,0.5)",borderRadius:10}]} onPress={
                         () => {
                             this.checkwalletlimit(this.state.topupselectchoice.second), this.setState(
                                 {
@@ -170,15 +162,10 @@ export default class TransferConfirm extends React.Component {
                             timer.setTimeout("delay_select_amount",()=>{this.moveTopUpAmount()}, 1); 
                         }
                     }>
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <Image source={require('../Resource/img/right_button.png')}
-                                style={styles.next_button}
-                            />
-                            <Text style={[styles.text_info, { textAlign: "right" }]} > {this.state.topupselectchoice.second}</Text>
-                        </View>
+                    <Text style={[styles.text_info, { textAlign: "center" }]} > {this.state.topupselectchoice.second}</Text>
                     </TouchableHighlight>
 
-                    <TouchableHighlight underlayColor='pink' style={styles.row_container} onPress={
+                    <TouchableHighlight underlayColor='pink' style={[styles.row_container,{alignItems:'center',marginBottom: 5,padding: 10,paddingBottom:12,justifyContent:"center",borderWidth:2, borderColor:"rgba(150,150,150,0.5)",borderRadius:10}]} onPress={
                         () => {
                             this.checkwalletlimit(this.state.topupselectchoice.third), this.setState(
                                 {
@@ -194,14 +181,9 @@ export default class TransferConfirm extends React.Component {
                             timer.setTimeout("delay_select_amount",()=>{this.moveTopUpAmount()}, 1); 
                         }
                     }>
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <Image source={require('../Resource/img/right_button.png')}
-                                style={styles.next_button}
-                            />
-                            <Text style={[styles.text_info, { textAlign: "right" }]} > {this.state.topupselectchoice.third}</Text>
-                        </View>
+                    <Text style={[styles.text_info, { textAlign: "center" }]} > {this.state.topupselectchoice.third}</Text>
                     </TouchableHighlight>
-                    <TouchableHighlight underlayColor='pink' style={[styles.box_container, this.state.button_pressed.fourth_button ? { backgroundColor: "pink" } : {}]} onPress={
+                    <TouchableHighlight underlayColor='pink' style={[styles.row_container,{alignItems:'center',marginBottom: 5,padding: 10,paddingBottom:12,justifyContent:"center",borderWidth:2, borderColor:"rgba(150,150,150,0.5)",borderRadius:10}]} onPress={
                         () => {
                             this.checkwalletlimit(this.state.topupselectchoice.fourth), this.setState(
                                 {
@@ -218,12 +200,7 @@ export default class TransferConfirm extends React.Component {
                         }
                     }>
 
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <Image source={require('../Resource/img/right_button.png')}
-                                style={styles.next_button}
-                            />
-                            <Text style={[styles.text_info, { textAlign: "right" }]} > {this.state.topupselectchoice.fourth}</Text>
-                        </View>
+                    <Text style={[styles.text_info, { textAlign: "center" }]} > {this.state.topupselectchoice.fourth}</Text>
                     </TouchableHighlight >
                     <View style={{ paddingTop: 10 }}>
                         <Text style={[styles.text_info, { textAlign: "center", color: "red", fontWeight: "bold" }]}> {this.state.TopUpNote}</Text>
@@ -252,7 +229,7 @@ const styles = StyleSheet.create({
     row_container: {
         // justifyContent: 'space-between',
         flexDirection: 'row',
-        paddingTop: 5,
+        // paddingTop: 5,
     },
     top_container: {
         flex: 5,
