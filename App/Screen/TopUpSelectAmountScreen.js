@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TouchableHighlight, Dimensions, Image } from 'react-native';
 var { height, width } = Dimensions.get('window');
 import api from '../../API/RequestAPI.js';
 import RestClient from 'react-native-rest-client';
 
 var { height, width } = Dimensions.get('window');
-var numeral = require('numeral');2
+var numeral = require('numeral'); 2
+const timer = require('react-native-timer');
 
 export default class TransferConfirm extends React.Component {
     static navigationOptions = {
@@ -38,7 +39,7 @@ export default class TransferConfirm extends React.Component {
 
         }
         this.getAccount();
-        this.checkwallet = this.checkwallet.bind(this);  
+        this.checkwallet = this.checkwallet.bind(this);
         this.checkwalletlimit = this.checkwalletlimit.bind(this);
         this.moveTopUpAmount = this.moveTopUpAmount.bind(this);
     }
@@ -48,22 +49,18 @@ export default class TransferConfirm extends React.Component {
         this.checkwallet(topupchoice);
     }
     checkwallet(amount) {
-        console.log("checkwallet")
-        console.log("balance : " + this.state.currentbalance, "amount ", amount)
+
         if ((this.state.currentbalance + amount) > this.state.walletLimit) {
-            console.log("topupallow false")
-            // this.setState({
-            //     TopUpNote: "Balance Excess The Limit",
-            //     topupallow: false
-            // })
+
+
             this.state.topupallow = false
             this.state.TopUpNote = "Maximum limit exceeded"
         }
         else if ((this.state.currentbalance + amount) <= this.state.walletLimit) {
-            console.log("topupallow True")
-            this.state.topupallow= true
 
-            console.log(this.state)
+            this.state.topupallow = true
+
+
         }
     }
     getAccount() {
@@ -102,197 +99,137 @@ export default class TransferConfirm extends React.Component {
     render() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
-        var balance = numeral(this.state.currentbalance).format('0,0');
+        var balance = numeral(Math.floor(this.state.currentbalance)).format('0,0');
         var balanceStang = numeral(this.state.currentbalance).format('.00');
-            //
-        // var today = new Date();
-        // var dd = today.getDate();
-        // var mm = today.getMonth() + 1; //January is 0!
-        // var yyyy = today.getFullYear();
-        //
-        // if (dd < 10) {
-        //     dd = '0' + dd
-        // }
-        //
-        // if (mm < 10) {
-        //     mm = '0' + mm
-        // }
-        //
-        // today = dd + '/' + mm + '/' + yyyy;
         return (
-            <View style={styles.container}>
-                <View style={styles.top_container}>
-                    <View style={[styles.box_container]}>
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1}]}>
-                            <Text style = {{fontSize:15,paddingLeft:5,paddingTop:20}}>Account Balance:</Text>
+            <View style={styles.col_container}>
+                <View style={ [{'flex':3}]}>
+                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1, marginLeft : 20}]}>
+                            <Text style={{ fontSize: 20, paddingTop: 10, fontWeight: "600" }}>Account Balance:</Text>
                         </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-                            <Text style={{fontSize:30}}>{balance}</Text>
-                               <Text style={{fontSize:11,paddingTop:18,paddingRight:2}}>{balanceStang}</Text>
-                               <Text style={{fontSize:15,paddingTop:14,paddingRight:5}}>THB</Text>
+                    {/* <View style={[styles.box_container]}> */}
+                        <View style={[{ flex: 1}]}></View>
+                        <View style={[styles.row_container, { alignItems: "center",justifyContent: 'center', flex: 2,borderColor:'rgba(206,59,111,0.2)',borderWidth:4,borderRadius:20,marginHorizontal:40 }]}>
+                            <Text style={{ fontSize: 30, fontWeight: "500"}}>{balance}</Text>
+                            <Text style={{ fontSize: 15, paddingTop: 12, paddingRight: 10 }}>{balanceStang}</Text>
+                            <Text style={{ fontSize: 20, paddingTop: 7, paddingRight: 5 }}>THB</Text>
 
                         </View>
-                    </View>
-
-                    <View style={[styles.box_container, this.state.button_pressed.first_button ? { backgroundColor: "pink" } : {}]}>
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <View>
-                                <TouchableOpacity style={styles.row_container} onPress={
-                                    () => {
-                                        this.checkwalletlimit(this.state.topupselectchoice.first), this.setState(
-                                            {
-                                                button_pressed: {
-                                                    first_button: true,
-                                                    second_button: false,
-                                                    third_button: false,
-                                                    fourth_button: false,
-                                                }
-                                                
-                                            }
-                                        )
-                                    
-                                          this.moveTopUpAmount() 
-                                         
-                                        
-                                    }
-                                }>
-                                    <Image source={require('../Resource/img/right_button.png')}
-                                        style={styles.next_button}
-                                    />
-                                    <Text style={[styles.text_info, { textAlign: "right" }]} > {this.state.topupselectchoice.first}</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-                        </View>
-                    </View>
-
-                    <View style={[styles.box_container, this.state.button_pressed.second_button ? { backgroundColor: "pink" } : {}]}>
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <View>
-                                <TouchableOpacity style={styles.row_container} onPress={
-                                    () => {
-                                        this.checkwalletlimit(this.state.topupselectchoice.second), this.setState(
-                                            {
-                                                button_pressed: {
-                                                    first_button: false,
-                                                    second_button: true,
-                                                    third_button: false,
-                                                    fourth_button: false
-                                                }
-                                            }
-                                        )
-                                         this.moveTopUpAmount()
-                                    }
-                                }>
-                                    <Image source={require('../Resource/img/right_button.png')}
-                                        style={styles.next_button}
-                                    />
-                                    <Text style={[styles.text_info, { textAlign: "right" }]} > {this.state.topupselectchoice.second}</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-                        </View>
-                    </View>
-
-                    <View style={[styles.box_container, this.state.button_pressed.third_button ? { backgroundColor: "pink" } : {}]}>
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <View>
-                                <TouchableOpacity style={styles.row_container} onPress={
-                                    () => {
-                                        this.checkwalletlimit(this.state.topupselectchoice.third), this.setState(
-                                            {
-                                                button_pressed: {
-                                                    first_button: false,
-                                                    second_button: false,
-                                                    third_button: true,
-                                                    fourth_button: false
-                                                }
-                                            }
-                                        )
-                                         this.moveTopUpAmount() 
-                                    }
-                                }>
-                                    <Image source={require('../Resource/img/right_button.png')}
-                                        style={styles.next_button}
-                                    />
-                                    <Text style={[styles.text_info, { textAlign: "right" }]} > {this.state.topupselectchoice.third}</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-                        </View>
-                    </View >
-
-                    <View style={[styles.box_container, this.state.button_pressed.fourth_button ? { backgroundColor: "pink" } : {}]}>
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                            <View>
-                                <TouchableOpacity style={styles.row_container} onPress={
-                                    () => {
-                                        this.checkwalletlimit(this.state.topupselectchoice.fourth), this.setState(
-                                            {
-                                                button_pressed: {
-                                                    first_button: false,
-                                                    second_button: false,
-                                                    third_button: false,
-                                                    fourth_button: true
-                                                }
-                                            }
-                                        )
-                                         this.moveTopUpAmount() 
-                                    }
-                                }>
-                                    <Image source={require('../Resource/img/right_button.png')}
-                                        style={styles.next_button}
-                                    />
-                                    <Text style={[styles.text_info, { textAlign: "right" }]} > {this.state.topupselectchoice.fourth}</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-                        </View>
-                    </View >
-                    <View style={{ paddingTop: 10 }}>
-                        <Text style={[styles.text_info, { textAlign: "center", color: "red",fontWeight:"bold" }]}> {this.state.TopUpNote}</Text>
-                    </View>
-
-
-
+                        <View style={[{ flex: 1}]}>
+                        </View>    
+                    {/* </View> */}
                 </View >
+                <View
+                        style={{
+                            borderBottomColor: "rgba(150,150,150,0.2)",
+                            borderBottomWidth: 2,
+                            marginHorizontal : 15
+                        }}
+                    />
+                <View style={ [{'flex':5, padding : 20}]}>
+                    <TouchableHighlight underlayColor='pink' style={[styles.row_container,styles.amount_button]} onPress={
+                        () => {
+                            this.checkwalletlimit(this.state.topupselectchoice.first), this.setState(
+                                {
+                                    button_pressed: {
+                                        first_button: true,
+                                        second_button: false,
+                                        third_button: false,
+                                        fourth_button: false,
+                                    }
 
-                {/* <View style={styles.bottom_container}>
-                    <TouchableOpacity onPress={
-                        () => { this.moveTopUpAmount() }
+                                }
+                            )
+                            // Delay to make button highlight 
+                            timer.setTimeout("delay_select_amount",()=>{this.moveTopUpAmount()}, 1); 
+                        }
+                    }>
+                    <Text style={[styles.text_info, { textAlign: "center" }]} > {this.state.topupselectchoice.first}</Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight underlayColor='pink' style={[styles.row_container,styles.amount_button]} onPress={
+                        () => {
+                            this.checkwalletlimit(this.state.topupselectchoice.second), this.setState(
+                                {
+                                    button_pressed: {
+                                        first_button: false,
+                                        second_button: true,
+                                        third_button: false,
+                                        fourth_button: false
+                                    }
+                                }
+                            )
+                            // Delay to make button highlight 
+                            timer.setTimeout("delay_select_amount",()=>{this.moveTopUpAmount()}, 1); 
+                        }
+                    }>
+                    <Text style={[styles.text_info, { textAlign: "center" }]} > {this.state.topupselectchoice.second}</Text>
+                    </TouchableHighlight>
+
+                    <TouchableHighlight underlayColor='pink' style={[styles.row_container,styles.amount_button]} onPress={
+                        () => {
+                            this.checkwalletlimit(this.state.topupselectchoice.third), this.setState(
+                                {
+                                    button_pressed: {
+                                        first_button: false,
+                                        second_button: false,
+                                        third_button: true,
+                                        fourth_button: false
+                                    }
+                                }
+                            )
+                            // Delay to make button highlight 
+                            timer.setTimeout("delay_select_amount",()=>{this.moveTopUpAmount()}, 1); 
+                        }
+                    }>
+                    <Text style={[styles.text_info, { textAlign: "center" }]} > {this.state.topupselectchoice.third}</Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight underlayColor='pink' style={[styles.row_container,styles.amount_button]} onPress={
+                        () => {
+                            this.checkwalletlimit(this.state.topupselectchoice.fourth), this.setState(
+                                {
+                                    button_pressed: {
+                                        first_button: false,
+                                        second_button: false,
+                                        third_button: false,
+                                        fourth_button: true
+                                    }
+                                }
+                            )
+                            // Delay to make button highlight 
+                            timer.setTimeout("delay_select_amount",()=>{this.moveTopUpAmount()}, 1); 
+                        }
                     }>
 
-                        <View style={styles.button}>
-                            <Text style={styles.text}>Next</Text>
-                        </View>
-
-                    </TouchableOpacity>
-
-
+                    <Text style={[styles.text_info, { textAlign: "center" }]} > {this.state.topupselectchoice.fourth}</Text>
+                    </TouchableHighlight >
+                    <View style={{ paddingTop: 10 }}>
+                        <Text style={[styles.text_info, { textAlign: "center", color: "red", fontWeight: "bold" }]}> {this.state.TopUpNote}</Text>
+                    </View>
 
 
-                </View> */}
 
+                
+                </View>
             </View >
         );
     }
 }
 
 const styles = StyleSheet.create({
+    col_container:{
+        flexDirection: 'column',
+        flex : 1
+    },
     container: {
         flex: 1,
         // marginTop: 10,
         backgroundColor: '#fff',
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
     },
     row_container: {
         // justifyContent: 'space-between',
         flexDirection: 'row',
-        paddingTop: 10,
+        // paddingTop: 5,
     },
     top_container: {
         flex: 5,
@@ -307,7 +244,7 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end",
     },
     box_container: {
-        
+
         flexDirection: 'row',
         // backgroundColor: 'pink',
         // borderWidth: 1,
@@ -340,4 +277,5 @@ const styles = StyleSheet.create({
         height: 40,
         borderRadius: 20,
     },
+    amount_button: {alignItems:'center',marginBottom: 5,padding: 10,paddingBottom:12,justifyContent:"center",borderWidth:2, borderColor:"rgba(150,150,150,0.5)",borderRadius:10}
 });

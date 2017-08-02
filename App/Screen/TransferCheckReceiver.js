@@ -23,13 +23,14 @@ export default class TransferCheckReceiver extends React.Component {
       receiver: "",
 
     };
-    let textInputId = params.data.receiverId.replace(new RegExp("-", 'g'), "");
+    let textReceiverId = params.data.receiverId.replace(new RegExp("-", 'g'), "");
+    let textSenderId = params.data.userId.replace(new RegExp("-", 'g'), "");
 
-    api.getData(params.data.userId).then((data) => {
+    api.getData(textSenderId).then((data) => {
       this.setState({ sender: data[0] });
     });
 
-    api.getData(textInputId).then((data) => {
+    api.getData(textReceiverId).then((data) => {
       this.setState({ receiver: data[0] });
     });
 
@@ -47,27 +48,33 @@ export default class TransferCheckReceiver extends React.Component {
   onChangePage() {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
-    if (this.state.amount > this.state.sender.balance) {
-      alert('Your money not enough')
+    if (this.state.amount === null || this.state.amount == 0) {
+      alert("Can't transfer 0 THB");
     }
-    else {
-      navigate('TransferConfirm', {
-        data: {
-          senderAccountInfo: {
-            senderName: this.state.sender.name,
-            senderSurname: this.state.sender.surname,
-            senderID: this.state.sender.account_id,
-            senderBalance: this.state.sender.balance
-          },
-          receiverAccountInfo: {
-            receiverName: this.state.receiver.name,
-            receiverSurname: this.state.receiver.surname,
-            receiverID: this.state.receiver.account_id,
-            receiverBalance: this.state.receiver.balance
-          },
-          transferAmount: this.state.amount
-        }
-      })
+    else{
+      
+      if (this.state.amount > this.state.sender.balance) {
+        alert('Your money not enough')
+      }
+      else {
+        navigate('TransferConfirm', {
+          data: {
+            senderAccountInfo: {
+              senderName: this.state.sender.name,
+              senderSurname: this.state.sender.surname,
+              senderID: params.data.userId,
+              senderBalance: this.state.sender.balance
+            },
+            receiverAccountInfo: {
+              receiverName: this.state.receiver.name,
+              receiverSurname: this.state.receiver.surname,
+              receiverID: params.data.receiverId,
+              receiverBalance: this.state.receiver.balance
+            },
+            transferAmount: this.state.amount
+          }
+        })
+      }
     }
   }
 
@@ -197,9 +204,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20
   },
-textGray:{
-color:'gray'
-},
+  textGray: {
+    color: 'gray'
+  },
   text_bold: {
     fontWeight: 'bold',
     fontSize: 25

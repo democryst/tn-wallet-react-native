@@ -5,7 +5,6 @@ import { RkButton, RkTheme, RkText } from 'react-native-ui-kitten';
 import api from '../../API/RequestAPI.js';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
-
 var { height, width } = Dimensions.get('window');
 var numeral = require('numeral');
 
@@ -28,12 +27,15 @@ RkTheme.setType('RkText', 'primaryBackground', {
 
 export default class HomeScreen extends React.Component {
 
-
-
-  updateUI = function(){
+  updateUI = function () {
     api.getData(currentAccount).then((data) => {
       this.setState(data[0]);
-    });
+    })
+      .then(() => {
+        var id = this.state.account_id;
+        id = `${id.slice(0, 3)}-${id.slice(3, 4)}-${id.slice(4, 10)}`;
+        this.setState({ account_id: id });
+      });
   }
 
   constructor(props) {
@@ -43,11 +45,10 @@ export default class HomeScreen extends React.Component {
   }
 
 
-  componentDidMount(){
-      const timer = require('react-native-timer');
-      timer.setInterval("Update_money",()=>{this.updateUI()}, 5000);
+  componentDidMount() {
+    const timer = require('react-native-timer');
+    timer.setInterval("Update_money", () => { this.updateUI() }, 5000);
   }
-
 
   static navigationOptions = {
     title: 'Home',
@@ -76,7 +77,7 @@ export default class HomeScreen extends React.Component {
           </View>
           <View style={[styles.menuContainer, { marginTop: 0 }]}>
             <TouchableOpacity onPress={() => navigate('TopUpSelectAmountScreen', { userId: this.state.account_id, balance: this.state.balance })} style={styles.buttoniOS}>
-               <View style={{ flexDirection: 'row', marginLeft: -38 }}>
+              <View style={{ flexDirection: 'row', marginLeft: -38 }}>
                 <View>
                   <Image source={require('../Resource/img/topup_ios.png')} style={[styles.icon, { marginTop: responsiveHeight(1.5) }]} />
                 </View>
@@ -95,16 +96,16 @@ export default class HomeScreen extends React.Component {
             <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen', { userId: this.state.account_id })} style={[styles.buttonAndroid]}>
               <View style={{ marginLeft: 0 }}>
                 <View>
-                  <Image source={require('../Resource/img/transfer_android.png')} style={{ height: 85, width: 250 }} />
+                  <Image source={require('../Resource/img/transfer_android.png')} style={{ height: 85, width: width * (2 / 3) }} />
                 </View>
               </View>
             </TouchableOpacity>
           </View>
           <View style={[styles.menuContainer, { marginTop: 0 }]}>
-            <TouchableOpacity onPress={() => navigate('TopUpSelectAmountScreen', { userId: this.state.account_id, balance: this.state.balance })} style={styles.buttonAndroid}>
+            <TouchableOpacity onPress={() => navigate('TopUpSelectAmountScreen', { userId: this.state.account_id.replace(new RegExp("-", 'g'), ""), balance: this.state.balance })} style={styles.buttonAndroid}>
               <View style={{ marginLeft: 0 }}>
                 <View>
-                  <Image source={require('../Resource/img/topup_android.png')} style={{ height: 85, width: 250 }} />
+                  <Image source={require('../Resource/img/topup_android.png')} style={{ height: 85, width: width * (2 / 3) }} />
                 </View>
 
               </View>
@@ -121,8 +122,9 @@ export default class HomeScreen extends React.Component {
     let pic = {
       uri: 'http://simpleicon.com/wp-content/uploads/account.png'
     };
-    var balance = numeral(this.state.balance).format('0,0');
-    var balanceStang = numeral(this.state.balance).format('.00');
+    let balance = numeral(Math.floor(this.state.balance)).format('0,0');
+    let balanceStang = numeral(this.state.balance).format('.00');
+
     return (
       <Image source={require('../Resource/img/pink_background.png')} style={styles.container}>
         <View style={styles.container_userbar}>
@@ -130,24 +132,25 @@ export default class HomeScreen extends React.Component {
             <Image source={require('../Resource/img/ploy.jpg')} style={styles.container_image_profile} />
           </View>
           <View style={styles.container_userdetail}>
-            <RkText style={{ fontSize: responsiveFontSize(2) }}>{`${this.state.name}  ${this.state.surname}`}</RkText>
-            <View style={{ flexDirection: 'row', marginTop: 8 }}>
+
+            <Text style={{ fontSize: responsiveFontSize(2.1) }}>{`${this.state.name}  ${this.state.surname}`}</Text>
+            <Text style={{ color: '#333333', fontSize: responsiveFontSize(1.8) }}>{`${this.state.account_id}`}</Text>
+            <View style={{ flexDirection: 'row', marginTop: 2 }}>
               <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}>
                 <View style={{ flexDirection: 'row' }}>
                   <View style={{ flexDirection: 'column', justifyContent: 'flex-end' }}>
-                    <RkText style={{ fontSize: responsiveFontSize(4.5) }}>{`${balance}`}</RkText>
+                    <Text style={{ fontSize: responsiveFontSize(4.5) }}>{`${balance}`}</Text>
                   </View>
                   <View style={{ flexDirection: 'column', justifyContent: 'flex-end', marginBottom: 4 }}>
-                    <RkText style={{ fontSize: responsiveFontSize(2.2) }}>{`${balanceStang}  `}</RkText>
+                    <Text style={{ fontSize: responsiveFontSize(2.2) }}>{`${balanceStang}  `}</Text>
                   </View>
                   <View style={{ flexDirection: 'column', justifyContent: 'flex-end', marginBottom: 3 }}>
-                    <RkText style={{ fontSize: responsiveFontSize(3) }}>THB</RkText>
+                    <Text style={{ fontSize: responsiveFontSize(3) }}>THB</Text>
                   </View>
                 </View>
               </View>
             </View>
           </View>
-
         </View>
         <View
           style={{
@@ -159,7 +162,7 @@ export default class HomeScreen extends React.Component {
             marginBottom: responsiveHeight(1),
           }}
         />
-          { this.renderUserMessage() }
+        {this.renderUserMessage()}
       </Image>
     )
   }
