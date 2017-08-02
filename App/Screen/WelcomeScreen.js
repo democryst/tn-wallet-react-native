@@ -33,14 +33,14 @@ export default class HomeScreen extends React.Component {
 
   }
 
-
-  componentDidMount(){
-      const timer = require('react-native-timer');
-      timer.setInterval("Update_money", ()=>{api.getData(6302335476).then((data) => {
+  componentDidMount() {
+    const timer = require('react-native-timer');
+    timer.setInterval("Update_money", () => {
+      api.getData(6302335476).then((data) => {
         this.setState(data[0]);
-      });}, 5000);
+      });
+    }, 5000);
   }
-
 
   static navigationOptions = {
     title: 'Home',
@@ -68,14 +68,14 @@ export default class HomeScreen extends React.Component {
           </View>
           <View style={[styles.menuContainer, { marginTop: 0 }]}>
             <TouchableOpacity onPress={() => navigate('TopUpSelectAmountScreen', { userId: this.state.account_id, balance: this.state.balance })} style={styles.buttoniOS}>
-               <View style={{ flexDirection: 'row', marginLeft: -38 }}>
+              <View style={{ flexDirection: 'row', marginLeft: -38 }}>
                 <View>
                   <Image source={require('../Resource/img/topup_ios.png')} style={[styles.icon, { marginTop: responsiveHeight(1.5) }]} />
                 </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: responsiveHeight(2.5), marginLeft: 20 }}>
                   <RkText style={{ fontSize: responsiveFontSize(3) }}> Top Up </RkText>
                 </View>
-              </View>   
+              </View>
             </TouchableOpacity>
           </View>
         </View>
@@ -101,9 +101,9 @@ export default class HomeScreen extends React.Component {
                 <View>
                   <Image source={require('../Resource/img/topup_android.png')} style={{ height: 85, width: 250 }} />
                 </View>
-                
+
               </View>
-      
+
             </TouchableOpacity>
           </View>
         </View>
@@ -116,7 +116,7 @@ export default class HomeScreen extends React.Component {
     let pic = {
       uri: 'http://simpleicon.com/wp-content/uploads/account.png'
     };
-    var balance = Math.floor(this.state.balance);
+    var balance = numeral(Math.floor(this.state.balance)).format('0,0');
     var balanceStang = numeral(this.state.balance).format('.00');
     return (
       <Image source={require('../Resource/img/pink_background.png')} style={styles.container}>
@@ -155,7 +155,7 @@ export default class HomeScreen extends React.Component {
           }}
         />
 
-          { this.renderUserMessage() }
+        {this.renderUserMessage()}
 
 
 
