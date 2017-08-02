@@ -152,8 +152,9 @@ const styles = StyleSheet.create({
         padding: 10,
         fontSize: 40,
         color:"gray",
-        borderWidth:1,
+        borderWidth: 1,
         borderRadius: 30,
-        //Didn't use on this page
+        width: width*0.7,
+        margin: 40,
     },
 });
