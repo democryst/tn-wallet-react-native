@@ -8,6 +8,7 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 var textInputAmount = 0.00;
+var numeral = require('numeral');
 export default class TransferCheckReceiver extends React.Component {
 
 
@@ -15,6 +16,7 @@ export default class TransferCheckReceiver extends React.Component {
     super(props);
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
+
     this.state = {
       amount: 0.00,
       sender: "",
@@ -70,6 +72,8 @@ export default class TransferCheckReceiver extends React.Component {
   }
 
   render() {
+    var balance = numeral(Math.floor(this.state.sender.balance)).format('0,0'); 
+    var balanceStang = numeral(this.state.sender.balance).format('.00');
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
     return (
@@ -81,13 +85,13 @@ export default class TransferCheckReceiver extends React.Component {
               <View style={styles.top_container}>
                 <View style={{ flexDirection: 'row' }}>
                   <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
-                    <Text style={styles.text}>Receiver</Text>
+                    <Text style={[styles.text, { fontSize: responsiveFontSize(2.5) }]}>Receiver</Text>
                   </View>
                   <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 2 }]}>
                     <View>
-                      <Text style={[styles.text_bold, { textAlign: "right" }]}> {params.data.receiverId}</Text>
-                      <Text style={[styles.text_bold, { textAlign: "right" }]}> {this.state.receiver.name}</Text>
-                      <Text style={[styles.text_bold, { textAlign: "right" }]}> {this.state.receiver.surname}</Text>
+                      <Text style={[styles.text_bold, { fontSize: responsiveFontSize(3), textAlign: "right" }]}> {params.data.receiverId}</Text>
+                      <Text style={[styles.text_bold, { fontSize: responsiveFontSize(3), textAlign: "right" }]}> {this.state.receiver.name}</Text>
+                      <Text style={[styles.text_bold, { fontSize: responsiveFontSize(3), textAlign: "right" }]}> {this.state.receiver.surname}</Text>
                     </View>
                   </View>
                 </View>
@@ -101,9 +105,9 @@ export default class TransferCheckReceiver extends React.Component {
                 />
 
                 <View style={{ flex: 1, justifyContent: 'center' }}>
-                  <Text style={styles.text_bold}> Amount (THB)</Text>
+                  <Text style={[styles.text_bold, { fontSize: responsiveFontSize(3) }]}> Amount (THB)</Text>
 
-                  <TextInputMask style={[styles.textInput,{textAlign: "right"}]}
+                  <TextInputMask style={[styles.textInput, { textAlign: "right" }]}
                     text=''
                     maxLength={8}
                     onChangeText={this.onChangeText.bind(this)}
@@ -119,7 +123,16 @@ export default class TransferCheckReceiver extends React.Component {
                     }}
                   />
                   <View style={styles.avilableBalance}>
-                    <Text style={styles.text_info}>Available balance {this.state.sender.balance} THB</Text>
+                    <View style={styles.bottomColumnContainer}>
+                      <Text style={[styles.text_info, { fontSize: responsiveFontSize(2.5) }]}>Available balance </Text>
+                    </View>
+                    <Text style={[styles.text_info, styles.text_bold, { fontSize: responsiveFontSize(3.5) }]}> {balance}</Text>
+                    <View style={styles.bottomColumnContainer}>
+                      <Text style={[styles.text_info, { fontSize: responsiveFontSize(2.5) }]}> {balanceStang}</Text>
+                    </View>
+                    <View style={styles.bottomColumnContainer}>
+                      <Text style={[styles.text_info, { fontSize: responsiveFontSize(2.5) }]}> THB</Text>
+                    </View>
                   </View>
                 </View>
 
@@ -150,11 +163,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 10,
   },
+  column_container: {
+    // justifyContent: 'space-between',
+    flexDirection: 'column',
+    padding: 10,
+  },
   top_container: {
     flex: 3,
     margin: 10,
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
+  },
+  bottomColumnContainer: {
+    flexDirection: 'column',
+    justifyContent: "flex-end"
   },
   bottom_container: {
     // flex: 1,
@@ -175,6 +197,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20
   },
+
   text_bold: {
     fontWeight: "bold",
     fontSize: 25
@@ -186,16 +209,17 @@ const styles = StyleSheet.create({
   avilableBalance: {
     flexDirection: "row",
     justifyContent: "flex-end",
-    margin: 10,
+    marginLeft: 10,
+    marginRight: 10,
   },
   textInput: {
     alignItems: 'flex-end',
     borderColor: 'gray',
     borderRadius: 10,
     borderWidth: 1,
-    height: 80,
+    height: responsiveHeight(11.5),
     padding: 10,
-    fontSize: 50,
+    fontSize: responsiveFontSize(6),
     margin: 10,
 
 
