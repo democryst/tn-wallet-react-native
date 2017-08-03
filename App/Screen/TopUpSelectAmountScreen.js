@@ -107,7 +107,7 @@ export default class TransferConfirm extends React.Component {
                         <View style={[styles.rowContainer, { justifyContent: 'flex-start', flex: 1, marginLeft : 20,padding:0}]}>
                             <Text style={styles.textTittleBold}>Account Balance:</Text>
                         </View>
-                    {/* <View style={[styles.box_container]}> */}
+
                         <View style={[{ flex: 1}]}></View>
                         <View style={[styles.rowContainer, { alignItems: "center",justifyContent: 'center', flex: 2,borderColor:'rgba(206,59,111,0.2)',borderWidth:4,borderRadius:20,marginHorizontal:responsiveWidth(12) }]}>
                             <Text style={styles.textAmount}>{balance}</Text>
@@ -117,14 +117,10 @@ export default class TransferConfirm extends React.Component {
                         </View>
                         <View style={[{ flex: 1}]}>
                         </View>    
-                    {/* </View> */}
+
                 </View >
                 <View
-                        style={{
-                            borderBottomColor: "rgba(150,150,150,0.2)",
-                            borderBottomWidth: 2,
-                            marginHorizontal : 15
-                        }}
+                        style={styles.linebar}
                     />
                 <View style={ [{'flex':5, padding : 20}]}>
                     <TouchableHighlight underlayColor='pink' style={[styles.rowContainer,styles.amountButton]} onPress={
@@ -144,7 +140,7 @@ export default class TransferConfirm extends React.Component {
                             timer.setTimeout("delay_select_amount",()=>{this.moveTopUpAmount()}, 1); 
                         }
                     }>
-                    <Text style={[styles.text_info, { textAlign: "center" }]} > {this.state.topupselectchoice.first}</Text>
+                    <Text style={[styles.textInformation, { textAlign: "center" }]} > {this.state.topupselectchoice.first}</Text>
                     </TouchableHighlight>
                     <TouchableHighlight underlayColor='pink' style={[styles.rowContainer,styles.amountButton]} onPress={
                         () => {
@@ -162,7 +158,7 @@ export default class TransferConfirm extends React.Component {
                             timer.setTimeout("delay_select_amount",()=>{this.moveTopUpAmount()}, 1); 
                         }
                     }>
-                    <Text style={[styles.text_info, { textAlign: "center" }]} > {this.state.topupselectchoice.second}</Text>
+                    <Text style={[styles.textInformation, { textAlign: "center" }]} > {this.state.topupselectchoice.second}</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight underlayColor='pink' style={[styles.rowContainer,styles.amountButton]} onPress={
@@ -181,7 +177,7 @@ export default class TransferConfirm extends React.Component {
                             timer.setTimeout("delay_select_amount",()=>{this.moveTopUpAmount()}, 1); 
                         }
                     }>
-                    <Text style={[styles.text_info, { textAlign: "center" }]} > {this.state.topupselectchoice.third}</Text>
+                    <Text style={[styles.textInformation, { textAlign: "center" }]} > {this.state.topupselectchoice.third}</Text>
                     </TouchableHighlight>
                     <TouchableHighlight underlayColor='pink' style={[styles.rowContainer,styles.amountButton]} onPress={
                         () => {
@@ -200,10 +196,10 @@ export default class TransferConfirm extends React.Component {
                         }
                     }>
 
-                    <Text style={[styles.text_info, { textAlign: "center" }]} > {this.state.topupselectchoice.fourth}</Text>
+                    <Text style={[styles.textInformation, { textAlign: "center" }]} > {this.state.topupselectchoice.fourth}</Text>
                     </TouchableHighlight >
                     <View style={{ paddingTop: 10 }}>
-                        <Text style={[styles.text_info, { textAlign: "center", color: "red", fontWeight: "bold" }]}> {this.state.TopUpNote}</Text>
+                        <Text style={styles.textAlert}> {this.state.TopUpNote}</Text>
                     </View>
 
 
