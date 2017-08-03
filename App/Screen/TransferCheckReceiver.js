@@ -7,6 +7,8 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
+var timer = require('react-native-timer');
+var buttonState = true ;
 var textInputAmount = 0.00;
 var numeral = require('numeral');
 export default class TransferCheckReceiver extends React.Component {
@@ -41,6 +43,33 @@ export default class TransferCheckReceiver extends React.Component {
     title: 'Transfer',
 
   };
+
+  setButtonState(){
+    const { navigate } = this.props.navigation;
+    const { params } = this.props.navigation.state;
+    if(buttonState === true){
+      buttonState = false ;
+      timer.setTimeout(this,"Set button back to active", ()=>{buttonState = true}, 2000);
+      navigate('TransferConfirm', {
+        data: {
+          senderAccountInfo: {
+            senderName: this.state.sender.name,
+            senderSurname: this.state.sender.surname,
+            senderID: params.data.userId,
+            senderBalance: this.state.sender.balance
+          },
+          receiverAccountInfo: {
+            receiverName: this.state.receiver.name,
+            receiverSurname: this.state.receiver.surname,
+            receiverID: params.data.receiverId,
+            receiverBalance: this.state.receiver.balance
+          },
+          transferAmount: this.state.amount
+        }
+      })
+    }
+  }
+
   onChangeText(text) {
     textInputAmount = text.replace(new RegExp(",", 'g'), "");
     this.state.amount = textInputAmount;
@@ -57,23 +86,7 @@ export default class TransferCheckReceiver extends React.Component {
         alert('Your money not enough')
       }
       else {
-        navigate('TransferConfirm', {
-          data: {
-            senderAccountInfo: {
-              senderName: this.state.sender.name,
-              senderSurname: this.state.sender.surname,
-              senderID: params.data.userId,
-              senderBalance: this.state.sender.balance
-            },
-            receiverAccountInfo: {
-              receiverName: this.state.receiver.name,
-              receiverSurname: this.state.receiver.surname,
-              receiverID: params.data.receiverId,
-              receiverBalance: this.state.receiver.balance
-            },
-            transferAmount: this.state.amount
-          }
-        })
+        this.setButtonState() ;
       }
     }
   }
