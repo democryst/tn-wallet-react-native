@@ -7,6 +7,8 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
+var timer = require('react-native-timer');
+var buttonState = true ;
 var textInputAmount = 0.00;
 var numeral = require('numeral');
 export default class TransferCheckReceiver extends React.Component {
@@ -41,6 +43,33 @@ export default class TransferCheckReceiver extends React.Component {
     title: 'Transfer',
 
   };
+
+  setButtonState(){
+    const { navigate } = this.props.navigation;
+    const { params } = this.props.navigation.state;
+    if(buttonState === true){
+      buttonState = false ;
+      timer.setTimeout(this,"Set button back to active", ()=>{buttonState = true}, 2000);
+      navigate('TransferConfirm', {
+        data: {
+          senderAccountInfo: {
+            senderName: this.state.sender.name,
+            senderSurname: this.state.sender.surname,
+            senderID: params.data.userId,
+            senderBalance: this.state.sender.balance
+          },
+          receiverAccountInfo: {
+            receiverName: this.state.receiver.name,
+            receiverSurname: this.state.receiver.surname,
+            receiverID: params.data.receiverId,
+            receiverBalance: this.state.receiver.balance
+          },
+          transferAmount: this.state.amount
+        }
+      })
+    }
+  }
+
   onChangeText(text) {
     textInputAmount = text.replace(new RegExp(",", 'g'), "");
     this.state.amount = textInputAmount;
@@ -51,29 +80,13 @@ export default class TransferCheckReceiver extends React.Component {
     if (this.state.amount === null || this.state.amount == 0) {
       alert("Can't transfer 0 THB");
     }
-    else{
-      
+    else {
+
       if (this.state.amount > this.state.sender.balance) {
         alert('Your money not enough')
       }
       else {
-        navigate('TransferConfirm', {
-          data: {
-            senderAccountInfo: {
-              senderName: this.state.sender.name,
-              senderSurname: this.state.sender.surname,
-              senderID: params.data.userId,
-              senderBalance: this.state.sender.balance
-            },
-            receiverAccountInfo: {
-              receiverName: this.state.receiver.name,
-              receiverSurname: this.state.receiver.surname,
-              receiverID: params.data.receiverId,
-              receiverBalance: this.state.receiver.balance
-            },
-            transferAmount: this.state.amount
-          }
-        })
+        this.setButtonState() ;
       }
     }
   }
@@ -96,9 +109,9 @@ export default class TransferCheckReceiver extends React.Component {
                   </View>
                   <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 2 }]}>
                     <View>
-                      <Text style={[styles.text_bold, { fontSize: responsiveFontSize(3), textAlign: 'right' }]}> {params.data.receiverId}</Text>
-                      <Text style={[styles.text_bold, { fontSize: responsiveFontSize(3), textAlign: 'right' }]}> {this.state.receiver.name}</Text>
-                      <Text style={[styles.text_bold, { fontSize: responsiveFontSize(3), textAlign: 'right' }]}> {this.state.receiver.surname}</Text>
+                      <Text style={[{ fontSize: responsiveFontSize(3), textAlign: 'right' }]}> {params.data.receiverId}</Text>
+                      <Text style={[{ fontSize: responsiveFontSize(2.5), textAlign: 'right' }]}> {this.state.receiver.name}</Text>
+                      <Text style={[{ fontSize: responsiveFontSize(2.5), textAlign: 'right' }]}> {this.state.receiver.surname}</Text>
                     </View>
                   </View>
                 </View>
@@ -209,7 +222,6 @@ const styles = StyleSheet.create({
   },
   text_bold: {
     fontWeight: 'bold',
-    fontSize: 25
   },
   text_button: {
     fontWeight: 'bold',

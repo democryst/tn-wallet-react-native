@@ -5,6 +5,8 @@ var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 var numeral = require('numeral');
 var styles = require('../Resource/style.js');
+const timer = require('react-native-timer');
+var buttonState = true ;
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 export default class TopUpAmount extends React.Component {
@@ -14,7 +16,6 @@ export default class TopUpAmount extends React.Component {
     constructor(props) {
         super(props);
 
-        const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
 
         this.state = {
@@ -24,7 +25,16 @@ export default class TopUpAmount extends React.Component {
         };
 
     }
-
+     setButtonState(data) {
+        const { navigate } = this.props.navigation;
+        const { params } = this.props.navigation.state;
+        console.log('fffffffffffffffffffffffffffff');
+        if (buttonState === true) {
+            console.log('fffffffssssssffffffffffffffffffffff');
+            buttonState = false;
+            timer.setTimeout(this, "Set button back to active", () => { buttonState = true }, 2000);
+             navigate('TopUpResult', { data: { currentbalance: data.des_remain_balance, amount: data.amount, } })
+        }}
     render() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
@@ -32,11 +42,11 @@ export default class TopUpAmount extends React.Component {
             <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
                 <View style={[styles.container, { paddingTop: responsiveHeight(12) }]}>
 
-                    <View style={styles.row_container} >
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
+                    <View style={styles.rowContainer} >
+                        <View style={[styles.rowContainer, { justifyContent: 'flex-start', flex: 1 }]}>
                             <Text style={styles.textTittle}>TopUp Amount:</Text>
                         </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
+                        <View style={[styles.rowContainer, { justifyContent: 'flex-end', flex: 1 }]}>
                             <Text style={styles.textAmount}>{numeral(params.data.amount).format('0,0')}</Text>
                             <Text style={styles.textAmountSatang}>{numeral(params.data.amount).format('.00')}</Text>
                             <Text style={styles.textAmountTHB}>THB</Text>
@@ -46,11 +56,11 @@ export default class TopUpAmount extends React.Component {
 
                     <View style={styles.linebar} />
 
-                    <View style={styles.row_container} >
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
+                    <View style={styles.rowContainer} >
+                        <View style={[styles.rowContainer, { justifyContent: 'flex-start', flex: 1 }]}>
                             <Text style={styles.textTittle}>Current Balance:</Text>
                         </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
+                        <View style={[styles.rowContainer, { justifyContent: 'flex-end', flex: 1 }]}>
                             <Text style={styles.textAmount}>{numeral(params.data.currentbalance).format('0,0')}</Text>
                             <Text style={styles.textAmountSatang}>{numeral(params.data.currentbalance).format('.00')}</Text>
                             <Text style={styles.textAmountTHB}>THB</Text>
@@ -60,11 +70,11 @@ export default class TopUpAmount extends React.Component {
 
                     <View style={styles.linebar} />
 
-                    <View style={styles.row_container} >
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
+                    <View style={styles.rowContainer} >
+                        <View style={[styles.rowContainer, { justifyContent: 'flex-start', flex: 1 }]}>
                             <Text style={styles.textTittle}>New Balance:</Text>
                         </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
+                        <View style={[styles.rowContainer, { justifyContent: 'flex-end', flex: 1 }]}>
                             <Text style={styles.textAmount}>{numeral(params.data.amount + params.data.currentbalance).format('0,0')}</Text>
                             <Text style={styles.textAmountSatang}>{numeral(params.data.amount + params.data.currentbalance).format('.00')}</Text>
                             <Text style={styles.textAmountTHB}>THB</Text>
@@ -73,9 +83,7 @@ export default class TopUpAmount extends React.Component {
                     </View>
 
 
-
-
-                    <View style={styles.bottom_container}>
+                    <View style={styles.bottomContainer}>
                         <TouchableOpacity onPress={() => {
                             api.postTransactionTopUp(this.state.receiverId, this.state.currentbalance, this.state.amount)
                                 .then(resp => resp.json())
@@ -83,7 +91,7 @@ export default class TopUpAmount extends React.Component {
                                     return api.getTransaction(data.transaction_id)
                                 })
                                 .then((data) => {
-                                    navigate('TopUpResult', { data: { currentbalance: data.des_remain_balance, amount: data.amount, } })
+                                   this.setButtonState(data)
                                 })
                                 .catch((err) => {
                                     console.log("error ", err)

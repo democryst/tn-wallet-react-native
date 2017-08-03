@@ -6,6 +6,9 @@ import { NavigationActions } from 'react-navigation';
 
 var { height, width } = Dimensions.get('window');
 var numeral = require('numeral');
+var moment = require('moment');
+var timer = require('react-native-timer');
+var buttonState = true ;
 
 const resetAction = NavigationActions.reset({
   index: 0,
@@ -36,6 +39,16 @@ export default class TransferResult extends React.Component {
 
     }
 
+    setButtonState(){
+      const { navigate } = this.props.navigation;
+      const { params } = this.props.navigation.state;
+      if(buttonState === true){
+        buttonState = false ;
+        timer.setTimeout(this,"Set button back to active", ()=>{buttonState = true}, 2000);
+        this.props.navigation.dispatch(resetAction);
+      }
+    }
+
     componentDidMount() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
@@ -54,6 +67,9 @@ export default class TransferResult extends React.Component {
         let amount = numeral(this.state.transactionResult.amount).format('0,0.00');
         let fee = numeral(this.state.transactionResult.src_remain_fee).format('0,0.00');
         let remain = numeral(this.state.transactionResult.src_remain_balance).format('0,0.00');
+        // console.log(this.state.transactionResult.createdAt);
+        let date = moment(this.state.transactionResult.createdAt).format("ddd DD-MM-YY hh:mm");
+
 
         return (
             <View style={styles.container}>
@@ -68,9 +84,9 @@ export default class TransferResult extends React.Component {
                     shadowRadius: 3,
                 }}>
                     <ScrollView>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 15, marginBottom: 10, marginTop: 4}}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 15, marginBottom: 10, marginTop: 5}}>
                             <Text style={{ color: 'grey', margin: 4 }}>Date</Text>
-                            <Text style={{ fontSize: responsiveFontSize(2.3) }}>Wed 02/08/17</Text>
+                            <Text style={{ fontSize: responsiveFontSize(2.3) }}>{date}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 15, marginTop: 0 }}>
                             <Text style={{ color: 'grey', margin: 4 }}>Transaction ID</Text>
@@ -118,11 +134,11 @@ export default class TransferResult extends React.Component {
                         />
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 15, marginBottom: 10 }}>
                             <Text style={{ color: 'grey', margin: 4 }}>Amount</Text>
-                            <Text style={{ fontSize: responsiveFontSize(4), fontWeight: 'bold' }}>{amount}  THB</Text>
+                            <Text style={{ fontSize: responsiveFontSize(4), fontWeight: 'bold' }}>{amount} THB</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 15, marginTop: 0 }}>
                             <Text style={{ color: 'grey', margin: 4 }}>Fee</Text>
-                            <Text style={{ fontSize: responsiveFontSize(2.3) }}>{fee}  THB</Text>
+                            <Text style={{ fontSize: responsiveFontSize(2.3) }}>{fee} THB</Text>
                         </View>
                         <View
                             style={{
@@ -135,14 +151,14 @@ export default class TransferResult extends React.Component {
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 15 }}>
                             <Text style={{ color: 'grey', margin: 4 }}>Available Balance</Text>
-                            <Text style={{ fontSize: responsiveFontSize(2.3) }}>{remain}  THB</Text>
+                            <Text style={{ fontSize: responsiveFontSize(2.3) }}>{remain} THB</Text>
                         </View>
                         <View />
 
                     </ScrollView>
                 </View>
                 <View style={styles.bottom_container}>
-                    <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.dispatch(resetAction)}>
+                    <TouchableOpacity style={styles.button} onPress={() => this.setButtonState()}>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={styles.text}>Done</Text>
                         </View>
