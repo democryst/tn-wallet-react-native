@@ -8,43 +8,63 @@ var { height, width } = Dimensions.get('window');
 
 module.exports = StyleSheet.create({
 
+    amountButton: {
+        alignItems: 'center',
+        marginBottom: 5,
+        padding: 10,
+        paddingBottom: 12,
+        justifyContent: "center",
+        borderWidth: 2,
+        borderColor: "rgba(150,150,150,0.5)",
+        borderRadius: 10
+    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
     },
-    row_container: {
+    columnContainer: {
+        flexDirection: 'column',
+        flex: 1
+    },
+    rowContainer: {
         justifyContent: 'space-between',
         flexDirection: 'row',
-        padding: 10,
+        padding: responsiveWidth(2),
     },
-    top_container: {
+    topContainer: {
         flex: 2,
         margin: 15,
         backgroundColor: '#fff',
         justifyContent: 'center',
+        alignItems: 'center'
     },
-    bottom_container: {
+    bottomContainer: {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'flex-end',
 
     },
+    button: {
+        backgroundColor: '#f06da1',
+        padding: responsiveHeight(3),
+        width: width,
+    },
     text: {
         textAlign: "center",
         fontWeight: "bold",
         fontSize: responsiveFontSize(3.5)
     },
-    button: {
-        backgroundColor: '#f06da1',
-        padding: 20,
-        width: width,
-    },
-
     textTittle: {
         fontSize: responsiveFontSize(2.5),
         paddingTop: responsiveHeight(1.5),
         color: "gray"
+    },
+    textTittleBold: {
+        fontSize: responsiveFontSize(3),
+        paddingTop: responsiveHeight(1.5),
+        color: "black",
+        fontWeight: 'bold'
     },
     textAmount: {
         fontSize: responsiveFontSize(3.5),
@@ -58,6 +78,15 @@ module.exports = StyleSheet.create({
     textAmountTHB: {
         fontSize: responsiveFontSize(3),
         paddingTop: responsiveHeight(0.5)
+    },
+    textStatus: {
+        fontSize: responsiveFontSize(8),
+        margin: 10,
+        fontWeight: "bold",
+    },
+    text_info: {
+        fontSize: 19,
+        paddingTop: 5,
     },
     linebar: {
         borderBottomColor: 'grey',
