@@ -61,19 +61,9 @@ export default class TransferConfirm extends React.Component {
      
 
     var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-
-    if (dd < 10) {
-      dd = '0' + dd
-    }
-
-    if (mm < 10) {
-      mm = '0' + mm
-    }
+   
   
-    today = dd + '/' + mm + '/' + yyyy;
+    
     let date = moment(today).format("ddd DD-MM-YY hh:mm");
     return (
 
