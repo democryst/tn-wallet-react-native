@@ -66,11 +66,10 @@ export default class TransferConfirm extends React.Component {
     getAccount() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
-        // api.getData(params.userId).then((data) => {
-        console.log(params.userId)
+    
         api.getData(params.userId).then((data) => {
             this.setState({ apidata: data[0], currentbalance: data[0].balance });
-            console.log("balance : " + this.state.currentbalance)
+            
         })
         .catch((err)=>{
              console.log("error in get account topupselect : ",err)
@@ -78,10 +77,7 @@ export default class TransferConfirm extends React.Component {
        
     }
     moveTopUpAmount() {
-        console.log("inside moveTopUpAmount")
-        console.log(this.state.topupallow)
         if (this.state.topupallow) {
-            console.log("insid topupallow")
             const { navigate } = this.props.navigation;
             const { params } = this.props.navigation.state;
             console.log("top up allow");
@@ -227,14 +223,11 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        // marginTop: 10,
         backgroundColor: '#fff',
-        // justifyContent: 'space-between',
+    
     },
     row_container: {
-        // justifyContent: 'space-between',
         flexDirection: 'row',
-        // paddingTop: 5,
     },
     top_container: {
         flex: 5,
@@ -245,21 +238,14 @@ const styles = StyleSheet.create({
         flex: 2,
         backgroundColor: '#fff',
         alignItems: 'center',
-        // justifyContent: 'center',
         justifyContent: "flex-end",
     },
     box_container: {
-
         flexDirection: 'row',
-        // backgroundColor: 'pink',
-        // borderWidth: 1,
 
     },
     button: {
-        // backgroundColor: '#f88fb0',
         backgroundColor: '#f06da1',
-        // backgroundColor: '#e64f93',
-        // flexDirection: "column",
         padding: 25,
         width: width,
     },
@@ -275,7 +261,7 @@ const styles = StyleSheet.create({
     text_info: {
         fontSize: 19,
         paddingTop: 5,
-        // fontWeight:"bold",
+      
     },
     next_button: {
         width: 40,

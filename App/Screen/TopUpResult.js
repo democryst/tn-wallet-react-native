@@ -8,10 +8,10 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 import { NavigationActions } from 'react-navigation';
 
 const resetAction = NavigationActions.reset({
-  index: 0,
-  actions: [
-    NavigationActions.navigate({ routeName: 'Home'})
-  ]
+    index: 0,
+    actions: [
+        NavigationActions.navigate({ routeName: 'Home' })
+    ]
 });
 
 export default class TopUpResult extends React.Component {
@@ -41,21 +41,13 @@ export default class TopUpResult extends React.Component {
         return (
 
             <View style={styles.container}>
-                <View style={[styles.top_container, { flex: 1}]} >
+                <View style={[styles.top_container, { flex: 1 }]} >
                     <Text style={{ fontSize: responsiveFontSize(8), color: 'green', margin: 10, fontWeight: "bold", }}>
                         Success
                             </Text>
                 </View >
-
-                {/* <View
-                        style={{
-                            borderBottomColor: 'grey',
-                            borderBottomWidth: 0.5,
-
-                        }}
-                    /> */}
                 <View style={{
-                    flex: 4, borderWidth: 2,borderBottomWidth:0, marginLeft: 10, marginRight: 10, borderColor: 'lightgrey',
+                    flex: 4, borderWidth: 2, borderBottomWidth: 0, marginLeft: 10, marginRight: 10, borderColor: 'lightgrey',
                     shadowColor: '#000',
                     shadowOffset: { width: 0, height: 2 },
                     shadowOpacity: 0.3,
@@ -88,14 +80,11 @@ export default class TopUpResult extends React.Component {
 
                             </View>
                         </View>
-
-                         {/* <View style={{ flex: 2 }}>
-                        </View>  */}
                     </ScrollView>
                 </View>
 
                 {/* DONE BUTTON */}
-                <View style={[styles.bottom_container, { }]}>
+                <View style={[styles.bottom_container, {}]}>
                     <TouchableOpacity onPress={() => navigate('Home')}>
                         <View style={styles.button}>
                             <Text style={styles.text}>Done</Text>
@@ -124,24 +113,21 @@ const styles = StyleSheet.create({
     },
     top_container: {
         flex: 2,
-        // margin: 15,
+
         backgroundColor: '#fff',
         justifyContent: 'center',
         alignItems: 'center'
     },
     bottom_container: {
-        // flex: 1,
+
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'flex-end',
 
     },
     button: {
-        // backgroundColor: '#f88fb0',
+
         backgroundColor: '#f06da1',
-        // backgroundColor: '#e64f93',
-        // flexDirection: "column",
-        // justifyContent: "flex-end",
         padding: 20,
         width: width,
 
