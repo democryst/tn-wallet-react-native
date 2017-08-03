@@ -8,7 +8,7 @@ var { height, width } = Dimensions.get('window');
 
 module.exports = StyleSheet.create({
 
-    amount_button: {
+    amountButton: {
         alignItems: 'center',
         marginBottom: 5,
         padding: 10,
@@ -22,40 +22,39 @@ module.exports = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
-    col_container: {
+    columnContainer: {
         flexDirection: 'column',
         flex: 1
     },
-    row_container: {
+    rowContainer: {
         justifyContent: 'space-between',
         flexDirection: 'row',
         padding: responsiveWidth(2),
     },
-    top_container: {
+    topContainer: {
         flex: 2,
         margin: 15,
         backgroundColor: '#fff',
         justifyContent: 'center',
         alignItems: 'center'
     },
-    bottom_container: {
+    bottomContainer: {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'flex-end',
 
     },
-    text: {
-        textAlign: "center",
-        fontWeight: "bold",
-        fontSize: responsiveFontSize(3.5)
-    },
     button: {
         backgroundColor: '#f06da1',
         padding: responsiveHeight(3),
         width: width,
     },
-
+    text: {
+        textAlign: "center",
+        fontWeight: "bold",
+        fontSize: responsiveFontSize(3.5)
+    },
     textTittle: {
         fontSize: responsiveFontSize(2.5),
         paddingTop: responsiveHeight(1.5),
@@ -65,7 +64,7 @@ module.exports = StyleSheet.create({
         fontSize: responsiveFontSize(3),
         paddingTop: responsiveHeight(1.5),
         color: "black",
-        fontWeight:'bold'
+        fontWeight: 'bold'
     },
     textAmount: {
         fontSize: responsiveFontSize(3.5),

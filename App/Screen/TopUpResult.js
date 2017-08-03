@@ -40,7 +40,7 @@ export default class TopUpResult extends React.Component {
         return (
             /* Success */
             <View style={styles.container}>
-                <View style={[styles.top_container, { flex: 1}]} >
+                <View style={[styles.topContainer, { flex: 1}]} >
                     <Text style={[styles.textStatus,{color:'green'}]}>
                         Success
                             </Text>
@@ -55,11 +55,11 @@ export default class TopUpResult extends React.Component {
                 }}>
                     <ScrollView>
                         {/* TOPUP BALANCE */}
-                        <View style={[styles.row_container, { flex: 1, marginTop: 20 }]} >
-                            <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
+                        <View style={[styles.rowContainer, { flex: 1, marginTop: 20 }]} >
+                            <View style={[styles.rowContainer, { justifyContent: 'flex-start', flex: 1 }]}>
                                 <Text style={styles.textTittle}>TopUp Balance:</Text>
                             </View>
-                            <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1}]}>
+                            <View style={[styles.rowContainer, { justifyContent: 'flex-end', flex: 1}]}>
                                 <Text style={styles.textAmount}>{numeral(params.data.amount).format('0,0')}</Text>
                                 <Text style={styles.textAmountSatang}>{numeral(params.data.amount).format('.00')}</Text>
                                 <Text style={styles.textAmountTHB}>THB</Text>
@@ -69,11 +69,11 @@ export default class TopUpResult extends React.Component {
 
 
                         {/* CURRENT BALANCE */}
-                        <View style={[styles.row_container, { flex: 1 }]} >
-                            <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
+                        <View style={[styles.rowContainer, { flex: 1 }]} >
+                            <View style={[styles.rowContainer, { justifyContent: 'flex-start', flex: 1 }]}>
                                 <Text style={styles.textTittle}>Current Balance:</Text>
                             </View>
-                            <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
+                            <View style={[styles.rowContainer, { justifyContent: 'flex-end', flex: 1 }]}>
                                 <Text style={styles.textAmount}>{numeral(params.data.currentbalance).format('0,0')}</Text>
                                 <Text style={styles.textAmountSatang}>{numeral(params.data.currentbalance).format('.00')}</Text>
                                 <Text style={styles.textAmountTHB}>THB</Text>
@@ -85,7 +85,7 @@ export default class TopUpResult extends React.Component {
                 </View>
 
                 {/* DONE BUTTON */}
-                <View style={[styles.bottom_container, { }]}>
+                <View style={[styles.bottomContainer, { }]}>
                     <TouchableOpacity onPress={() => navigate('Home')}>
                         <View style={styles.button}>
                             <Text style={styles.text}>Done</Text>

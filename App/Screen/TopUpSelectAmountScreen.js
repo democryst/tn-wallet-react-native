@@ -102,14 +102,14 @@ export default class TransferConfirm extends React.Component {
         var balance = numeral(Math.floor(this.state.currentbalance)).format('0,0');
         var balanceStang = numeral(this.state.currentbalance).format('.00');
         return (
-            <View style={styles.col_container}>
+            <View style={styles.columnContainer}>
                 <View style={ [{'flex':3}]}>
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1, marginLeft : 20,padding:0}]}>
+                        <View style={[styles.rowContainer, { justifyContent: 'flex-start', flex: 1, marginLeft : 20,padding:0}]}>
                             <Text style={styles.textTittleBold}>Account Balance:</Text>
                         </View>
                     {/* <View style={[styles.box_container]}> */}
                         <View style={[{ flex: 1}]}></View>
-                        <View style={[styles.row_container, { alignItems: "center",justifyContent: 'center', flex: 2,borderColor:'rgba(206,59,111,0.2)',borderWidth:4,borderRadius:20,marginHorizontal:responsiveWidth(12) }]}>
+                        <View style={[styles.rowContainer, { alignItems: "center",justifyContent: 'center', flex: 2,borderColor:'rgba(206,59,111,0.2)',borderWidth:4,borderRadius:20,marginHorizontal:responsiveWidth(12) }]}>
                             <Text style={styles.textAmount}>{balance}</Text>
                             <Text style={styles.textAmountSatang}>{balanceStang}</Text>
                             <Text style={styles.textAmountTHB}>THB</Text>
@@ -127,7 +127,7 @@ export default class TransferConfirm extends React.Component {
                         }}
                     />
                 <View style={ [{'flex':5, padding : 20}]}>
-                    <TouchableHighlight underlayColor='pink' style={[styles.row_container,styles.amount_button]} onPress={
+                    <TouchableHighlight underlayColor='pink' style={[styles.rowContainer,styles.amountButton]} onPress={
                         () => {
                             this.checkwalletlimit(this.state.topupselectchoice.first), this.setState(
                                 {
@@ -146,7 +146,7 @@ export default class TransferConfirm extends React.Component {
                     }>
                     <Text style={[styles.text_info, { textAlign: "center" }]} > {this.state.topupselectchoice.first}</Text>
                     </TouchableHighlight>
-                    <TouchableHighlight underlayColor='pink' style={[styles.row_container,styles.amount_button]} onPress={
+                    <TouchableHighlight underlayColor='pink' style={[styles.rowContainer,styles.amountButton]} onPress={
                         () => {
                             this.checkwalletlimit(this.state.topupselectchoice.second), this.setState(
                                 {
@@ -165,7 +165,7 @@ export default class TransferConfirm extends React.Component {
                     <Text style={[styles.text_info, { textAlign: "center" }]} > {this.state.topupselectchoice.second}</Text>
                     </TouchableHighlight>
 
-                    <TouchableHighlight underlayColor='pink' style={[styles.row_container,styles.amount_button]} onPress={
+                    <TouchableHighlight underlayColor='pink' style={[styles.rowContainer,styles.amountButton]} onPress={
                         () => {
                             this.checkwalletlimit(this.state.topupselectchoice.third), this.setState(
                                 {
@@ -183,7 +183,7 @@ export default class TransferConfirm extends React.Component {
                     }>
                     <Text style={[styles.text_info, { textAlign: "center" }]} > {this.state.topupselectchoice.third}</Text>
                     </TouchableHighlight>
-                    <TouchableHighlight underlayColor='pink' style={[styles.row_container,styles.amount_button]} onPress={
+                    <TouchableHighlight underlayColor='pink' style={[styles.rowContainer,styles.amountButton]} onPress={
                         () => {
                             this.checkwalletlimit(this.state.topupselectchoice.fourth), this.setState(
                                 {
