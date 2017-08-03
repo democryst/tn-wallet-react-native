@@ -68,7 +68,7 @@ export default class TransferConfirm extends React.Component {
         console.log(params.userId)
         api.getData(params.userId).then((data) => {
             this.setState({ apidata: data[0], currentbalance: data[0].balance });
-            console.log("balance : " + this.state.currentbalance)
+            
         })
             .catch((err) => {
                 console.log("error in get account topupselect : ", err)
