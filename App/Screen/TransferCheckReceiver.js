@@ -8,7 +8,7 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 var timer = require('react-native-timer');
-var buttonState = true ;
+var buttonState = true;
 var textInputAmount = 0.00;
 var numeral = require('numeral');
 export default class TransferCheckReceiver extends React.Component {
@@ -44,12 +44,12 @@ export default class TransferCheckReceiver extends React.Component {
 
   };
 
-  setButtonState(){
+  setButtonState() {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
-    if(buttonState === true){
-      buttonState = false ;
-      timer.setTimeout(this,"Set button back to active", ()=>{buttonState = true}, 2000);
+    if (buttonState === true) {
+      buttonState = false;
+      timer.setTimeout(this, "Set button back to active", () => { buttonState = true }, 2000);
       navigate('TransferConfirm', {
         data: {
           senderAccountInfo: {
@@ -86,7 +86,12 @@ export default class TransferCheckReceiver extends React.Component {
         alert('Your money not enough')
       }
       else {
-        this.setButtonState() ;
+        if (parseFloat(this.state.amount) + parseFloat(this.state.receiver.balance) <= 5000) {
+          this.setButtonState();
+        }
+        else{
+           alert('Receiver Maximun limit exceeded.');
+        }
       }
     }
   }
