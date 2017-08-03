@@ -78,19 +78,19 @@ export default class TransferCheckReceiver extends React.Component {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
     if (this.state.amount === null || this.state.amount == 0) {
-      alert("Can't transfer 0 THB");
+      alert("Please fill in some amount.");
     }
     else {
 
       if (this.state.amount > this.state.sender.balance) {
-        alert('Your money not enough')
+        alert('Not enough money.')
       }
       else {
         if (parseFloat(this.state.amount) + parseFloat(this.state.receiver.balance) <= 5000) {
           this.setButtonState();
         }
         else{
-           alert('Receiver Maximun limit exceeded.');
+           alert('Receiver Maximum limit exceeded.');
         }
       }
     }
