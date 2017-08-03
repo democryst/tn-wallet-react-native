@@ -127,7 +127,7 @@ export default class TransferCheckReceiver extends React.Component {
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                   <Text style={[styles.text_bold, { fontSize: responsiveFontSize(3) }]}> Amount (THB)</Text>
 
-                  <TextInputMask style={[styles.textInput, { textAlign: 'right' }]}
+                  <TextInputMask underlineColorAndroid='transparent' style={[styles.textInput, { textAlign: 'right' }]}
                     text=''
                     maxLength={8}
                     onChangeText={this.onChangeText.bind(this)}

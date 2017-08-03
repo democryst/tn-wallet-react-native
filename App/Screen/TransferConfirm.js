@@ -58,13 +58,13 @@ export default class TransferConfirm extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
-     
+
 
     var today = new Date();
-   
-  
-    
-    let date = moment(today).format("ddd DD-MM-YY hh:mm");
+
+
+
+    let date = moment(today).format("ddd DD-MM-YY HH:mm");
     return (
 
       <View style={styles.container}>

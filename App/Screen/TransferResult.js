@@ -68,7 +68,7 @@ export default class TransferResult extends React.Component {
         let fee = numeral(this.state.transactionResult.src_remain_fee).format('0,0.00');
         let remain = numeral(this.state.transactionResult.src_remain_balance).format('0,0.00');
         // console.log(this.state.transactionResult.createdAt);
-        let date = moment(this.state.transactionResult.createdAt).format("ddd DD-MM-YY hh:mm");
+        let date = moment(this.state.transactionResult.createdAt).format("ddd DD-MM-YY HH:mm");
 
 
         return (

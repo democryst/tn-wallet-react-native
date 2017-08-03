@@ -79,7 +79,7 @@ export default class EnterTransferScreen extends React.Component {
           <View style={styles.inputBox} >
             <Text style={[styles.textTittle,{color:'black'}]} >Receiver Account Number</Text>
 
-            <TextInputMask style={styles.textInput}
+            <TextInputMask underlineColorAndroid='transparent' style={styles.textInput}
               text=""
               onChangeText={this.onChangeText.bind(this)}
               keyboardType='numeric'
