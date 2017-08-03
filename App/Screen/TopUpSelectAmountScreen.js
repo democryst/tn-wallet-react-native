@@ -106,7 +106,7 @@ export default class TransferConfirm extends React.Component {
             <View style={styles.columnContainer}>
                 <View style={ [{'flex':3}]}>
                         <View style={[styles.rowContainer, { justifyContent: 'flex-start', flex: 1, marginLeft : 20,padding:0}]}>
-                            <Text style={styles.textTittleBold}>Account Balance:</Text>
+                            <Text style={[styles.textTittleBold,{fontSize:responsiveFontSize(2.5)}]}>Account Balance:</Text>
                         </View>
 
                         <View style={[{ flex: 1}]}></View>
