@@ -8,20 +8,35 @@ var { height, width } = Dimensions.get('window');
 
 module.exports = StyleSheet.create({
 
+    amount_button: {
+        alignItems: 'center',
+        marginBottom: 5,
+        padding: 10,
+        paddingBottom: 12,
+        justifyContent: "center",
+        borderWidth: 2,
+        borderColor: "rgba(150,150,150,0.5)",
+        borderRadius: 10
+    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
     },
+    col_container: {
+        flexDirection: 'column',
+        flex: 1
+    },
     row_container: {
         justifyContent: 'space-between',
         flexDirection: 'row',
-        padding: 10,
+        padding: responsiveWidth(2),
     },
     top_container: {
         flex: 2,
         margin: 15,
         backgroundColor: '#fff',
         justifyContent: 'center',
+        alignItems: 'center'
     },
     bottom_container: {
         flex: 1,
@@ -37,7 +52,7 @@ module.exports = StyleSheet.create({
     },
     button: {
         backgroundColor: '#f06da1',
-        padding: 20,
+        padding: responsiveHeight(3),
         width: width,
     },
 
@@ -45,6 +60,12 @@ module.exports = StyleSheet.create({
         fontSize: responsiveFontSize(2.5),
         paddingTop: responsiveHeight(1.5),
         color: "gray"
+    },
+    textTittleBold: {
+        fontSize: responsiveFontSize(3),
+        paddingTop: responsiveHeight(1.5),
+        color: "black",
+        fontWeight:'bold'
     },
     textAmount: {
         fontSize: responsiveFontSize(3.5),
@@ -58,6 +79,15 @@ module.exports = StyleSheet.create({
     textAmountTHB: {
         fontSize: responsiveFontSize(3),
         paddingTop: responsiveHeight(0.5)
+    },
+    textStatus: {
+        fontSize: responsiveFontSize(8),
+        margin: 10,
+        fontWeight: "bold",
+    },
+    text_info: {
+        fontSize: 19,
+        paddingTop: 5,
     },
     linebar: {
         borderBottomColor: 'grey',

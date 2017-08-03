@@ -73,8 +73,6 @@ export default class TopUpAmount extends React.Component {
                     </View>
 
 
-
-
                     <View style={styles.bottom_container}>
                         <TouchableOpacity onPress={() => {
                             {/* console.log("state account : ", this.state.receiverId) */ }

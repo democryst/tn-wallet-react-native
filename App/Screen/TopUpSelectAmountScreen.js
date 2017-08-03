@@ -5,9 +5,10 @@ import api from '../../API/RequestAPI.js';
 import RestClient from 'react-native-rest-client';
 
 var { height, width } = Dimensions.get('window');
-var numeral = require('numeral'); 2
+var numeral = require('numeral'); 
 const timer = require('react-native-timer');
-
+var styles = require('../Resource/style.js');
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 export default class TransferConfirm extends React.Component {
     static navigationOptions = {
         title: 'Top Up Amount',
@@ -17,7 +18,6 @@ export default class TransferConfirm extends React.Component {
         super(props);
         this.state = {
             date: "25/7/17",
-            // ID: "6302335476",
             currentbalance: 0,
             amount: 0,
             topupselectchoice: {
@@ -44,7 +44,6 @@ export default class TransferConfirm extends React.Component {
         this.moveTopUpAmount = this.moveTopUpAmount.bind(this);
     }
     checkwalletlimit(topupchoice) {
-        // this.setState({ amount: topupchoice });
         this.state.amount = topupchoice
         this.checkwallet(topupchoice);
     }
@@ -64,9 +63,7 @@ export default class TransferConfirm extends React.Component {
         }
     }
     getAccount() {
-        const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
-        // api.getData(params.userId).then((data) => {
         console.log(params.userId)
         api.getData(params.userId).then((data) => {
             this.setState({ apidata: data[0], currentbalance: data[0].balance });
@@ -102,22 +99,20 @@ export default class TransferConfirm extends React.Component {
     }
 
     render() {
-        const { navigate } = this.props.navigation;
-        const { params } = this.props.navigation.state;
         var balance = numeral(Math.floor(this.state.currentbalance)).format('0,0');
         var balanceStang = numeral(this.state.currentbalance).format('.00');
         return (
             <View style={styles.col_container}>
                 <View style={ [{'flex':3}]}>
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1, marginLeft : 20}]}>
-                            <Text style={{ fontSize: 20, paddingTop: 10, fontWeight: "600" }}>Account Balance:</Text>
+                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1, marginLeft : 20,padding:0}]}>
+                            <Text style={styles.textTittleBold}>Account Balance:</Text>
                         </View>
                     {/* <View style={[styles.box_container]}> */}
                         <View style={[{ flex: 1}]}></View>
-                        <View style={[styles.row_container, { alignItems: "center",justifyContent: 'center', flex: 2,borderColor:'rgba(206,59,111,0.2)',borderWidth:4,borderRadius:20,marginHorizontal:40 }]}>
-                            <Text style={{ fontSize: 30, fontWeight: "500"}}>{balance}</Text>
-                            <Text style={{ fontSize: 15, paddingTop: 12, paddingRight: 10 }}>{balanceStang}</Text>
-                            <Text style={{ fontSize: 20, paddingTop: 7, paddingRight: 5 }}>THB</Text>
+                        <View style={[styles.row_container, { alignItems: "center",justifyContent: 'center', flex: 2,borderColor:'rgba(206,59,111,0.2)',borderWidth:4,borderRadius:20,marginHorizontal:responsiveWidth(12) }]}>
+                            <Text style={styles.textAmount}>{balance}</Text>
+                            <Text style={styles.textAmountSatang}>{balanceStang}</Text>
+                            <Text style={styles.textAmountTHB}>THB</Text>
 
                         </View>
                         <View style={[{ flex: 1}]}>
@@ -219,68 +214,3 @@ export default class TransferConfirm extends React.Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    col_container:{
-        flexDirection: 'column',
-        flex : 1
-    },
-    container: {
-        flex: 1,
-        // marginTop: 10,
-        backgroundColor: '#fff',
-        // justifyContent: 'space-between',
-    },
-    row_container: {
-        // justifyContent: 'space-between',
-        flexDirection: 'row',
-        // paddingTop: 5,
-    },
-    top_container: {
-        flex: 5,
-        backgroundColor: '#fff',
-        justifyContent: 'center',
-    },
-    bottom_container: {
-        flex: 2,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        // justifyContent: 'center',
-        justifyContent: "flex-end",
-    },
-    box_container: {
-
-        flexDirection: 'row',
-        // backgroundColor: 'pink',
-        // borderWidth: 1,
-
-    },
-    button: {
-        // backgroundColor: '#f88fb0',
-        backgroundColor: '#f06da1',
-        // backgroundColor: '#e64f93',
-        // flexDirection: "column",
-        padding: 25,
-        width: width,
-    },
-    text: {
-        textAlign: "center",
-        fontWeight: "bold",
-        fontSize: 25
-    },
-    text_bold: {
-        fontWeight: "bold",
-        fontSize: 22
-    },
-    text_info: {
-        fontSize: 19,
-        paddingTop: 5,
-        // fontWeight:"bold",
-    },
-    next_button: {
-        width: 40,
-        height: 40,
-        borderRadius: 20,
-    },
-    amount_button: {alignItems:'center',marginBottom: 5,padding: 10,paddingBottom:12,justifyContent:"center",borderWidth:2, borderColor:"rgba(150,150,150,0.5)",borderRadius:10}
-});
