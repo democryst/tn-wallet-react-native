@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f06da1',
     // backgroundColor: '#e64f93',
     // flexDirection: "column",
-    padding: 25,
+    padding: 23,
     width: width,
   },
   textTitle: {
