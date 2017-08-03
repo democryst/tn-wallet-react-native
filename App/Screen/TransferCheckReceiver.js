@@ -52,7 +52,7 @@ export default class TransferCheckReceiver extends React.Component {
       alert("Can't transfer 0 THB");
     }
     else{
-      
+
       if (this.state.amount > this.state.sender.balance) {
         alert('Your money not enough')
       }
@@ -96,9 +96,9 @@ export default class TransferCheckReceiver extends React.Component {
                   </View>
                   <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 2 }]}>
                     <View>
-                      <Text style={[styles.text_bold, { fontSize: responsiveFontSize(3), textAlign: 'right' }]}> {params.data.receiverId}</Text>
-                      <Text style={[styles.text_bold, { fontSize: responsiveFontSize(3), textAlign: 'right' }]}> {this.state.receiver.name}</Text>
-                      <Text style={[styles.text_bold, { fontSize: responsiveFontSize(3), textAlign: 'right' }]}> {this.state.receiver.surname}</Text>
+                      <Text style={[{ fontSize: responsiveFontSize(3), textAlign: 'right' }]}> {params.data.receiverId}</Text>
+                      <Text style={[{ fontSize: responsiveFontSize(2.5), textAlign: 'right' }]}> {this.state.receiver.name}</Text>
+                      <Text style={[{ fontSize: responsiveFontSize(2.5), textAlign: 'right' }]}> {this.state.receiver.surname}</Text>
                     </View>
                   </View>
                 </View>
@@ -209,7 +209,6 @@ const styles = StyleSheet.create({
   },
   text_bold: {
     fontWeight: 'bold',
-    fontSize: 25
   },
   text_button: {
     fontWeight: 'bold',
