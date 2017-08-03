@@ -160,7 +160,7 @@ export default class TransferConfirm extends React.Component {
 
         <View style={styles.bottom_container}>
           <TouchableOpacity style={styles.button} onPress={() => { this.postTransaction() }}>
-            <Text style={styles.text}>Confirm</Text>
+            <Text style={styles.text_button}>Confirm</Text>
           </TouchableOpacity>
 
         </View>
@@ -175,6 +175,11 @@ const styles = StyleSheet.create({
     flex: 1,
     // marginTop: 10,
     backgroundColor: '#fff',
+  },
+  text_button: {
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: responsiveFontSize(3)
   },
   row_container: {
     // justifyContent: 'space-between',

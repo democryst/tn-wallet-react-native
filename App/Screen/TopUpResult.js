@@ -31,7 +31,7 @@ export default class TopUpResult extends React.Component {
         };
 
     }
-    
+
     render() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
@@ -88,7 +88,7 @@ export default class TopUpResult extends React.Component {
 
                 {/* DONE BUTTON */}
                 <View style={[styles.bottomContainer, { }]}>
-                   
+
                     <TouchableOpacity onPress={() => this.props.navigation.dispatch(resetAction)}>
                         <View style={styles.button}>
                             <Text style={styles.text}>Done</Text>
