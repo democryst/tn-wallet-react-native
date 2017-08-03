@@ -72,7 +72,7 @@ module.exports = StyleSheet.create({
     },
     textAmountSatang: {
         fontSize: responsiveFontSize(2.5),
-        paddingRight: 20,
+        paddingRight: 7,
         paddingTop: responsiveHeight(1.2)
     },
     textAmountTHB: {
@@ -84,14 +84,21 @@ module.exports = StyleSheet.create({
         margin: 10,
         fontWeight: "bold",
     },
-    text_info: {
-        fontSize: 19,
+    textInformation: {
+        fontSize: responsiveFontSize(2.5),
         paddingTop: 5,
+    },
+    textAlert: {
+        fontSize: responsiveFontSize(3),
+        paddingTop: 5,
+        textAlign: "center", 
+        color: "red", 
+        fontWeight: "bold"
     },
     linebar: {
         borderBottomColor: 'grey',
         borderBottomWidth: 0.5,
-        margin: 15
+        margin: 8
     }
 
 });

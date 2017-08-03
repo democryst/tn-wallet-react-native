@@ -5,6 +5,8 @@ import api from '../../API/RequestAPI.js';
 import RestClient from 'react-native-rest-client';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
+var timer = require('react-native-timer');
+var buttonState = true ;
 
 export default class TransferConfirm extends React.Component {
   static navigationOptions = {
@@ -16,7 +18,28 @@ export default class TransferConfirm extends React.Component {
     this.state = {}
   }
 
-
+  setButtonState(senderId,receiverId,balance){
+    const { navigate } = this.props.navigation;
+    const { params } = this.props.navigation.state;
+    if(buttonState === true){
+      buttonState = false ;
+      timer.setTimeout(this,"Set button back to active", ()=>{buttonState = true}, 2000);
+      api.postTransaction(senderId,
+        params.data.senderAccountInfo.senderBalance,
+        receiverId,
+        params.data.receiverAccountInfo.receiverBalance,
+        params.data.transferAmount
+      )
+      .then( resp=> resp.json())
+      .then((resp)=>{
+        navigate('TransferResult' , { result: resp , data: params.data ,remaining: balance}) ;
+      })
+      .catch((res)=>{
+        console.log("temp resp");
+        console.log(res)
+      });
+    }
+  }
 
   postTransaction() {
     const { navigate } = this.props.navigation;
@@ -28,20 +51,7 @@ export default class TransferConfirm extends React.Component {
     console.log(senderIdFormat);
     var receiverId= receiverIdFormat.replace(new RegExp("-", 'g'), "");
     var senderId=senderIdFormat.replace(new RegExp("-", 'g'), "");
-    api.postTransaction(senderId,
-      params.data.senderAccountInfo.senderBalance,
-      receiverId,
-      params.data.receiverAccountInfo.receiverBalance,
-      params.data.transferAmount
-    )
-    .then( resp=> resp.json())
-    .then((resp)=>{
-      navigate('TransferResult' , { result: resp , data: params.data ,remaining: balance}) ;
-    })
-    .catch((res)=>{
-      console.log("temp resp");
-      console.log(res)
-    });
+    this.setButtonState(senderId,receiverId,balance);
   }
 
   render() {

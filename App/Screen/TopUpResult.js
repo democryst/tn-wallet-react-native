@@ -54,7 +54,7 @@ export default class TopUpResult extends React.Component {
                         Success
                             </Text>
                 </View >
-                
+
                 <View style={{
                     flex: 4, borderWidth: 2,borderBottomWidth:0, marginLeft: 10, marginRight: 10, borderColor: 'lightgrey',
                     shadowColor: '#000',
@@ -95,7 +95,11 @@ export default class TopUpResult extends React.Component {
 
                 {/* DONE BUTTON */}
                 <View style={[styles.bottomContainer, { }]}>
+<<<<<<< HEAD
                     <TouchableOpacity onPress={() => this.setButtonState()}>
+=======
+                    <TouchableOpacity onPress={() => this.props.navigation.dispatch(resetAction)}>
+>>>>>>> 87362a53bc9228a2be66d9f5a26a5f4c2bbcbd1e
                         <View style={styles.button}>
                             <Text style={styles.text}>Done</Text>
                         </View>
