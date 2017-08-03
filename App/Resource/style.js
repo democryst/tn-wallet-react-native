@@ -91,14 +91,29 @@ module.exports = StyleSheet.create({
     textAlert: {
         fontSize: responsiveFontSize(3),
         paddingTop: 5,
-        textAlign: "center", 
-        color: "red", 
+        textAlign: "center",
+        color: "red",
         fontWeight: "bold"
+    },
+    textInput: {
+        borderColor: 'gray',
+        borderRadius: 10,
+        borderWidth: 1,
+        height: 50,
+        padding: 10,
+        fontSize: 25,
+        margin: 10
     },
     linebar: {
         borderBottomColor: 'grey',
         borderBottomWidth: 0.5,
         margin: 8
+    },
+    inputBox: {
+        flex: 2,
+        margin: 15,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
     }
 
 });

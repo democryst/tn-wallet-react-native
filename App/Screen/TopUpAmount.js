@@ -16,7 +16,6 @@ export default class TopUpAmount extends React.Component {
     constructor(props) {
         super(props);
 
-        const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
 
         this.state = {
