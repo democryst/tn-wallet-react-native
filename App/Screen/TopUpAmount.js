@@ -16,6 +16,7 @@ export default class TopUpAmount extends React.Component {
     constructor(props) {
         super(props);
 
+        const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
 
         this.state = {
@@ -28,9 +29,7 @@ export default class TopUpAmount extends React.Component {
      setButtonState(data) {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
-        console.log('fffffffffffffffffffffffffffff');
         if (buttonState === true) {
-            console.log('fffffffssssssffffffffffffffffffffff');
             buttonState = false;
             timer.setTimeout(this, "Set button back to active", () => { buttonState = true }, 2000);
              navigate('TopUpResult', { data: { currentbalance: data.des_remain_balance, amount: data.amount, } })
