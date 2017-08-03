@@ -5,6 +5,8 @@ var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 var numeral = require('numeral');
 var styles = require('../Resource/style.js');
+const timer = require('react-native-timer');
+var buttonState = true ;
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 export default class TopUpAmount extends React.Component {
@@ -24,7 +26,16 @@ export default class TopUpAmount extends React.Component {
         };
 
     }
-
+     setButtonState(data) {
+        const { navigate } = this.props.navigation;
+        const { params } = this.props.navigation.state;
+        console.log('fffffffffffffffffffffffffffff');
+        if (buttonState === true) {
+            console.log('fffffffssssssffffffffffffffffffffff');
+            buttonState = false;
+            timer.setTimeout(this, "Set button back to active", () => { buttonState = true }, 2000);
+             navigate('TopUpResult', { data: { currentbalance: data.des_remain_balance, amount: data.amount, } })
+        }}
     render() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
@@ -84,7 +95,7 @@ export default class TopUpAmount extends React.Component {
                                     return api.getTransaction(data.transaction_id)
                                 })
                                 .then((data) => {
-                                    navigate('TopUpResult', { data: { currentbalance: data.des_remain_balance, amount: data.amount, } })
+                                   this.setButtonState(data)
                                 })
                                 .catch((err) => {
                                     console.log("error ", err)

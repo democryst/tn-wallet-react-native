@@ -5,6 +5,8 @@ var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 var numeral = require('numeral');
 var styles = require('../Resource/style.js');
+const timer = require('react-native-timer');
+var buttonState = true ;
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import { NavigationActions } from 'react-navigation';
 
@@ -29,7 +31,14 @@ export default class TopUpResult extends React.Component {
         };
 
     }
-
+     setButtonState() {
+        const { navigate } = this.props.navigation;
+        const { params } = this.props.navigation.state;
+        if (buttonState === true) {
+            buttonState = false;
+            timer.setTimeout(this, "Set button back to active", () => { buttonState = true }, 2000);
+            navigate('Home')
+        }}
     render() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
@@ -86,7 +95,7 @@ export default class TopUpResult extends React.Component {
 
                 {/* DONE BUTTON */}
                 <View style={[styles.bottomContainer, { }]}>
-                    <TouchableOpacity onPress={() => navigate('Home')}>
+                    <TouchableOpacity onPress={() => this.setButtonState()}>
                         <View style={styles.button}>
                             <Text style={styles.text}>Done</Text>
                         </View>
