@@ -11,10 +11,10 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 import { NavigationActions } from 'react-navigation';
 
 const resetAction = NavigationActions.reset({
-  index: 0,
-  actions: [
-    NavigationActions.navigate({ routeName: 'Home'})
-  ]
+    index: 0,
+    actions: [
+        NavigationActions.navigate({ routeName: 'Home' })
+    ]
 });
 
 export default class TopUpResult extends React.Component {
@@ -49,7 +49,7 @@ export default class TopUpResult extends React.Component {
                 </View >
 
                 <View style={{
-                    flex: 4, borderWidth: 2,borderBottomWidth:0, marginLeft: 10, marginRight: 10, borderColor: 'lightgrey',
+                    flex: 4, borderWidth: 2, borderBottomWidth: 0, marginLeft: 10, marginRight: 10, borderColor: 'lightgrey',
                     shadowColor: '#000',
                     shadowOffset: { width: 0, height: 2 },
                     shadowOpacity: 0.3,
@@ -82,7 +82,6 @@ export default class TopUpResult extends React.Component {
 
                             </View>
                         </View>
-
                     </ScrollView>
                 </View>
 

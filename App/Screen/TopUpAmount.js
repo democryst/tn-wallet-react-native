@@ -84,12 +84,9 @@ export default class TopUpAmount extends React.Component {
 
                     <View style={styles.bottomContainer}>
                         <TouchableOpacity onPress={() => {
-                            {/* console.log("state account : ", this.state.receiverId) */ }
                             api.postTransactionTopUp(this.state.receiverId, this.state.currentbalance, this.state.amount)
                                 .then(resp => resp.json())
                                 .then((data) => {
-                                    {/* console.log("postTransactionTopUp")
-                                console.log(data) */}
                                     return api.getTransaction(data.transaction_id)
                                 })
                                 .then((data) => {
