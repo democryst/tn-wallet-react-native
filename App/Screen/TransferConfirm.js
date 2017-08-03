@@ -6,6 +6,7 @@ import RestClient from 'react-native-rest-client';
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 
 var timer = require('react-native-timer');
+var moment = require('moment');
 var buttonState = true ;
 
 export default class TransferConfirm extends React.Component {
@@ -57,20 +58,13 @@ export default class TransferConfirm extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
+     
+
     var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-
-    if (dd < 10) {
-      dd = '0' + dd
-    }
-
-    if (mm < 10) {
-      mm = '0' + mm
-    }
-
-    today = dd + '/' + mm + '/' + yyyy;
+   
+  
+    
+    let date = moment(today).format("ddd DD-MM-YY hh:mm");
     return (
 
       <View style={styles.container}>
@@ -80,7 +74,7 @@ export default class TransferConfirm extends React.Component {
               <Text style={styles.textTitle}> Date</Text>
             </View>
             <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
-              <Text style={styles.textInfo}> {today}</Text>
+              <Text style={styles.textInfoDate}> {date}</Text>
             </View>
           </View>
 
@@ -207,6 +201,10 @@ const styles = StyleSheet.create({
   },
   textInfo: {
     fontSize: responsiveFontSize(2.5),
+    fontWeight: "bold",
+  },
+   textInfoDate: {
+    fontSize: responsiveFontSize(2),
     fontWeight: "bold",
   },
   lineBar: {
