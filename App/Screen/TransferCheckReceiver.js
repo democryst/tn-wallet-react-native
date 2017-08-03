@@ -51,29 +51,36 @@ export default class TransferCheckReceiver extends React.Component {
     if (this.state.amount === null || this.state.amount == 0) {
       alert("Can't transfer 0 THB");
     }
-    else{
+    else {
 
       if (this.state.amount > this.state.sender.balance) {
         alert('Your money not enough')
       }
-      else {
-        navigate('TransferConfirm', {
-          data: {
-            senderAccountInfo: {
-              senderName: this.state.sender.name,
-              senderSurname: this.state.sender.surname,
-              senderID: params.data.userId,
-              senderBalance: this.state.sender.balance
-            },
-            receiverAccountInfo: {
-              receiverName: this.state.receiver.name,
-              receiverSurname: this.state.receiver.surname,
-              receiverID: params.data.receiverId,
-              receiverBalance: this.state.receiver.balance
-            },
-            transferAmount: this.state.amount
-          }
-        })
+      else{ 
+        
+        if (parseFloat(this.state.amount) + parseFloat(this.state.receiver.balance) <= 5000) {
+          navigate('TransferConfirm', {
+            data: {
+              senderAccountInfo: {
+                senderName: this.state.sender.name,
+                senderSurname: this.state.sender.surname,
+                senderID: params.data.userId,
+                senderBalance: this.state.sender.balance
+              },
+              receiverAccountInfo: {
+                receiverName: this.state.receiver.name,
+                receiverSurname: this.state.receiver.surname,
+                receiverID: params.data.receiverId,
+                receiverBalance: this.state.receiver.balance
+              },
+              transferAmount: this.state.amount
+            }
+          })
+        }
+        else {
+          alert('Receiver Maximun limit exceeded.');
+        }
+
       }
     }
   }
