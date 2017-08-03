@@ -37,7 +37,7 @@ export default class EnterTransferScreen extends React.Component {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
     console.log('--------------'+textInputId);
-    if (textInputId !== '') {
+    if (textInputId !== '' && textInputId !== null ) {
       if (textInputId !== params.userId.replace(new RegExp("-", 'g'), "")) {
         api.getData(this.state.receiverId.replace(new RegExp("-", 'g'), "")).then((data) => {
           if (data[0] === undefined) {
@@ -83,14 +83,6 @@ export default class EnterTransferScreen extends React.Component {
                 mask: '999-9-999999'
               }} />
 
-            {/* <TextInput
-              maxLength={10}
-           keyboardType='numeric'
-              style={styles.textInput}
-              placeholder='XXX-X-XXXXXX'
-
-              onChangeText={(receiverId) => this.setState({ receiverId })}
-            />   */}
           </View >
           <View style={styles.bottom_container}>
             {/* <TouchableOpacity onPress={() => navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } })}> */}
