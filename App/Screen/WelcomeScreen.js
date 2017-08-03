@@ -11,7 +11,7 @@ var timer = require('react-native-timer');
 var buttonState = true ;
 
 let accent = '#ed1c4d';
-var currentAccount = "1234567890";
+var currentAccount = "6302335476";
 
 
 RkTheme.setType('RkButton', 'accent', {
