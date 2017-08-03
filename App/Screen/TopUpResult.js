@@ -33,11 +33,7 @@ export default class TopUpResult extends React.Component {
     }
     
     render() {
-        const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
-
-        var balance = numeral(this.state.currentbalance).format('0,0');
-        var balanceStang = numeral(this.state.currentbalance).format('.00');
 
         return (
             /* Success */
@@ -62,7 +58,7 @@ export default class TopUpResult extends React.Component {
                                 <Text style={styles.textTittle}>TopUp Balance:</Text>
                             </View>
                             <View style={[styles.rowContainer, { justifyContent: 'flex-end', flex: 1}]}>
-                                <Text style={styles.textAmount}>{numeral(params.data.amount).format('0,0')}</Text>
+                                <Text style={styles.textAmount}>{numeral(Math.floor(params.data.amount)).format('0,0')}</Text>
                                 <Text style={styles.textAmountSatang}>{numeral(params.data.amount).format('.00')}</Text>
                                 <Text style={styles.textAmountTHB}>THB</Text>
 
@@ -76,7 +72,7 @@ export default class TopUpResult extends React.Component {
                                 <Text style={styles.textTittle}>Current Balance:</Text>
                             </View>
                             <View style={[styles.rowContainer, { justifyContent: 'flex-end', flex: 1 }]}>
-                                <Text style={styles.textAmount}>{numeral(params.data.currentbalance).format('0,0')}</Text>
+                                <Text style={styles.textAmount}>{numeral(Math.floor(params.data.currentbalance)).format('0,0')}</Text>
                                 <Text style={styles.textAmountSatang}>{numeral(params.data.currentbalance).format('.00')}</Text>
                                 <Text style={styles.textAmountTHB}>THB</Text>
 
