@@ -145,7 +145,7 @@ export default class HomeScreen extends React.Component {
       <Image source={require('../Resource/img/pink_background.png')} style={styles.container}>
         <View style={styles.container_userbar}>
           <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
-            <Image source={require('../Resource/img/ploy.jpg')} style={styles.container_image_profile} />
+            <Image source={require('../Resource/img/team.png')} style={styles.container_image_profile} />
           </View>
           <View style={styles.container_userdetail}>
 
