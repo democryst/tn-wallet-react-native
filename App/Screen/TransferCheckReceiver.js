@@ -80,7 +80,7 @@ export default class TransferCheckReceiver extends React.Component {
     if (this.state.amount === null || this.state.amount == 0) {
       alert("Can't transfer 0 THB");
     }
-    else{
+    else {
 
       if (this.state.amount > this.state.sender.balance) {
         alert('Your money not enough')
