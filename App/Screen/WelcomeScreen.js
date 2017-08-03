@@ -7,6 +7,8 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 
 var { height, width } = Dimensions.get('window');
 var numeral = require('numeral');
+var timer = require('react-native-timer');
+var buttonState = true ;
 
 let accent = '#ed1c4d';
 var currentAccount = "1234567890";
@@ -46,7 +48,6 @@ export default class HomeScreen extends React.Component {
 
 
   componentDidMount() {
-    const timer = require('react-native-timer');
     timer.setInterval("Update_money", () => { this.updateUI() }, 5000);
   }
 
@@ -55,6 +56,21 @@ export default class HomeScreen extends React.Component {
     headerLeft: null
   };
 
+  setButtonState(action){
+    const { navigate } = this.props.navigation;
+    if(buttonState === true){
+      buttonState = false ;
+      timer.setTimeout(this,"Set button back to active", ()=>{buttonState = true}, 2000);
+      if(action == "transfer"){
+        navigate('EnterTransferIdScreen', { userId: this.state.account_id }) ;
+      }
+      else {
+        navigate('TopUpSelectAmountScreen', { userId: this.state.account_id.replace(new RegExp("-", 'g'), ""), balance: this.state.balance })
+      }
+    }
+
+  }
+
 
   renderUserMessage() {
     const { navigate } = this.props.navigation;
@@ -62,7 +78,7 @@ export default class HomeScreen extends React.Component {
       return (
         <View style={styles.container_button}>
           <View style={[styles.menuContainer, { marginTop: 0 }]}>
-            <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen', { userId: this.state.account_id })} style={[styles.buttoniOS]}>
+            <TouchableOpacity onPress={ () => this.setButtonState("transfer") } style={[styles.buttoniOS]}>
               <View style={{ marginLeft: 0 }}>
                 <View style={{ flexDirection: 'row', marginLeft: -38 }}>
                   <View>
@@ -76,7 +92,7 @@ export default class HomeScreen extends React.Component {
             </TouchableOpacity>
           </View>
           <View style={[styles.menuContainer, { marginTop: 0 }]}>
-            <TouchableOpacity onPress={() => navigate('TopUpSelectAmountScreen', { userId: this.state.account_id.replace(new RegExp("-", 'g'), ""), balance: this.state.balance })} style={styles.buttoniOS}>
+            <TouchableOpacity onPress={() => this.setButtonState("topUp")  } style={styles.buttoniOS}>
               <View style={{ flexDirection: 'row', marginLeft: -38 }}>
                 <View>
                   <Image source={require('../Resource/img/topup_ios.png')} style={[styles.icon, { marginTop: responsiveHeight(1.5) }]} />
@@ -93,7 +109,7 @@ export default class HomeScreen extends React.Component {
       return (
         <View style={styles.container_button}>
           <View style={[styles.menuContainer, { marginTop: 0 }]}>
-            <TouchableOpacity onPress={() => navigate('EnterTransferIdScreen', { userId: this.state.account_id })} style={[styles.buttonAndroid]}>
+            <TouchableOpacity onPress={  () => this.setButtonState("transfer") } style={[styles.buttonAndroid]}>
               <View style={{ marginLeft: 0 }}>
                 <View>
                   <Image source={require('../Resource/img/transfer_android.png')} style={{ height: 85, width: width * (2 / 3) }} />
@@ -102,7 +118,7 @@ export default class HomeScreen extends React.Component {
             </TouchableOpacity>
           </View>
           <View style={[styles.menuContainer, { marginTop: 0 }]}>
-            <TouchableOpacity onPress={() => navigate('TopUpSelectAmountScreen', { userId: this.state.account_id.replace(new RegExp("-", 'g'), ""), balance: this.state.balance })} style={styles.buttonAndroid}>
+            <TouchableOpacity onPress={() => this.setButtonState("topUp") } style={styles.buttonAndroid}>
               <View style={{ marginLeft: 0 }}>
                 <View>
                   <Image source={require('../Resource/img/topup_android.png')} style={{ height: 85, width: width * (2 / 3) }} />
