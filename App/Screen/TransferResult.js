@@ -7,6 +7,8 @@ import { NavigationActions } from 'react-navigation';
 var { height, width } = Dimensions.get('window');
 var numeral = require('numeral');
 var moment = require('moment');
+var timer = require('react-native-timer');
+var buttonState = true ;
 
 const resetAction = NavigationActions.reset({
   index: 0,
@@ -35,6 +37,16 @@ export default class TransferResult extends React.Component {
             receiverSurname: params.data.receiverAccountInfo.receiverSurname
         };
 
+    }
+
+    setButtonState(){
+      const { navigate } = this.props.navigation;
+      const { params } = this.props.navigation.state;
+      if(buttonState === true){
+        buttonState = false ;
+        timer.setTimeout(this,"Set button back to active", ()=>{buttonState = true}, 2000);
+        this.props.navigation.dispatch(resetAction);
+      }
     }
 
     componentDidMount() {
@@ -146,7 +158,7 @@ export default class TransferResult extends React.Component {
                     </ScrollView>
                 </View>
                 <View style={styles.bottom_container}>
-                    <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.dispatch(resetAction)}>
+                    <TouchableOpacity style={styles.button} onPress={() => this.setButtonState()}>
                         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                             <Text style={styles.text}>Done</Text>
                         </View>

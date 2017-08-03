@@ -5,9 +5,10 @@ import api from '../../API/RequestAPI.js';
 import RestClient from 'react-native-rest-client';
 
 var { height, width } = Dimensions.get('window');
-var numeral = require('numeral'); 
+var numeral = require('numeral');
 const timer = require('react-native-timer');
 var styles = require('../Resource/style.js');
+var buttonState = true;
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 export default class TransferConfirm extends React.Component {
     static navigationOptions = {
@@ -69,22 +70,17 @@ export default class TransferConfirm extends React.Component {
             this.setState({ apidata: data[0], currentbalance: data[0].balance });
             console.log("balance : " + this.state.currentbalance)
         })
-        .catch((err)=>{
-             console.log("error in get account topupselect : ",err)
-        });
-       
+            .catch((err) => {
+                console.log("error in get account topupselect : ", err)
+            });
+
     }
-    moveTopUpAmount() {
-        console.log("inside moveTopUpAmount")
-        console.log(this.state.topupallow)
-        if (this.state.topupallow) {
-            console.log("insid topupallow")
-            const { navigate } = this.props.navigation;
-            const { params } = this.props.navigation.state;
-            console.log("top up allow");
-            console.log("top up amount", this.state.amount);
-            console.log("top up currentbalance", this.state.currentbalance);
-            console.log("top up apidata", this.state.apidata);
+    setButtonState() {
+        const { navigate } = this.props.navigation;
+        const { params } = this.props.navigation.state;
+        if (buttonState === true) {
+            buttonState = false;
+            timer.setTimeout(this, "Set button back to active", () => { buttonState = true }, 2000);
             navigate('TopUpAmount', {
                 data: {
                     amount: this.state.amount,
@@ -93,6 +89,11 @@ export default class TransferConfirm extends React.Component {
                     userId: params.userId
                 }
             })
+        }
+    }
+    moveTopUpAmount() {
+        if (this.state.topupallow) {
+            this.setButtonState()
         }
 
 
@@ -137,12 +138,12 @@ export default class TransferConfirm extends React.Component {
                                 }
                             )
                             // Delay to make button highlight 
-                            timer.setTimeout("delay_select_amount",()=>{this.moveTopUpAmount()}, 1); 
+                            timer.setTimeout("delay_select_amount", () => { this.moveTopUpAmount() }, 1);
                         }
                     }>
                     <Text style={[styles.textInformation, { textAlign: "center" }]} > {this.state.topupselectchoice.first}</Text>
                     </TouchableHighlight>
-                    <TouchableHighlight underlayColor='pink' style={[styles.rowContainer,styles.amountButton]} onPress={
+                    <TouchableHighlight underlayColor='pink' style={[styles.rowContainer, styles.amountButton]} onPress={
                         () => {
                             this.checkwalletlimit(this.state.topupselectchoice.second), this.setState(
                                 {
@@ -155,13 +156,13 @@ export default class TransferConfirm extends React.Component {
                                 }
                             )
                             // Delay to make button highlight 
-                            timer.setTimeout("delay_select_amount",()=>{this.moveTopUpAmount()}, 1); 
+                            timer.setTimeout("delay_select_amount", () => { this.moveTopUpAmount() }, 1);
                         }
                     }>
                     <Text style={[styles.textInformation, { textAlign: "center" }]} > {this.state.topupselectchoice.second}</Text>
                     </TouchableHighlight>
 
-                    <TouchableHighlight underlayColor='pink' style={[styles.rowContainer,styles.amountButton]} onPress={
+                    <TouchableHighlight underlayColor='pink' style={[styles.rowContainer, styles.amountButton]} onPress={
                         () => {
                             this.checkwalletlimit(this.state.topupselectchoice.third), this.setState(
                                 {
@@ -174,12 +175,12 @@ export default class TransferConfirm extends React.Component {
                                 }
                             )
                             // Delay to make button highlight 
-                            timer.setTimeout("delay_select_amount",()=>{this.moveTopUpAmount()}, 1); 
+                            timer.setTimeout("delay_select_amount", () => { this.moveTopUpAmount() }, 1);
                         }
                     }>
                     <Text style={[styles.textInformation, { textAlign: "center" }]} > {this.state.topupselectchoice.third}</Text>
                     </TouchableHighlight>
-                    <TouchableHighlight underlayColor='pink' style={[styles.rowContainer,styles.amountButton]} onPress={
+                    <TouchableHighlight underlayColor='pink' style={[styles.rowContainer, styles.amountButton]} onPress={
                         () => {
                             this.checkwalletlimit(this.state.topupselectchoice.fourth), this.setState(
                                 {
@@ -192,7 +193,7 @@ export default class TransferConfirm extends React.Component {
                                 }
                             )
                             // Delay to make button highlight 
-                            timer.setTimeout("delay_select_amount",()=>{this.moveTopUpAmount()}, 1); 
+                            timer.setTimeout("delay_select_amount", () => { this.moveTopUpAmount() }, 1);
                         }
                     }>
 
@@ -204,7 +205,7 @@ export default class TransferConfirm extends React.Component {
 
 
 
-                
+
                 </View>
             </View >
         );

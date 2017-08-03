@@ -5,6 +5,8 @@ var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
 var numeral = require('numeral');
 var styles = require('../Resource/style.js');
+const timer = require('react-native-timer');
+var buttonState = true ;
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import { NavigationActions } from 'react-navigation';
 
@@ -29,7 +31,14 @@ export default class TopUpResult extends React.Component {
         };
 
     }
-
+     setButtonState() {
+        const { navigate } = this.props.navigation;
+        const { params } = this.props.navigation.state;
+        if (buttonState === true) {
+            buttonState = false;
+            timer.setTimeout(this, "Set button back to active", () => { buttonState = true }, 2000);
+            navigate('Home')
+        }}
     render() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
@@ -45,7 +54,7 @@ export default class TopUpResult extends React.Component {
                         Success
                             </Text>
                 </View >
-                
+
                 <View style={{
                     flex: 4, borderWidth: 2,borderBottomWidth:0, marginLeft: 10, marginRight: 10, borderColor: 'lightgrey',
                     shadowColor: '#000',
@@ -86,7 +95,11 @@ export default class TopUpResult extends React.Component {
 
                 {/* DONE BUTTON */}
                 <View style={[styles.bottomContainer, { }]}>
-                    <TouchableOpacity onPress={() => navigate('Home')}>
+<<<<<<< HEAD
+                    <TouchableOpacity onPress={() => this.setButtonState()}>
+=======
+                    <TouchableOpacity onPress={() => this.props.navigation.dispatch(resetAction)}>
+>>>>>>> 87362a53bc9228a2be66d9f5a26a5f4c2bbcbd1e
                         <View style={styles.button}>
                             <Text style={styles.text}>Done</Text>
                         </View>
