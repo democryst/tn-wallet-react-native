@@ -16,6 +16,7 @@ export default class TopUpAmount extends React.Component {
     constructor(props) {
         super(props);
 
+        const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
 
         this.state = {
@@ -27,16 +28,16 @@ export default class TopUpAmount extends React.Component {
     }
      setButtonState(data) {
         const { navigate } = this.props.navigation;
-        const { params } = this.props.navigation.state;
-        console.log('fffffffffffffffffffffffffffff');
+        // const { params } = this.props.navigation.state;
+    
         if (buttonState === true) {
-            console.log('fffffffssssssffffffffffffffffffffff');
+        
             buttonState = false;
             timer.setTimeout(this, "Set button back to active", () => { buttonState = true }, 2000);
              navigate('TopUpResult', { data: { currentbalance: data.des_remain_balance, amount: data.amount, } })
         }}
     render() {
-        const { navigate } = this.props.navigation;
+        // const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
         return (
             <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
@@ -61,7 +62,7 @@ export default class TopUpAmount extends React.Component {
                             <Text style={styles.textTittle}>Current Balance:</Text>
                         </View>
                         <View style={[styles.rowContainer, { justifyContent: 'flex-end', flex: 1 }]}>
-                            <Text style={styles.textAmount}>{numeral(params.data.currentbalance).format('0,0')}</Text>
+                            <Text style={styles.textAmount}>{numeral(Math.floor(params.data.currentbalance)).format('0,0')}</Text>
                             <Text style={styles.textAmountSatang}>{numeral(params.data.currentbalance).format('.00')}</Text>
                             <Text style={styles.textAmountTHB}>THB</Text>
 
@@ -75,7 +76,7 @@ export default class TopUpAmount extends React.Component {
                             <Text style={styles.textTittle}>New Balance:</Text>
                         </View>
                         <View style={[styles.rowContainer, { justifyContent: 'flex-end', flex: 1 }]}>
-                            <Text style={styles.textAmount}>{numeral(params.data.amount + params.data.currentbalance).format('0,0')}</Text>
+                            <Text style={styles.textAmount}>{numeral(Math.floor(params.data.amount + params.data.currentbalance)).format('0,0')}</Text>
                             <Text style={styles.textAmountSatang}>{numeral(params.data.amount + params.data.currentbalance).format('.00')}</Text>
                             <Text style={styles.textAmountTHB}>THB</Text>
 
@@ -85,12 +86,9 @@ export default class TopUpAmount extends React.Component {
 
                     <View style={styles.bottomContainer}>
                         <TouchableOpacity onPress={() => {
-                            {/* console.log("state account : ", this.state.receiverId) */ }
                             api.postTransactionTopUp(this.state.receiverId, this.state.currentbalance, this.state.amount)
                                 .then(resp => resp.json())
                                 .then((data) => {
-                                    {/* console.log("postTransactionTopUp")
-                                console.log(data) */}
                                     return api.getTransaction(data.transaction_id)
                                 })
                                 .then((data) => {
