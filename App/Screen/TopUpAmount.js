@@ -32,11 +32,11 @@ export default class TopUpAmount extends React.Component {
             <TouchableWithoutFeedback onPress={() => { DismissKeyboard() }}>
                 <View style={[styles.container, { paddingTop: responsiveHeight(12) }]}>
 
-                    <View style={styles.row_container} >
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
+                    <View style={styles.rowContainer} >
+                        <View style={[styles.rowContainer, { justifyContent: 'flex-start', flex: 1 }]}>
                             <Text style={styles.textTittle}>TopUp Amount:</Text>
                         </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
+                        <View style={[styles.rowContainer, { justifyContent: 'flex-end', flex: 1 }]}>
                             <Text style={styles.textAmount}>{numeral(params.data.amount).format('0,0')}</Text>
                             <Text style={styles.textAmountSatang}>{numeral(params.data.amount).format('.00')}</Text>
                             <Text style={styles.textAmountTHB}>THB</Text>
@@ -46,11 +46,11 @@ export default class TopUpAmount extends React.Component {
 
                     <View style={styles.linebar} />
 
-                    <View style={styles.row_container} >
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
+                    <View style={styles.rowContainer} >
+                        <View style={[styles.rowContainer, { justifyContent: 'flex-start', flex: 1 }]}>
                             <Text style={styles.textTittle}>Current Balance:</Text>
                         </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
+                        <View style={[styles.rowContainer, { justifyContent: 'flex-end', flex: 1 }]}>
                             <Text style={styles.textAmount}>{numeral(params.data.currentbalance).format('0,0')}</Text>
                             <Text style={styles.textAmountSatang}>{numeral(params.data.currentbalance).format('.00')}</Text>
                             <Text style={styles.textAmountTHB}>THB</Text>
@@ -60,11 +60,11 @@ export default class TopUpAmount extends React.Component {
 
                     <View style={styles.linebar} />
 
-                    <View style={styles.row_container} >
-                        <View style={[styles.row_container, { justifyContent: 'flex-start', flex: 1 }]}>
+                    <View style={styles.rowContainer} >
+                        <View style={[styles.rowContainer, { justifyContent: 'flex-start', flex: 1 }]}>
                             <Text style={styles.textTittle}>New Balance:</Text>
                         </View>
-                        <View style={[styles.row_container, { justifyContent: 'flex-end', flex: 1 }]}>
+                        <View style={[styles.rowContainer, { justifyContent: 'flex-end', flex: 1 }]}>
                             <Text style={styles.textAmount}>{numeral(params.data.amount + params.data.currentbalance).format('0,0')}</Text>
                             <Text style={styles.textAmountSatang}>{numeral(params.data.amount + params.data.currentbalance).format('.00')}</Text>
                             <Text style={styles.textAmountTHB}>THB</Text>
@@ -73,9 +73,7 @@ export default class TopUpAmount extends React.Component {
                     </View>
 
 
-
-
-                    <View style={styles.bottom_container}>
+                    <View style={styles.bottomContainer}>
                         <TouchableOpacity onPress={() => {
                             {/* console.log("state account : ", this.state.receiverId) */ }
                             api.postTransactionTopUp(this.state.receiverId, this.state.currentbalance, this.state.amount)

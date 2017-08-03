@@ -7,6 +7,8 @@ import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-nat
 
 var { height, width } = Dimensions.get('window');
 var DismissKeyboard = require('dismissKeyboard');
+var timer = require('react-native-timer');
+var buttonState = true ;
 
 var textInputId=null;
 var textInputIdFormat=null;
@@ -32,12 +34,21 @@ export default class EnterTransferScreen extends React.Component {
     this.state.receiverId = textInputId;
   }
 
+  setButtonState(){
+    const { navigate } = this.props.navigation;
+    const { params } = this.props.navigation.state;
+    if(buttonState === true){
+      buttonState = false ;
+      timer.setTimeout(this,"Set button back to active", ()=>{buttonState = true}, 2000);
+      navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } });
+    }
+  }
+
   onChangePage() {
 
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
-    console.log('--------------'+textInputId);
-    if (textInputId !== '') {
+    if (textInputId !== '' && textInputId !== null ) {
       if (textInputId !== params.userId.replace(new RegExp("-", 'g'), "")) {
         api.getData(this.state.receiverId.replace(new RegExp("-", 'g'), "")).then((data) => {
           if (data[0] === undefined) {
@@ -45,7 +56,7 @@ export default class EnterTransferScreen extends React.Component {
           }
           else {
             this.state.receiverId = textInputIdFormat;
-            navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } });
+            this.setButtonState() ;
           }
 
         });
@@ -57,9 +68,6 @@ export default class EnterTransferScreen extends React.Component {
     else {
       alert("Please fill account nummber.");
     }
-
-
-
   }
 
   render() {
@@ -83,14 +91,6 @@ export default class EnterTransferScreen extends React.Component {
                 mask: '999-9-999999'
               }} />
 
-            {/* <TextInput
-              maxLength={10}
-           keyboardType='numeric'
-              style={styles.textInput}
-              placeholder='XXX-X-XXXXXX'
-
-              onChangeText={(receiverId) => this.setState({ receiverId })}
-            />   */}
           </View >
           <View style={styles.bottom_container}>
             {/* <TouchableOpacity onPress={() => navigate('TransferCheckReceiver', { data: { userId: params.userId, receiverId: this.state.receiverId } })}> */}
