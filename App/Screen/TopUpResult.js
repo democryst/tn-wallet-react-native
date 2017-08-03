@@ -31,14 +31,7 @@ export default class TopUpResult extends React.Component {
         };
 
     }
-     setButtonState() {
-        const { navigate } = this.props.navigation;
-        const { params } = this.props.navigation.state;
-        if (buttonState === true) {
-            buttonState = false;
-            timer.setTimeout(this, "Set button back to active", () => { buttonState = true }, 2000);
-            navigate('Home')
-        }}
+    
     render() {
         const { navigate } = this.props.navigation;
         const { params } = this.props.navigation.state;
@@ -95,11 +88,8 @@ export default class TopUpResult extends React.Component {
 
                 {/* DONE BUTTON */}
                 <View style={[styles.bottomContainer, { }]}>
-<<<<<<< HEAD
-                    <TouchableOpacity onPress={() => this.setButtonState()}>
-=======
+                   
                     <TouchableOpacity onPress={() => this.props.navigation.dispatch(resetAction)}>
->>>>>>> 87362a53bc9228a2be66d9f5a26a5f4c2bbcbd1e
                         <View style={styles.button}>
                             <Text style={styles.text}>Done</Text>
                         </View>
