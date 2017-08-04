@@ -49,8 +49,9 @@ export default class EnterTransferScreen extends React.Component {
   onChangePage() {
 
     const { params } = this.props.navigation.state;
-    if (textInputId !== '' && textInputId !== null) {
+    if (textInputId !== '' && textInputId !== null && this.state.receiverId!==null) {
       if (textInputId !== params.userId.replace(new RegExp("-", 'g'), "")) {
+        console.log('++++++++++++++'+this.state.receiverId)
         api.getData(this.state.receiverId.replace(new RegExp("-", 'g'), "")).then((data) => {
           if (data[0] === undefined) {
             this.setButtonState('notPass');
